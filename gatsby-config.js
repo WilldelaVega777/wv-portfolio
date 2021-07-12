@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://www.yourdomain.tld",
+    siteUrl: "https://www.willdelavega.com",
     title: "wv-portfolio",
   },
   plugins: ["gatsby-plugin-sass"],

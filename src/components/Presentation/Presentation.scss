@@ -1,0 +1,29 @@
+section.presentation
+{
+    background-color: white;
+    background-image: url('../../assets/images/WoodTile_Bg.jpg');
+    background-repeat: repeat;
+    background-size: 25%;
+    font-family: 'Poppins Regular';
+    color: #F8EFBA;
+    width: 100vw;
+    height: 800px;
+    overflow: hidden;
+
+    h1
+    {
+        text-align: center;
+        font-family: 'Oxygen Bold', Tahoma, Geneva, Verdana, sans-serif;
+        text-shadow: 2px 2px 2px #222;
+    }
+
+    div.presentation-container
+    {
+        width: 90%;
+        height: 630px;
+        background-color: rgba(255,255,255,0.15);
+        border-radius: 6px;
+        margin: 0 auto;
+        box-shadow: 10px 10px 19px 0px rgba(0,0,0,0.73);
+    }
+}
