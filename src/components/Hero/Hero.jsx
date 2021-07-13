@@ -28,7 +28,8 @@ const Hero = (props) => {
     const heroText          = useRef(null)
     const heroMask          = useRef(null)
     const frontEndAnimation = useRef(null)
-    const NUMBER_OF_IMAGES  = 58
+    const backEndAnimation  = useRef(null)
+    const NUMBER_OF_IMAGES  = 53
     let current             = 1
     let context             = null
     let image               = new Image()
@@ -48,9 +49,6 @@ const Hero = (props) => {
             }
 
             await cacheImages(images)
-
-            // Initial Settings
-            backendText.current.style.opacity = '0'
 
             // Load First Image
             heroCanvas.current.width        = 1400
@@ -74,11 +72,13 @@ const Hero = (props) => {
     //----------------------------------------------------------
     const heroCanvas_onWheel = (pEvent) =>
     {
+        // Checks if Component has Focus
         if (document.body.style.overflowY !== 'hidden')
         {
             return
         }
 
+        // Get Direction and Current
         const direction = ((pEvent.deltaY < 0) ? 'up' : 'down')
         if (direction === 'up')
         {
@@ -111,11 +111,49 @@ const Hero = (props) => {
         {
             heroText.current.style.marginTop = `${((current * 15) * -1)}px`
             heroText.current.style.opacity = (1.0 - (current / 5))
+
+            // Show FrontEnd Article
+            if (current === 10)
+            {
+                if (direction === 'down')
+                {
+                    frontEndAnimation.current.getGSAP().play(0)
+                }
+                else
+                {
+                    frontEndAnimation.current.getGSAP().timeScale(
+                        frontEndAnimation.current.getGSAP().duration()
+                    ).reverse()
+                }
+            }
         }
 
         // Show Mask
         if (current >= 35)
         {
+            // Removes FrontEnd Article
+            if (current === 38)
+            {
+                frontEndAnimation.current.getGSAP().timeScale(
+                    frontEndAnimation.current.getGSAP().duration()
+                ).reverse()
+            }
+
+            if ((current === 42) && (direction === 'down'))
+            {
+                console.log('debería entrar backEnd aquí...')
+                // Brings up BackEnd Article
+                backEndAnimation.current.getGSAP().play(0)
+            }
+            else if ((current === 40) && (direction === 'up'))
+            {
+                console.log('debería salir backEnd aquí...')
+                // Removes BackEnd Article
+                backEndAnimation.current.getGSAP().timeScale(
+                    backEndAnimation.current.getGSAP().duration()
+                ).reverse()
+            }
+
             heroMask.current.style.opacity = (.04 * current)
         }
         else
@@ -123,26 +161,11 @@ const Hero = (props) => {
             heroMask.current.style.opacity = 0
         }
 
-        // Show FrontEnd Article
-        if (current === 15)
-        {
-            if (direction === 'down')
-            {
-                frontEndAnimation.current.getGSAP().play(0)
-            }
-            else
-            {
-                frontEndAnimation.current.getGSAP().timeScale(
-                    frontEndAnimation.current.getGSAP().duration()
-                ).reverse()
-            }
-
-        }
-
+        // Update Clock Animation
         requestAnimationFrame(() => {
-            if (current > 20)
+            if (current > 15)
             {
-                update((current - 20))
+                update((current - 15))
             }
         })
     }
@@ -218,8 +241,7 @@ const Hero = (props) => {
             <Timeline ref={frontEndAnimation}
                       playState={PlayState.stop}
                       target={
-                <article ref={frontendArticle}
-                        className="heroFront"
+                <article className="heroFront"
                 >
                     <div ref={frontendText}>
                         <h1>Front End</h1>
@@ -240,25 +262,29 @@ const Hero = (props) => {
                 <Tween to={{ x: '350px', opacity: 1.0 }} duration={2} ease="back.out(1.7)"/>
             </Timeline>
 
-
-            <article ref={backendArticle}
-                     className="heroBack"
-            >
-                <div ref={backendText}>
-                    <h1>Back End</h1>
-                    <p>
-                        Lorem Ipsum Dolor sit amet consectetur
-                        boris malos noff justus novicius mentecatus et justo
-                        et metropolis austerus mexicus Kabala Harris president
-                        Lorem Ipsum Dolor sit amet consectetur
-                        boris malos noff justus novicius mentecatus et justo
-                        et metropolis austerus mexicus Kabala Harris president
-                        Lorem Ipsum Dolor sit amet consectetur
-                        boris malos noff justus novicius mentecatus et justo
-                        et metropolis austerus mexicus Kabala Harris president
-                    </p>
-                </div>
-            </article>
+            <Timeline ref={backEndAnimation}
+                      playState={PlayState.stop}
+                      target={
+                <article className="heroBack"
+                >
+                    <div ref={backendText}>
+                        <h1>Back End</h1>
+                        <p>
+                            Lorem Ipsum Dolor sit amet consectetur
+                            boris malos noff justus novicius mentecatus et justo
+                            et metropolis austerus mexicus Kabala Harris president
+                            Lorem Ipsum Dolor sit amet consectetur
+                            boris malos noff justus novicius mentecatus et justo
+                            et metropolis austerus mexicus Kabala Harris president
+                            Lorem Ipsum Dolor sit amet consectetur
+                            boris malos noff justus novicius mentecatus et justo
+                            et metropolis austerus mexicus Kabala Harris president
+                        </p>
+                    </div>
+                </article>
+            }>
+                <Tween to  ={{ x: '700px', opacity: 1.0 }} duration={2} ease="back.out(1.7)"/>
+            </Timeline>
 
         </section>
     )

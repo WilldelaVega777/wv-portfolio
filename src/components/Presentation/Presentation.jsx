@@ -15,7 +15,7 @@ const Presentation = () => {
 
 
     return (
-        <section className="presentation">
+        <section id="presentation" className="presentation">
             <h1>PRESENTATION COMPONENT</h1>
             <div className="presentation-container">
 

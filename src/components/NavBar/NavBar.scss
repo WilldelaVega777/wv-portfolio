@@ -1,0 +1,76 @@
+nav
+{
+    overflow: hidden;
+    background-color: #85754e;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-height: 50px;
+
+    a {
+      float: left;
+      display: block;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px;
+      text-decoration: none;
+      font-family: 'Poppins';
+      text-shadow: 2px 2px 2px #222;
+    }
+
+    a:hover
+    {
+        color: #4b3621;
+        text-shadow: 2px 2px 2px #777;
+    }
+
+    div.lets-talk
+    {
+        float: right;
+        margin-right: 30px;
+    }
+
+    a.lets-talk
+    {
+        color: #e4d96f;
+        margin-right: 10px;
+    }
+
+    a.lets-talk:hover
+    {
+        color: white;
+        text-shadow: 2px 2px 2px #222;
+    }
+
+    a>img.logo-link
+    {
+        margin-left: 10px;
+        max-height: 25px;
+        cursor: pointer;
+        filter: drop-shadow(4px 4px 4px #444);
+    }
+    a>img.logo-link:hover
+    {
+        filter: hue-rotate(90deg) drop-shadow(4px 4px 4px #444);
+    }
+}
+
+
+  /* Page content */
+  .content {
+    padding: 16px;
+  }
+
+  /* The sticky class is added to the navbar with JS when it reaches its scroll position */
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
+
+.sticky + .content {
+    padding-top: 60px;
+}
+

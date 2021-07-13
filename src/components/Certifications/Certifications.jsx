@@ -15,8 +15,11 @@ const Certifications = () => {
 
 
     return (
-        <section className="certifications">
+        <section id="certifications" className="certifications">
             <h1>CERTIFICATIONS COMPONENT</h1>
+            <div className="certifications-container">
+
+            </div>
         </section>
     )
 

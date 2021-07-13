@@ -15,8 +15,11 @@ const Resume = () => {
 
 
     return (
-        <section className="resume">
+        <section id="resume" className="resume">
             <h1>RESUME COMPONENT</h1>
+            <div className="resume-container">
+
+            </div>
         </section>
     )
 

@@ -2,30 +2,24 @@
 // Imports Section
 //--------------------------------------------------------------
 import * as React       from "react"
-import "./Featured.scss"
-
-import { useRef }       from "react"
-import { useEffect }    from "react"
+import './Footer.scss'
 
 
 //--------------------------------------------------------------
 // Component Section
 //--------------------------------------------------------------
-const Featured = () => {
-
+const Footer = () => {
 
     return (
-        <section id="featured" className="featured">
-            <h1>FEATURED COMPONENT</h1>
-            <div className="featured-container">
-
-            </div>
-        </section>
+        <footer>
+            Copyright (c) 2021 - All Rights Reserved
+        </footer>
     )
 
 }
 
+
 //--------------------------------------------------------------
 // Exports Section
 //--------------------------------------------------------------
-export default Featured
+export default Footer

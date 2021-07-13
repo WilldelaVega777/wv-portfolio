@@ -15,7 +15,7 @@ const Diplomas = () => {
 
 
     return (
-        <section className="diplomas">
+        <section id="diplomas" className="diplomas">
             <h1>DIPLOMAS COMPONENT</h1>
         </section>
     )
