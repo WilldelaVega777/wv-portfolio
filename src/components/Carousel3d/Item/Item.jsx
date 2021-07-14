@@ -23,8 +23,26 @@ const Item = (props) => {
     //----------------------------------------------------------
     // Event Handler Methods Section
     //----------------------------------------------------------
-    //useFrame((state, delta) => (currentMesh.current.rotation.x += 0.01))
+    useFrame((state, delta) => {
+        if (hovered && currentMesh.current.position.y <= .8)
+        {
+            (currentMesh.current.position.y += 0.05)
+        }
+        else if (!hovered && currentMesh.current.position.y > 0)
+        {
+            (currentMesh.current.position.y -= 0.05)
+        }
+    })
 
+    //----------------------------------------------------------
+    const itemOnPointerOver = (event) => {
+        setHover(true)
+    }
+
+    //----------------------------------------------------------
+    const itemOnPointerOut = (event) => {
+        setHover(false)
+    }
 
     //----------------------------------------------------------
     // Render Section
@@ -34,10 +52,10 @@ const Item = (props) => {
             {...props}
             ref={currentMesh}
             onClick={(event) => setActive(!active)}
-            onPointerOver={(event) => setHover(true)}
-            onPointerOut={(event) => setHover(false)}
+            onPointerOver={(event) => itemOnPointerOver(event)}
+            onPointerOut={(event) => itemOnPointerOut(event)}
         >
-            <boxGeometry args={[1.6, 1, .01]} />
+            <boxGeometry args={[2.6, 1.5, .01]} />
             <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
         </mesh>
     )

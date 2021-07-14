@@ -12,7 +12,7 @@ const Footer = () => {
 
     return (
         <footer>
-            Copyright (c) 2021 - All Rights Reserved
+            Copyright ©️ 2021 WilldelaVega.com - All Rights Reserved
         </footer>
     )
 
