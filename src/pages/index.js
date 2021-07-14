@@ -4,16 +4,16 @@
 import * as React       from "react"
 import "../styles/index.scss"
 
-import Hero             from '../components/Hero/Hero'
-import NavBar           from '../components/NavBar/NavBar'
-import Presentation     from '../components/Presentation/Presentation'
-import Portfolio        from '../components/Portfolio/Portfolio'
-import Featured         from '../components/Featured/Featured'
-import Resume           from '../components/Resume/Resume'
-import Certifications   from '../components/Certifications/Certifications'
-import Diplomas         from '../components/Diplomas/Diplomas'
-import Contact          from '../components/Contact/Contact'
-import Footer           from '../components/Footer/Footer'
+import Hero             from '../sections/Hero/Hero'
+import NavBar           from '../sections/NavBar/NavBar'
+import Presentation     from '../sections/Presentation/Presentation'
+import Portfolio        from '../sections/Portfolio/Portfolio'
+import Featured         from '../sections/Featured/Featured'
+import Resume           from '../sections/Resume/Resume'
+import Certifications   from '../sections/Certifications/Certifications'
+import Diplomas         from '../sections/Diplomas/Diplomas'
+import Contact          from '../sections/Contact/Contact'
+import Footer           from '../sections/Footer/Footer'
 
 import { useRef }       from "react"
 import { useEffect }    from "react"
@@ -23,11 +23,6 @@ import { useEffect }    from "react"
 // Component Section
 //--------------------------------------------------------------
 const IndexPage = () => {
-    //----------------------------------------------------------
-    // Initial Vars
-    //----------------------------------------------------------
-    const navBar = useRef(null)
-
 
     //----------------------------------------------------------
     // Lifecycle Events
@@ -62,9 +57,11 @@ const IndexPage = () => {
             <Hero enter={() => deactivateScroll()}
                   leave={() => activateScroll()}
             />
-            <NavBar ref={navBar}/>
+            <NavBar/>
             <Presentation/>
-            <Portfolio/>
+            <Portfolio enter={() => deactivateScroll()}
+                       leave={() => activateScroll()}
+            />
             <Featured/>
             <Resume/>
             <Certifications/>

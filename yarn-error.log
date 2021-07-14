@@ -1,0 +1,61 @@
+Arguments: 
+  /Users/will/.nvm/versions/node/v12.13.0/bin/node /usr/local/Cellar/yarn/1.22.10/libexec/bin/yarn.js add three @react-three-fiber
+
+PATH: 
+  /Users/will/.rvm/gems/ruby-2.7.0/bin:/Users/will/.rvm/gems/ruby-2.7.0@global/bin:/Users/will/.rvm/rubies/ruby-2.7.0/bin:/Users/will/.rvm/bin:/Users/will/.nvm/versions/node/v12.13.0/bin:/Users/will/bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Xamarin Workbooks.app/Contents/SharedSupport/path-bin:/Users/will/Library/Android/sdk/emulator:/Users/will/Library/Android/sdk/tools:/Users/will/Library/Android/sdk/tools/bin:/Users/will/Library/Android/sdk/platform-tools
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  12.13.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/@react-three-fiber: Request "https://registry.yarnpkg.com/@react-three-fiber" returned a 405
+      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.22.10/libexec/lib/cli.js:66997:18)
+      at Request.self.callback (/usr/local/Cellar/yarn/1.22.10/libexec/lib/cli.js:140749:22)
+      at Request.emit (events.js:210:5)
+      at Request.<anonymous> (/usr/local/Cellar/yarn/1.22.10/libexec/lib/cli.js:141721:10)
+      at Request.emit (events.js:210:5)
+      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.22.10/libexec/lib/cli.js:141643:12)
+      at Object.onceWrapper (events.js:299:28)
+      at IncomingMessage.emit (events.js:215:7)
+      at endReadableNT (_stream_readable.js:1183:12)
+      at processTicksAndRejections (internal/process/task_queues.js:80:21)
+
+npm manifest: 
+  {
+    "name": "wv-portfolio",
+    "version": "1.0.0",
+    "private": true,
+    "description": "wv-portfolio",
+    "author": "Will de la Vega",
+    "keywords": [
+      "gatsby"
+    ],
+    "scripts": {
+      "develop": "gatsby develop",
+      "start": "gatsby develop",
+      "build": "gatsby build",
+      "serve": "gatsby serve",
+      "clean": "gatsby clean"
+    },
+    "dependencies": {
+      "gatsby": "^3.8.1",
+      "gatsby-plugin-sass": "^4.9.0",
+      "gsap": "^3.7.0",
+      "react": "^17.0.1",
+      "react-dom": "^17.0.1",
+      "react-gsap": "^3.2.1",
+      "sass": "^1.35.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

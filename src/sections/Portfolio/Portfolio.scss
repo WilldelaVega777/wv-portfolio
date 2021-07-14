@@ -1,5 +1,6 @@
 section.portfolio
 {
+    position: relative;
     background-color: black;
     width: 100vw;
     height: 600px;
@@ -12,5 +13,14 @@ section.portfolio
         text-align: center;
         font-family: 'Oxygen Bold', Tahoma, Geneva, Verdana, sans-serif;
         text-shadow: 2px 2px 2px #222;
+    }
+
+    div.portfolio-title
+    {
+        position: absolute;
+        max-width: 1400px;
+        min-height: 100%;
+        top: 0px;
+        transform: translate(calc((100vw - 300px) / 2));
     }
 }

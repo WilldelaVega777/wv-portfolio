@@ -21,8 +21,6 @@ const Hero = (props) => {
     // Initialize Variables Section
     //----------------------------------------------------------
     const heroCanvas        = useRef(null)
-    const backendArticle    = useRef(null)
-    const frontendArticle   = useRef(null)
     const frontendText      = useRef(null)
     const backendText       = useRef(null)
     const heroText          = useRef(null)
@@ -203,10 +201,6 @@ const Hero = (props) => {
     `/images/Hero/Hero_${index.toString().padStart(2,'0')}.jpg`
 
     //----------------------------------------------------------
-    const removePx = (exp) =>
-        parseInt(exp.toString().substring(0, exp.toString().indexOf('px')))
-
-    //----------------------------------------------------------
     const update = (index) => {
         const context = heroCanvas.current.getContext('2d')
         image.onload = () => {
@@ -220,9 +214,10 @@ const Hero = (props) => {
     // Render Section
     //----------------------------------------------------------
     return (
-        <section className="hero"
+        <section id="hero"
+                 className="hero"
                  onWheel={(e) => heroCanvas_onWheel(e)}
-                 onMouseOver={() => heroCanvas_onMouseEnter()}
+                 onMouseOver={()  => heroCanvas_onMouseEnter()}
                  onMouseLeave={() => heroCanvas_onMouseLeave()}
         >
 
