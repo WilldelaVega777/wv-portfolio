@@ -31,7 +31,7 @@ const IndexPage = () => {
         document.body.id = 'app'
 
         window.onscroll = function() {
-            console.log('works')
+
         }
 
     }, [])

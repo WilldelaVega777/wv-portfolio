@@ -15,31 +15,52 @@ import { useEffect }        from "react"
 //--------------------------------------------------------------
 const Portfolio = (props) => {
 
+
+    //----------------------------------------------------------
+    // Internal Functions Section
+    //----------------------------------------------------------
+    const getImageName = (index) => {
+      return `/images/Portfolio/p${index}.png`
+    }
+
     //----------------------------------------------------------
     // Component Variables Section
     //----------------------------------------------------------
-    const portfolioCanvas  = useRef(null)
-    let   items = [
+    const portfolioCanvas  = useRef(null);
+
+
+    let items = [
         {
-            id: 0
+            id: 0,
+            src: getImageName(1)
         },
         {
-            id: 1
+            id: 1,
+            src: getImageName(2)
         },
         {
-            id: 2
+            id: 2,
+            src: getImageName(3)
         },
         {
-            id: 3
+            id: 3,
+            src: getImageName(4)
         },
         {
-            id: 4
+            id: 4,
+            src: getImageName(5)
         },
         {
-            id: 5
+            id: 5,
+            src: getImageName(6)
         },
         {
-            id: 6
+            id: 6,
+            src: getImageName(7)
+        },
+        {
+            id: 7,
+            src: getImageName(8)
         }
     ]
 
