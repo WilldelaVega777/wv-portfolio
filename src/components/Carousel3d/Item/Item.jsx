@@ -2,7 +2,6 @@
 // Imports Section
 //--------------------------------------------------------------
 import React                from 'react'
-import { useState }         from 'react'
 import { useRef }           from 'react'
 import { useFrame }         from '@react-three/fiber'
 import { useLoader }        from '@react-three/fiber'
@@ -18,8 +17,14 @@ const Item = (props) => {
     // Internal Variables Section
     //----------------------------------------------------------
     const currentMesh               = useRef()
-    const [hovered, setHover]       = useState(false)
-    const [colorMap]                = useLoader(TextureLoader, [props.item.src])
+    const reversedMesh              = useRef()
+    const [colorMap, colorLabel]    = useLoader(
+        TextureLoader,
+        [
+            props.item.src,
+            props.item.text
+        ]
+    )
 
 
     let innerRadius
@@ -30,12 +35,17 @@ const Item = (props) => {
     let outerPosition
     let outerRotation
 
+    let innerReversedRadius
+    let innerReversedPosition
+    let innerReversedRotation
+
 
     //----------------------------------------------------------
     // Initialize Variables Section
     //----------------------------------------------------------
-    outerRadius = 3.5
-    innerRadius = 3.496
+    outerRadius         = 2.4
+    innerRadius         = 2.396
+    innerReversedRadius = 2.392
 
     outerPosition= [
         Math.cos(props.angle) * outerRadius,
@@ -62,6 +72,19 @@ const Item = (props) => {
         0
     ]
 
+    innerReversedPosition= [
+        Math.cos(props.angle) * innerReversedRadius,
+        0,
+        Math.sin(props.angle) * innerReversedRadius
+    ]
+
+    innerReversedRotation= [
+        0,
+        (props.angle * -1) + (Math.PI / 2),
+        0
+    ]
+
+
     //----------------------------------------------------------
     // Lifecycle Event Handler Methods Section
     //----------------------------------------------------------
@@ -77,16 +100,18 @@ const Item = (props) => {
         // Internal Functions Section
         //------------------------------------------------------
         const hover = () => {
-            if (currentMesh.current.position.y <= .7)
+            if (currentMesh.current.position.y <= .38)
             {
-                (currentMesh.current.position.y += 0.05)
+                currentMesh.current.position.y += 0.05
+                reversedMesh.current.position.y += 0.05
             }
         }
         //------------------------------------------------------
         const unhover = () => {
-            if (currentMesh.current.position.y > 0)
+            if (currentMesh.current.position.y > -0.19)
             {
-                (currentMesh.current.position.y -= 0.05)
+                currentMesh.current.position.y -= 0.05
+                reversedMesh.current.position.y -= 0.05
             }
         }
 
@@ -109,7 +134,6 @@ const Item = (props) => {
     // Event Handler Methods Section
     //----------------------------------------------------------
     const itemOnPointerOver = (event) => {
-        setHover(true)
         props.activateItem(props.item.id)
     }
 
@@ -125,15 +149,28 @@ const Item = (props) => {
                 rotation={outerRotation}
                 onPointerOver={(event) => itemOnPointerOver(event)}
             >
-                <boxGeometry args={[2.6, 1.5, .01]} />
-                <meshStandardMaterial color={'#888'} map={colorMap}/>
+                <boxGeometry args={[1.8, 1.0, .01]} />
+                <meshStandardMaterial color={'#888'}
+                                      map={colorMap}
+                />
             </mesh>
             <mesh
                 position={innerPosition}
                 rotation={innerRotation}
             >
-                <boxGeometry args={[2.6, .75, .01]}/>
-                <meshStandardMaterial color={'#444444'} />
+                <boxGeometry args={[1.8, .63, .01]}/>
+                <meshStandardMaterial color={'#aaaaaa'}
+                                      map={colorLabel}
+                />
+            </mesh>
+            <mesh
+                ref={reversedMesh}
+                position={innerReversedPosition}
+                rotation={innerReversedRotation}
+            >
+                <boxGeometry args={[1.8, 1.0, .01]}/>
+                <meshStandardMaterial color={'orange'}
+                />
             </mesh>
         </group>
     )

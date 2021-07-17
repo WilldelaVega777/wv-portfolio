@@ -24,6 +24,11 @@ const Portfolio = (props) => {
     }
 
     //----------------------------------------------------------
+    const getTextName = (index) => {
+        return `/images/Portfolio/d${index}.png`
+      }
+
+    //----------------------------------------------------------
     // Component Variables Section
     //----------------------------------------------------------
     const portfolioCanvas  = useRef(null);
@@ -32,35 +37,43 @@ const Portfolio = (props) => {
     let items = [
         {
             id: 0,
-            src: getImageName(1)
+            src: getImageName(1),
+            text: getTextName(1)
         },
         {
             id: 1,
-            src: getImageName(2)
+            src: getImageName(2),
+            text: getTextName(2)
         },
         {
             id: 2,
-            src: getImageName(3)
+            src: getImageName(3),
+            text: getTextName(3)
         },
         {
             id: 3,
-            src: getImageName(4)
+            src: getImageName(4),
+            text: getTextName(4)
         },
         {
             id: 4,
-            src: getImageName(5)
+            src: getImageName(5),
+            text: getTextName(5)
         },
         {
             id: 5,
-            src: getImageName(6)
+            src: getImageName(6),
+            text: getTextName(6)
         },
         {
             id: 6,
-            src: getImageName(7)
+            src: getImageName(7),
+            text: getTextName(7)
         },
         {
             id: 7,
-            src: getImageName(8)
+            src: getImageName(8),
+            text: getTextName(8)
         }
     ]
 
