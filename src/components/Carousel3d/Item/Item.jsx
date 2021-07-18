@@ -14,75 +14,62 @@ import { TextureLoader }    from 'three/src/loaders/TextureLoader'
 const Item = (props) => {
 
     //----------------------------------------------------------
+    // Component Functions Section
+    //----------------------------------------------------------
+    const getPosition = (yPosition) => {
+        return [
+            Math.cos(props.angle) * getRadius(),
+            yPosition,
+            Math.sin(props.angle) * getRadius()
+        ]
+    }
+
+    //----------------------------------------------------------
+    const getRotation = () => [
+        0,
+        (props.angle * -1) + (Math.PI / 2),
+        0
+    ]
+
+    //----------------------------------------------------------
+    const getRadius = () => {
+        baseRadius = (baseRadius - decrement)
+        return baseRadius
+    }
+
+
+    //----------------------------------------------------------
     // Internal Variables Section
     //----------------------------------------------------------
-    const currentMesh               = useRef()
-    const reversedMesh              = useRef()
-    const [colorMap, colorLabel]    = useLoader(
+    const o2i1aMesh = useRef()
+    const o2i1bMesh = useRef()
+    const o2i2aMesh = useRef()
+    const o2i2bMesh = useRef()
+
+    const [
+        colorMap1a,
+        colorMap1b,
+        colorMap2a,
+        colorMap2b
+    ] = useLoader(
         TextureLoader,
         [
             props.item.src,
-            props.item.text
+            props.item.text,
+            props.item.iSrc,
+            props.item.iText
         ]
     )
 
 
-    let innerRadius
-    let innerPosition
-    let innerRotation
+    let baseRadius  = 2.4
+    let decrement   = 0.002
+    let rt          = getRotation()
 
-    let outerRadius
-    let outerPosition
-    let outerRotation
-
-    let innerReversedRadius
-    let innerReversedPosition
-    let innerReversedRotation
-
-
-    //----------------------------------------------------------
-    // Initialize Variables Section
-    //----------------------------------------------------------
-    outerRadius         = 2.4
-    innerRadius         = 2.396
-    innerReversedRadius = 2.392
-
-    outerPosition= [
-        Math.cos(props.angle) * outerRadius,
-        0,
-        Math.sin(props.angle) * outerRadius
-    ]
-
-    outerRotation= [
-        0,
-        (props.angle * -1) + (Math.PI / 2),
-        0
-    ]
-
-
-    innerPosition= [
-        Math.cos(props.angle) * innerRadius,
-        -.40,
-        Math.sin(props.angle) * innerRadius
-    ]
-
-    innerRotation= [
-        0,
-        (props.angle * -1) + (Math.PI / 2),
-        0
-    ]
-
-    innerReversedPosition= [
-        Math.cos(props.angle) * innerReversedRadius,
-        0,
-        Math.sin(props.angle) * innerReversedRadius
-    ]
-
-    innerReversedRotation= [
-        0,
-        (props.angle * -1) + (Math.PI / 2),
-        0
-    ]
+    let o2i0Pos     = getPosition(props.floor)
+    let o2i1Pos     = getPosition((props.floor +0.32))
+    let o2i2Pos     = getPosition((props.floor +0.32))
+    let o2i3Pos     = getPosition(props.floor)
 
 
     //----------------------------------------------------------
@@ -100,18 +87,18 @@ const Item = (props) => {
         // Internal Functions Section
         //------------------------------------------------------
         const hover = () => {
-            if (currentMesh.current.position.y <= .38)
+            if (o2i1aMesh.current.position.y <= .38)
             {
-                currentMesh.current.position.y += 0.05
-                reversedMesh.current.position.y += 0.05
+                o2i1aMesh.current.position.y += 0.05
+                o2i2bMesh.current.position.y += 0.05
             }
         }
         //------------------------------------------------------
         const unhover = () => {
-            if (currentMesh.current.position.y > -0.19)
+            if (o2i1aMesh.current.position.y > -0.19)
             {
-                currentMesh.current.position.y -= 0.05
-                reversedMesh.current.position.y -= 0.05
+                o2i1aMesh.current.position.y -= 0.05
+                o2i2bMesh.current.position.y -= 0.05
             }
         }
 
@@ -130,6 +117,7 @@ const Item = (props) => {
 
     })
 
+
     //----------------------------------------------------------
     // Event Handler Methods Section
     //----------------------------------------------------------
@@ -144,37 +132,50 @@ const Item = (props) => {
     return (
         <group>
             <mesh
-                ref={currentMesh}
-                position={outerPosition}
-                rotation={outerRotation}
+                ref={o2i1aMesh}
+                position={o2i0Pos}
+                rotation={rt}
                 onPointerOver={(event) => itemOnPointerOver(event)}
             >
                 <boxGeometry args={[1.8, 1.0, .01]} />
                 <meshStandardMaterial color={'#888'}
-                                      map={colorMap}
+                                      map={colorMap1a}
                 />
             </mesh>
             <mesh
-                position={innerPosition}
-                rotation={innerRotation}
+                ref={o2i1bMesh}
+                position={o2i1Pos}
+                rotation={rt}
             >
                 <boxGeometry args={[1.8, .63, .01]}/>
                 <meshStandardMaterial color={'#aaaaaa'}
-                                      map={colorLabel}
+                                      map={colorMap1b}
                 />
             </mesh>
             <mesh
-                ref={reversedMesh}
-                position={innerReversedPosition}
-                rotation={innerReversedRotation}
+                ref={o2i2aMesh}
+                position={o2i2Pos}
+                rotation={rt}
+            >
+                <boxGeometry args={[1.8, .63, .01]}/>
+                <meshStandardMaterial color={'#444'}
+                                      map={colorMap2b}
+                />
+            </mesh>
+            <mesh
+                ref={o2i2bMesh}
+                position={o2i3Pos}
+                rotation={rt}
             >
                 <boxGeometry args={[1.8, 1.0, .01]}/>
-                <meshStandardMaterial color={'orange'}
+                <meshStandardMaterial color={'#383838'}
+                                      map={colorMap2a}
                 />
             </mesh>
         </group>
     )
 }
+
 
 //--------------------------------------------------------------
 // Exports Section
