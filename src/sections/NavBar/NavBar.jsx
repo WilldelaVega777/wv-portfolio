@@ -1,8 +1,18 @@
 //--------------------------------------------------------------
 // Imports Section
 //--------------------------------------------------------------
-import * as React       from "react"
+import * as React           from "react"
 import './NavBar.scss'
+
+import { Link }             from "@reach/router"
+import { useEffect }        from "react"
+import { useContext }       from "react"
+import { globalHistory }    from "@reach/router"
+
+import { gsap }             from "gsap"
+import { ScrollToPlugin }   from "gsap/ScrollToPlugin"
+
+import PageContext          from "../../context/page-context"
 
 
 //--------------------------------------------------------------
@@ -10,33 +20,66 @@ import './NavBar.scss'
 //--------------------------------------------------------------
 const NavBar = () => {
 
+    //----------------------------------------------------------
+    // Initial Settings Section
+    //----------------------------------------------------------
+    let config = useContext(PageContext)
+    gsap.registerPlugin(ScrollToPlugin)
+
+
+    //----------------------------------------------------------
+    // Lifecycle Event Handlers Section
+    //----------------------------------------------------------
+    useEffect(() => {
+
+        globalHistory.listen(({ action, location }) => {
+            if (action === 'PUSH') {
+                gsap.to(
+                    window,
+                    {
+                        duration: 1,
+                        scrollTo: {
+                            y: location.hash,
+                            offsetY: 50
+                        }
+                    }
+                );
+            }
+        })
+
+    }, [])
+
+
+    //----------------------------------------------------------
+    // Render Section
+    //----------------------------------------------------------
     return (
         <nav>
-            <a href="#hero">
+            <Link to="#hero">
                 <img className="logo-link" src="./images/Logo.png" alt="WV Logo"/>
-            </a>
-            <a href="#presentation">
+            </Link>
+            <Link to="#presentation">
                 Hi, I'm Will
-            </a>
-            <a href="#portfolio">
+            </Link>
+            <Link to="#portfolio">
                 My Portfolio
-            </a>
-            <a href="#featured">
+            </Link>
+            <Link to="#featured">
                 Favorite Projects
-            </a>
-            <a href="#resume">
+            </Link>
+            <Link to="#resume">
                 Download my Resume
-            </a>
-            <a href="#certifications">
+            </Link>
+            <Link to="#certifications">
                 Some Certifications
-            </a>
-            <a href="#diplomas">
+            </Link>
+            <Link to="#diplomas">
                 A Few Diplomas
-            </a>
+            </Link>
             <div className="lets-talk">
-                <a className="lets-talk" href="#contact">
+                <Link className="lets-talk" to="#contact">
                 ☎️ &nbsp; Let's Talk!
-                </a>
+                </Link>
             </div>
         </nav>
     )
