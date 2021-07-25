@@ -2,10 +2,9 @@
 // Imports Section
 //--------------------------------------------------------------
 import * as React       from "react"
+import { Suspense }     from "react"
+import Gallery           from "../../components/Gallery/Gallery.jsx"
 import "./Certifications.scss"
-
-import { useRef }       from "react"
-import { useEffect }    from "react"
 
 
 //--------------------------------------------------------------
@@ -16,10 +15,13 @@ const Certifications = () => {
 
     return (
         <section id="certifications" className="certifications">
-            <h1>CERTIFICATIONS COMPONENT</h1>
-            <div className="certifications-container">
-
-            </div>
+            <Suspense fallback={
+                <div>
+                    Loading...
+                </div>
+            }>
+                <Gallery/>
+            </Suspense>
         </section>
     )
 

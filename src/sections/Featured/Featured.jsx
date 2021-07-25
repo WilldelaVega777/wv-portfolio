@@ -4,9 +4,6 @@
 import * as React       from "react"
 import "./Featured.scss"
 
-import { useRef }       from "react"
-import { useEffect }    from "react"
-
 
 //--------------------------------------------------------------
 // Component Section

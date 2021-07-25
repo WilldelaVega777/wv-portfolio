@@ -4,15 +4,15 @@
 import * as React           from "react"
 import { Suspense }         from "react"
 import { useState }         from "react"
-import { useRef }           from "react"
-import { useLoader }        from '@react-three/fiber'
+import { useTexture }       from '@react-three/drei'
 
 import { Canvas }           from "@react-three/fiber"
-import { TextureLoader }    from 'three/src/loaders/TextureLoader'
+import { Text }             from "@react-three/drei"
 import { Reflector }        from "@react-three/drei"
 import { OrbitControls }    from "@react-three/drei"
 
 import Item                 from "./Item/Item"
+
 import "./Carousel3d.scss"
 
 
@@ -31,18 +31,14 @@ const Carousel3d = (props) => {
     // Textures
     const [
         depthMap
-    ] = useLoader(
-        TextureLoader,
-        [
-            `/images/Portfolio/depth.png`
-        ]
-    )
+    ] = useTexture([`/images/Portfolio/depth.png`])
 
 
     //----------------------------------------------------------
     // Event Handler Methods Section
     //----------------------------------------------------------
     const activateItem = (id) => {
+
         setActiveComponent(id)
     }
     //----------------------------------------------------------
@@ -55,7 +51,16 @@ const Carousel3d = (props) => {
     // Render Section
     //----------------------------------------------------------
     return (
-        <Suspense fallback={<ambientLight/>}>
+        <Suspense fallback={
+            <Canvas>
+                <Text color="white"
+                    anchorX="center"
+                    anchorY="middle"
+                >
+                    Loading
+                </Text>
+            </Canvas>
+        }>
             <Canvas>
                 <ambientLight />
                 <pointLight position={[10, 10, 10]}

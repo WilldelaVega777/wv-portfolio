@@ -1,15 +1,16 @@
 section.certifications
 {
-    background-color: white;
+    position: relative;
+    background-color: black;
     background-image: url('../../assets/images/WoodTile_Bg.jpg');
     background-repeat: repeat;
     background-size: 25%;
-    font-family: 'Poppins Regular';
-    color: #F8EFBA;
+    background-position: 0px -300px;
     width: 100vw;
-    height: 1000px;
+    height: 900px;
     overflow: hidden;
-    z-index: 9999;
+    z-index: 9990;
+    color: #F8EFBA;
 
     h1
     {
@@ -18,13 +19,30 @@ section.certifications
         text-shadow: 2px 2px 2px #222;
     }
 
-    div.certifications-container
+    div.certifications-title
     {
-        width: 90%;
-        height: 900px;
-        background-color: rgba(255,255,255,0.30);
-        border-radius: 6px;
-        margin: 0 auto;
-        box-shadow: 10px 10px 19px 0px rgba(0,0,0,0.73);
+        position: absolute;
+        max-width: 1400px;
+        min-height: 100%;
+        top: 0px;
+        transform: translate(calc((100vw - 300px) / 2));
+        z-index: 9990;
+    }
+
+    article
+    {
+        position:absolute;
+        max-width: 1400px;
+        min-height: 0px;
+        top: 80px;
+        transform: translate(calc((100vw - 1400px) / 2));
+        z-index: 9990;
+        color: #b5a642;
+        font-family: 'Poppins Regular';
+        font-size: 14px;
+        background: rgba(0, 0, 0, 0.301);
+        border-radius: 6;
+        padding: 20px;
+        text-shadow: 2px 2px 2px #000;
     }
 }

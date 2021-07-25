@@ -8,6 +8,7 @@ import { Link }             from "@reach/router"
 import { useEffect }        from "react"
 import { useContext }       from "react"
 import { globalHistory }    from "@reach/router"
+import { navigate }         from "@reach/router"
 
 import { gsap }             from "gsap"
 import { ScrollToPlugin }   from "gsap/ScrollToPlugin"
@@ -18,45 +19,100 @@ import PageContext          from "../../context/page-context"
 //--------------------------------------------------------------
 // Component Section
 //--------------------------------------------------------------
-const NavBar = () => {
+const NavBar = (props) => {
 
     //----------------------------------------------------------
     // Initial Settings Section
     //----------------------------------------------------------
-    let config = useContext(PageContext)
+    const config = useContext(PageContext)
     gsap.registerPlugin(ScrollToPlugin)
 
 
     //----------------------------------------------------------
-    // Lifecycle Event Handlers Section
+    // Listener Declaration Section
     //----------------------------------------------------------
     useEffect(() => {
 
-        globalHistory.listen(({ action, location }) => {
+        let timeline
+        globalHistory.listen(async ({ action, location }) => {
             if (action === 'PUSH') {
-                gsap.to(
-                    window,
-                    {
-                        duration: 1,
-                        scrollTo: {
-                            y: location.hash,
-                            offsetY: 50
-                        }
-                    }
-                );
+                switch (location.hash)
+                {
+                    case '#hero':
+                        timeline = gsap.to(
+                            window,
+                            {
+                                duration: 1,
+                                scrollTo: {
+                                    y: location.hash,
+                                    onComplete: () => {
+                                        config.updateFixTop()
+                                    }
+                                }
+                            }
+                        )
+                        break
+                    case '#presentation':
+                        gsap.to(
+                            window,
+                            {
+                                duration: 1,
+                                scrollTo: {
+                                    y: location.hash,
+                                    offsetY: 50
+                                }
+                            }
+                        )
+                        break
+                    case '#nav':
+                        timeline = gsap.to(
+                            window,
+                            {
+                                duration: 1,
+                                scrollTo: {
+                                    y: location.hash,
+                                    offsetY: -50,
+                                    onComplete: async () => {
+                                        setTimeout(async () => {
+                                            await navigate('#presentation')
+                                        }, 200)
+                                    }
+                                }
+                            }
+                        )
+                        break
+                    default:
+                        gsap.to(
+                            window,
+                            {
+                                duration: 1,
+                                scrollTo: {
+                                    y: location.hash,
+                                    offsetY: 50
+                                }
+                            }
+                        )
+                        break
+                }
             }
+
         })
 
     }, [])
+
+
 
 
     //----------------------------------------------------------
     // Render Section
     //----------------------------------------------------------
     return (
-        <nav>
+        <nav id="nav">
             <Link to="#hero">
-                <img className="logo-link" src="./images/Logo.png" alt="WV Logo"/>
+                <img className="logo-link"
+                     src="./images/Logo.png"
+                     alt="WV Logo"
+                />
             </Link>
             <Link to="#presentation">
                 Hi, I'm Will
@@ -67,18 +123,20 @@ const NavBar = () => {
             <Link to="#featured">
                 Favorite Projects
             </Link>
-            <Link to="#resume">
-                Download my Resume
-            </Link>
             <Link to="#certifications">
                 Some Certifications
+            </Link>
+            <Link to="#resume">
+                My Resume
             </Link>
             <Link to="#diplomas">
                 A Few Diplomas
             </Link>
-            <div className="lets-talk">
-                <Link className="lets-talk" to="#contact">
-                ☎️ &nbsp; Let's Talk!
+            <div className={"lets-talk "  + (config.scroll ? "move-right" : "move-left")}>
+                <Link to="#contact"
+                    className="lets-talk"
+                >
+                    ☎️ &nbsp; Let's Talk!
                 </Link>
             </div>
         </nav>

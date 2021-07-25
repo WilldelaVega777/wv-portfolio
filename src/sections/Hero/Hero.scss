@@ -26,11 +26,6 @@ section.hero
     text-align: center;
 }
 
-.hero-text-scroll-off
-{
-    padding-left: 17px;
-}
-
 
 canvas.hero
 {
@@ -95,4 +90,9 @@ article.heroBack
         text-shadow: 2px 2px 2px #222;
         text-align: right;
     }
+}
+
+.text-scroll-off
+{
+    padding-left: 17px;
 }

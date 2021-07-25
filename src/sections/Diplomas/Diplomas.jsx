@@ -2,21 +2,28 @@
 // Imports Section
 //--------------------------------------------------------------
 import * as React       from "react"
+import { Suspense }     from "react"
+import Museum           from "../../components/Museum/Museum.jsx"
 import "./Diplomas.scss"
-
-import { useRef }       from "react"
-import { useEffect }    from "react"
 
 
 //--------------------------------------------------------------
 // Component Section
 //--------------------------------------------------------------
-const Diplomas = () => {
+const Diplomas = (props) => {
 
 
     return (
         <section id="diplomas" className="diplomas">
-            <h1>DIPLOMAS COMPONENT</h1>
+
+            <Suspense fallback={
+                <div>
+                    Loading...
+                </div>
+            }>
+                <Museum/>
+            </Suspense>
+
         </section>
     )
 

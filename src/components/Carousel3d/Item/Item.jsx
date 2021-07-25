@@ -4,8 +4,8 @@
 import React                from 'react'
 import { useRef }           from 'react'
 import { useFrame }         from '@react-three/fiber'
-import { useLoader }        from '@react-three/fiber'
-import { TextureLoader }    from 'three/src/loaders/TextureLoader'
+import { useTexture }       from '@react-three/drei'
+
 
 
 //--------------------------------------------------------------
@@ -51,8 +51,7 @@ const Item = (props) => {
         colorMap1b,
         colorMap2a,
         colorMap2b
-    ] = useLoader(
-        TextureLoader,
+    ] = useTexture(
         [
             props.item.src,
             props.item.text,
@@ -66,10 +65,10 @@ const Item = (props) => {
     let decrement   = 0.002
     let rt          = getRotation()
 
-    let o2i0Pos     = getPosition(props.floor)
+    let o2i0Pos     = getPosition((props.floor +0.89))
     let o2i1Pos     = getPosition((props.floor +0.32))
     let o2i2Pos     = getPosition((props.floor +0.32))
-    let o2i3Pos     = getPosition(props.floor)
+    let o2i3Pos     = getPosition((props.floor +0.89))
 
 
     //----------------------------------------------------------
@@ -138,7 +137,7 @@ const Item = (props) => {
                 onPointerOver={(event) => itemOnPointerOver(event)}
             >
                 <boxGeometry args={[1.8, 1.0, .01]} />
-                <meshStandardMaterial color={'#888'}
+                <meshStandardMaterial color={'#b3b3b3'}
                                       map={colorMap1a}
                 />
             </mesh>
@@ -148,7 +147,7 @@ const Item = (props) => {
                 rotation={rt}
             >
                 <boxGeometry args={[1.8, .63, .01]}/>
-                <meshStandardMaterial color={'#aaaaaa'}
+                <meshStandardMaterial color={'#bbb'}
                                       map={colorMap1b}
                 />
             </mesh>
@@ -158,7 +157,7 @@ const Item = (props) => {
                 rotation={rt}
             >
                 <boxGeometry args={[1.8, .63, .01]}/>
-                <meshStandardMaterial color={'#444'}
+                <meshStandardMaterial color={'#777'}
                                       map={colorMap2b}
                 />
             </mesh>
@@ -168,7 +167,7 @@ const Item = (props) => {
                 rotation={rt}
             >
                 <boxGeometry args={[1.8, 1.0, .01]}/>
-                <meshStandardMaterial color={'#383838'}
+                <meshStandardMaterial color={'#575757'}
                                       map={colorMap2a}
                 />
             </mesh>

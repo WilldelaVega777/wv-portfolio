@@ -17,14 +17,14 @@ nav
       text-align: center;
       padding: 14px;
       text-decoration: none;
-      font-family: 'Poppins';
+      font-family: 'Poppins Regular';
       text-shadow: 2px 2px 2px #222;
     }
 
     a:hover
     {
-        color: #4b3621;
-        text-shadow: 2px 2px 2px #777;
+        color: #e4d96f;
+        text-shadow: 2px 2px 2px #222;
     }
 
     div.lets-talk
@@ -36,7 +36,7 @@ nav
     a.lets-talk
     {
         color: #e4d96f;
-        margin-right: 10px;
+        margin-top: -3px;
     }
 
     a.lets-talk:hover
@@ -59,20 +59,32 @@ nav
 }
 
 
-  /* Page content */
-  .content {
+/* Page content */
+.content
+{
     padding: 16px;
-  }
+}
 
-  /* The sticky class is added to the navbar with JS when it reaches its scroll position */
-  .sticky {
+/* The sticky class is added to the navbar with JS when it reaches its scroll position */
+.sticky
+{
     position: fixed;
     top: 0;
     width: 100%;
-  }
-
+}
 
 .sticky + .content {
     padding-top: 60px;
 }
 
+.move-right
+{
+    padding-left: 3px;
+    margin-right: 27px !important;
+}
+
+.move-left
+{
+    padding-left: 0px;
+    margin-right: 30px !important;
+}

@@ -1,11 +1,8 @@
 //--------------------------------------------------------------
 // Imports Section
 //--------------------------------------------------------------
-import * as React       from "react"
+import * as React           from "react"
 import "./Presentation.scss"
-
-import { useRef }       from "react"
-import { useEffect }    from "react"
 
 
 //--------------------------------------------------------------
@@ -13,7 +10,9 @@ import { useEffect }    from "react"
 //--------------------------------------------------------------
 const Presentation = () => {
 
-
+    //----------------------------------------------------------
+    // Render Section
+    //----------------------------------------------------------
     return (
         <section id="presentation" className="presentation">
             <h1>PRESENTATION COMPONENT</h1>

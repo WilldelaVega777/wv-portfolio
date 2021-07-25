@@ -10,6 +10,10 @@ import { Tween }            from 'react-gsap';
 
 import { useRef }           from "react"
 import { useEffect }        from "react"
+import { useContext }       from "react"
+import PageContext          from "../../context/page-context"
+
+import { navigate }         from "@reach/router"
 
 
 //--------------------------------------------------------------
@@ -20,6 +24,7 @@ const Hero = (props) => {
     //----------------------------------------------------------
     // Initialize Variables Section
     //----------------------------------------------------------
+    const NUMBER_OF_IMAGES  = 53
     const heroCanvas        = useRef(null)
     const frontendText      = useRef(null)
     const backendText       = useRef(null)
@@ -27,7 +32,7 @@ const Hero = (props) => {
     const heroMask          = useRef(null)
     const frontEndAnimation = useRef(null)
     const backEndAnimation  = useRef(null)
-    const NUMBER_OF_IMAGES  = 53
+    const config            = useContext(PageContext)
     let current             = 1
     let context             = null
     let image               = new Image()
@@ -61,20 +66,24 @@ const Hero = (props) => {
 
             update(current)
         }
+
         componentDidMount()
+
     }, [])
+
+    //----------------------------------------------------------
+    useEffect(() => {
+
+        rewind()
+
+    }, [config.fixTop])
 
 
     //----------------------------------------------------------
     // Event Handler Methods Section
     //----------------------------------------------------------
-    const heroCanvas_onWheel = (pEvent) =>
+    const heroCanvas_onWheel = async (pEvent) =>
     {
-        // Checks if Component has Focus
-        if (document.body.style.overflowY !== 'hidden')
-        {
-            return
-        }
 
         // Get Direction and Current
         const direction = ((pEvent.deltaY < 0) ? 'up' : 'down')
@@ -91,16 +100,82 @@ const Hero = (props) => {
         }
         else
         {
-            if (current >= NUMBER_OF_IMAGES)
-            {
-                current = NUMBER_OF_IMAGES
-            }
-            else
-            {
-                current++
-            }
+            current++
         }
 
+        animate(current, direction)
+
+    }
+
+    //----------------------------------------------------------
+    const heroCanvas_onMouseEnter = () => {
+
+        if (config.scroll)
+        {
+            config.toggleScroll()
+            heroText.current.classList.add('text-scroll-off')
+        }
+
+    }
+
+
+    //----------------------------------------------------------
+    // Internal Functions Section
+    //----------------------------------------------------------
+    const cacheImages = async (srcArray) => {
+        const promises = await srcArray.map((src) => {
+            return new Promise((resolve, reject) => {
+                image = new Image()
+                image.onload = resolve()
+                image.onerror = reject()
+                image.src = src
+            })
+        })
+        await Promise.all(promises)
+    }
+
+    //----------------------------------------------------------
+    const currentFrame = (index) =>
+    `/images/Hero/Hero_${index.toString().padStart(2,'0')}.jpg`
+
+    //----------------------------------------------------------
+    const update = (index) => {
+
+        const context = heroCanvas.current.getContext('2d')
+        image.onload = () => {
+            context.drawImage(image, 0, 0)
+        }
+        image.src = currentFrame(index)
+
+    }
+
+    //----------------------------------------------------------
+    const rewind = () => {
+        current = 1
+        frontEndAnimation.current.getGSAP().seek(0)
+        frontEndAnimation.current.getGSAP().pause()
+        backEndAnimation.current.getGSAP().seek(0)
+        backEndAnimation.current.getGSAP().pause()
+        animate(current, 'up')
+    }
+
+    //----------------------------------------------------------
+    const rewindAsync = () => {
+        return new Promise((resolve, reject) => {
+            current = 1
+            frontEndAnimation.current.getGSAP().seek(0)
+            frontEndAnimation.current.getGSAP().pause()
+            backEndAnimation.current.getGSAP().seek(0)
+            backEndAnimation.current.getGSAP().pause()
+            animate(current, 'up')
+            resolve(true)
+        })
+    }
+
+
+
+    //----------------------------------------------------------
+    const animate = async (current, direction) => {
         //------------------------------------------------------
         // Animations by Frame
         //------------------------------------------------------
@@ -130,7 +205,7 @@ const Hero = (props) => {
         if (current >= 35)
         {
             // Removes FrontEnd Article
-            if (current === 38)
+            if (current === 36)
             {
                 frontEndAnimation.current.getGSAP().timeScale(
                     frontEndAnimation.current.getGSAP().duration()
@@ -139,13 +214,11 @@ const Hero = (props) => {
 
             if ((current === 42) && (direction === 'down'))
             {
-                console.log('debería entrar backEnd aquí...')
                 // Brings up BackEnd Article
                 backEndAnimation.current.getGSAP().play(0)
             }
             else if ((current === 40) && (direction === 'up'))
             {
-                console.log('debería salir backEnd aquí...')
                 // Removes BackEnd Article
                 backEndAnimation.current.getGSAP().timeScale(
                     backEndAnimation.current.getGSAP().duration()
@@ -159,54 +232,29 @@ const Hero = (props) => {
             heroMask.current.style.opacity = 0
         }
 
+        if (current === 65)
+        {
+            await Promise.all([
+                rewindAsync(),
+                navigate('#nav')
+            ])
+        }
+
         // Update Clock Animation
         requestAnimationFrame(() => {
             if (current > 15)
             {
                 update((current - 15))
             }
+            else if (current <= 15)
+            {
+                update(1)
+            }
+            else if (current > 53)
+            {
+                update(53)
+            }
         })
-    }
-
-    //----------------------------------------------------------
-    const heroCanvas_onMouseEnter = () => {
-        heroText.current.classList.add('hero-text-scroll-off')
-        props.enter()
-    }
-
-    //----------------------------------------------------------
-    const heroCanvas_onMouseLeave = () => {
-        heroText.current.classList.remove('hero-text-scroll-off')
-        props.leave()
-    }
-
-
-    //----------------------------------------------------------
-    // Internal Functions Section
-    //----------------------------------------------------------
-    const cacheImages = async (srcArray) => {
-        const promises = await srcArray.map((src) => {
-            return new Promise((resolve, reject) => {
-                image = new Image()
-                image.onload = resolve()
-                image.onerror = reject()
-                image.src = src
-            })
-        })
-        await Promise.all(promises)
-    }
-
-    //----------------------------------------------------------
-    const currentFrame = (index) =>
-    `/images/Hero/Hero_${index.toString().padStart(2,'0')}.jpg`
-
-    //----------------------------------------------------------
-    const update = (index) => {
-        const context = heroCanvas.current.getContext('2d')
-        image.onload = () => {
-            context.drawImage(image, 0, 0)
-        }
-        image.src = currentFrame(index)
     }
 
 
@@ -215,17 +263,22 @@ const Hero = (props) => {
     //----------------------------------------------------------
     return (
         <section id="hero"
-                 className="hero"
-                 onWheel={(e) => heroCanvas_onWheel(e)}
-                 onMouseOver={()  => heroCanvas_onMouseEnter()}
-                 onMouseLeave={() => heroCanvas_onMouseLeave()}
+                role="banner"
+                className="hero"
+                onWheel={(e) => heroCanvas_onWheel(e)}
+                onMouseOver={()  => heroCanvas_onMouseEnter()}
+                onFocus={()  => heroCanvas_onMouseEnter()}
         >
-
             <div ref={heroText} className="hero-text">
                 THE WATCHMEN
             </div>
 
-            <img ref={heroMask} className="hero-mask" src="/images/Hero/Hero-Back.png"/>
+            <img ref={heroMask}
+                 className="hero-mask"
+                 src="/images/Hero/Hero-Back.png"
+                 alt="mask"
+                 draggable={false}
+            />
 
             <canvas ref={heroCanvas}
                     className="hero"
@@ -234,8 +287,8 @@ const Hero = (props) => {
             </canvas>
 
             <Timeline ref={frontEndAnimation}
-                      playState={PlayState.stop}
-                      target={
+                    playState={PlayState.stop}
+                    target={
                 <article className="heroFront"
                 >
                     <div ref={frontendText}>
@@ -258,8 +311,8 @@ const Hero = (props) => {
             </Timeline>
 
             <Timeline ref={backEndAnimation}
-                      playState={PlayState.stop}
-                      target={
+                    playState={PlayState.stop}
+                    target={
                 <article className="heroBack"
                 >
                     <div ref={backendText}>
@@ -280,6 +333,7 @@ const Hero = (props) => {
             }>
                 <Tween to  ={{ x: '700px', opacity: 1.0 }} duration={2} ease="back.out(1.7)"/>
             </Timeline>
+
 
         </section>
     )

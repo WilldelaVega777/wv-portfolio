@@ -4,8 +4,6 @@
 import * as React       from "react"
 import "./Contact.scss"
 
-import { useRef }       from "react"
-import { useEffect }    from "react"
 
 
 //--------------------------------------------------------------
