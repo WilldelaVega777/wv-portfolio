@@ -16,3 +16,37 @@ div.bottom-nav
     text-shadow: 2px 2px 2px #000;
     z-index: 9990;
 }
+
+
+figure
+{
+    position:absolute;
+    z-index: 9990;
+    top: 0px;
+    padding: 0px;
+    margin: 0px;
+    max-width: 1400px;
+    min-height: 200px;
+    min-width: 280px;
+    color: #b5a642;
+    font-family: 'Poppins Regular';
+    font-size: 14px;
+    border-radius: 6;
+    transform: translate(calc(100vw - 285px));
+    text-shadow: 2px 2px 2px #000;
+    background: rgba(0, 0, 0, 0.3);
+
+    div
+    {
+        position: relative;
+        margin-bottom: 0px;
+        margin-left: 0px;
+
+        .debug
+        {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+    }
+}

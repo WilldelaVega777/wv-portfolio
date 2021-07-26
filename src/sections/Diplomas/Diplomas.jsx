@@ -1,10 +1,11 @@
 //--------------------------------------------------------------
 // Imports Section
 //--------------------------------------------------------------
-import * as React       from "react"
-import { Suspense }     from "react"
-import Museum           from "../../components/Museum/Museum.jsx"
+import * as React               from "react"
+import { Suspense }             from "react"
 import "./Diplomas.scss"
+
+import Museum                   from "../../components/Museum/Museum.jsx"
 
 
 //--------------------------------------------------------------
@@ -12,7 +13,19 @@ import "./Diplomas.scss"
 //--------------------------------------------------------------
 const Diplomas = (props) => {
 
+    //----------------------------------------------------------
+    // Initialization Section
+    //----------------------------------------------------------
 
+
+    //----------------------------------------------------------
+    // Event Handler Methods Section
+    //----------------------------------------------------------
+
+
+    //----------------------------------------------------------
+    // Render Section
+    //----------------------------------------------------------
     return (
         <section id="diplomas" className="diplomas">
 
