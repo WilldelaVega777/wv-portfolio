@@ -5,16 +5,17 @@ div.bottom-nav
     min-height: 180px;
     min-width: 150px;
     text-align: center;
-    top: 750px;
+    top: 730px;
     transform: translate(calc((100vw - 100px) / 2));
     color: #b5a642;
     font-family: 'Poppins Regular';
     font-size: 14px;
     background: rgba(0, 0, 0, 0);
     border-radius: 6;
-    padding: 20px;
+    padding: 45px;
     text-shadow: 2px 2px 2px #000;
     z-index: 9990;
+    cursor: pointer;
 }
 
 
@@ -38,15 +39,20 @@ figure
 
     div
     {
-        position: relative;
-        margin-bottom: 0px;
-        margin-left: 0px;
+        position: flex;
+        flex-direction: row;
+        align-items: center;
+        align-content: flex-end;
 
         .debug
         {
             position: absolute;
             bottom: 0;
             left: 0;
+            flex: 1;
+            padding-bottom: 14px;
+            text-align: center;
+            min-width: 100%;
         }
     }
 }

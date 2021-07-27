@@ -27,6 +27,8 @@ import "../Gui/Gui.scss"
 import { useHelper }            from "@react-three/drei"
 import { AxesHelper }           from "@react-three/fiber"
 
+import Camera                   from "../Camera/Camera"
+
 
 //--------------------------------------------------------------
 // Component Section
@@ -37,8 +39,7 @@ const Museum = (props) => {
     //----------------------------------------------------------
     const museum    = useLoader(GLTFLoader, '/models/Museum/scene.gltf')
     const sky       = useTexture('/models/Museum/sky.jpeg')
-    const cameraRef = useRef()
-    let e
+
 
     // DAT GUI State
     const defaultState = {
@@ -56,7 +57,8 @@ const Museum = (props) => {
         lPosZ: 55
     }
     const [dat, setDat] = useState(defaultState)
-    const point = useRef()
+    const [angle, setAngle] = useState('')
+    const [direction, setDirection] = useState('')
 
 
 
@@ -72,9 +74,12 @@ const Museum = (props) => {
     // Event Handler Methods Section
     //----------------------------------------------------------
     const managerListener = (manager) => {
-        manager.on('move', (e, stick => {
-            console.log('I moved')
-        }))
+        manager.on('move', (e, stick) => {
+            setAngle(stick?.angle?.radian)
+        })
+        manager.on('dir', (e, stick) => {
+            setDirection(stick?.direction?.angle)
+        })
         manager.on('end', () => {
             console.log('I ended')
         })
@@ -145,8 +150,10 @@ const Museum = (props) => {
                     <DatButton label='Load Data' onClick={async () => { await LoadDatGui() }}/>
                 </DatGui>
                 <div>
-                    <div className="debug">
-                        works?
+                <div className="debug">
+                        Angle: { angle }
+                        <p/>
+                        Direction: { direction }
                     </div>
                 </div>
 
@@ -156,6 +163,10 @@ const Museum = (props) => {
             {/* 3D Render */}
             <Canvas>
 
+                {/* First Person Camera */}
+                <Camera position={[0,0,0]}/>
+
+                {/* World */}
                 <group>
                     <primitive object={museum.scene}
                                 position={[0,-174,-50]}
@@ -189,9 +200,7 @@ const Museum = (props) => {
                         ]}
                     />
                     useHelper(point, AxesHelper, 'cyan')
-                    <pointLight
-                        ref={point}
-                        color={'white'}
+                    <pointLight color={'white'}
 
                         position={[
                             -72.0,
@@ -199,15 +208,12 @@ const Museum = (props) => {
                             652.4
                         ]}
                     />
-
-
-
-
                 </group>
+
 
                 <OrbitControls
                     enableZoom={false}
-                    enablePosition={true}
+                    enablePosition={false}
                     enableRotation={true}
                     maxPolarAngle={(Math.PI /2) * 0.85}
                     minPolarAngle={Math.PI/2}
@@ -229,7 +235,7 @@ const Museum = (props) => {
                             position: 'relative',
                             background: 'rgba(0,0,0,0)'
                         }}
-                        managerListener={managerListener}
+                        managerListener={(manager) => managerListener(manager)}
                 />
             </div>
 
