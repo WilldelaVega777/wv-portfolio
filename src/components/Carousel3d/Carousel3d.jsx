@@ -108,7 +108,8 @@ const Carousel3d = (props) => {
                                enableZoom={false}
                                enableRotate={true}
                                autoRotate={true}
-                               maxPolarAngle={(Math.PI /2) * 0.85}
+                               maxPolarAngle={((Math.PI / 2) * 0.85)}
+                               minPolarAngle={((Math.PI / 2) * 0.50)}
                 />
             </Canvas>
         </Suspense>

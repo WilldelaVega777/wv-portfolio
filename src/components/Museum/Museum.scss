@@ -15,7 +15,7 @@ div.bottom-nav
     padding: 45px;
     text-shadow: 2px 2px 2px #000;
     z-index: 9990;
-    cursor: pointer;
+    cursor: grab;
 }
 
 
@@ -35,14 +35,15 @@ figure
     border-radius: 6;
     transform: translate(calc(100vw - 285px));
     text-shadow: 2px 2px 2px #000;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.7);
 
-    div
+    div.debug-container
     {
         position: flex;
         flex-direction: row;
         align-items: center;
         align-content: flex-end;
+        min-height: 240px !important;
 
         .debug
         {

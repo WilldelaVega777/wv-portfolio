@@ -14,7 +14,6 @@ import { Text }                 from "@react-three/drei"
 import { useLoader }            from '@react-three/fiber'
 import { GLTFLoader }           from 'three/examples/jsm/loaders/GLTFLoader'
 import { Plane }                from "@react-three/drei"
-import { OrbitControls }        from "@react-three/drei"
 import { useTexture }           from '@react-three/drei'
 import JoyStick                 from "react-joystick"
 
@@ -23,9 +22,6 @@ import { DatFolder }            from 'react-dat-gui';
 import { DatNumber }            from 'react-dat-gui';
 import { DatButton }            from 'react-dat-gui';
 import "../Gui/Gui.scss"
-
-import { useHelper }            from "@react-three/drei"
-import { AxesHelper }           from "@react-three/fiber"
 
 import Camera                   from "../Camera/Camera"
 
@@ -57,17 +53,9 @@ const Museum = (props) => {
         lPosZ: 55
     }
     const [dat, setDat] = useState(defaultState)
-    const [angle, setAngle] = useState('')
-    const [direction, setDirection] = useState('')
+    const [position, setPosition] = useState({x:0, y:0})
 
-
-
-    //----------------------------------------------------------
-    // Life Cycle Event Handler Methods Section
-    //----------------------------------------------------------
-    useEffect(() => {
-
-    }, [])
+    const world = useRef()
 
 
     //----------------------------------------------------------
@@ -75,13 +63,17 @@ const Museum = (props) => {
     //----------------------------------------------------------
     const managerListener = (manager) => {
         manager.on('move', (e, stick) => {
-            setAngle(stick?.angle?.radian)
-        })
-        manager.on('dir', (e, stick) => {
-            setDirection(stick?.direction?.angle)
+            if (stick.angle)
+            {
+                setPosition(convertPosition(
+                        stick?.distance,
+                        stick?.angle?.radian
+                    )
+                )
+            }
         })
         manager.on('end', () => {
-            console.log('I ended')
+            setPosition({y: 0, x: 0})
         })
     }
     //----------------------------------------------------------
@@ -101,7 +93,18 @@ const Museum = (props) => {
     const LoadDatGui = async () => {
         const storedState = await JSON.parse(localStorage.getItem('dat'))
         setDat(storedState ? storedState : defaultState)
-     }
+    }
+
+
+    //----------------------------------------------------------
+    // Internal Functions Section
+    //----------------------------------------------------------
+    const convertPosition = (distanceFromCenter, angle) => {
+        let xPos = (((Math.cos(angle) * distanceFromCenter) * 2) / 100)
+        let yPos = (((Math.sin(angle) * distanceFromCenter) * 2) / 100)
+
+        return { x: xPos.toFixed(2), y: yPos.toFixed(2) }
+    }
 
 
     //----------------------------------------------------------
@@ -113,13 +116,14 @@ const Museum = (props) => {
                 <Text color="white"
                     anchorX="center"
                     anchorY="middle"
+                    size="large"
                 >
                     Loading...
                 </Text>
             </Canvas>
         }>
 
-            {/* GUI (HTML) Render */}
+            {/* DAT GUI (HTML) Render */}
             <figure>
                 <DatGui data={dat}
                         onUpdate={(e) => handleUpdate(e)}
@@ -149,11 +153,11 @@ const Museum = (props) => {
                     <DatButton label='Save Data' onClick={() => { SaveDatGui() }}/>
                     <DatButton label='Load Data' onClick={async () => { await LoadDatGui() }}/>
                 </DatGui>
-                <div>
-                <div className="debug">
-                        Angle: { angle }
+                <div className="debug-container">
+                    <div className="debug">
+                        {`Position X: ${position.x}`}
                         <p/>
-                        Direction: { direction }
+                        {`Position Y: ${position.y}`}
                     </div>
                 </div>
 
@@ -164,10 +168,12 @@ const Museum = (props) => {
             <Canvas>
 
                 {/* First Person Camera */}
-                <Camera position={[0,0,0]}/>
+                <Camera target={world}
+                        XY={position}
+                />
 
                 {/* World */}
-                <group>
+                <group ref={world}>
                     <primitive object={museum.scene}
                                 position={[0,-174,-50]}
                     />
@@ -189,7 +195,12 @@ const Museum = (props) => {
                             1.0
                         ]}
                     >
-                        <meshStandardMaterial attach="material" map={sky} color={"white"} side={THREE.DoubleSide}/>
+                        <meshStandardMaterial
+                            attach="material"
+                            map={sky}
+                            color={"white"}
+                            side={THREE.DoubleSide}
+                        />
                     </Plane>
 
                     <pointLight
@@ -199,7 +210,6 @@ const Museum = (props) => {
                             (dat.posZ + 180)
                         ]}
                     />
-                    useHelper(point, AxesHelper, 'cyan')
                     <pointLight color={'white'}
 
                         position={[
@@ -208,19 +218,12 @@ const Museum = (props) => {
                             652.4
                         ]}
                     />
+
                 </group>
-
-
-                <OrbitControls
-                    enableZoom={false}
-                    enablePosition={false}
-                    enableRotation={true}
-                    maxPolarAngle={(Math.PI /2) * 0.85}
-                    minPolarAngle={Math.PI/2}
-                />
 
             </Canvas>
 
+            {/* Joystick */}
             <div className="bottom-nav">
                 <JoyStick options={{
                             mode: 'static',
