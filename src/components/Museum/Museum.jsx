@@ -15,6 +15,12 @@ import { useLoader }            from '@react-three/fiber'
 import { GLTFLoader }           from 'three/examples/jsm/loaders/GLTFLoader'
 import { Plane }                from "@react-three/drei"
 import { useTexture }           from '@react-three/drei'
+
+import { Physics }              from '@react-three/cannon'
+import { usePlane }             from '@react-three/cannon'
+import { useBox }               from '@react-three/cannon'
+import { useSphere }            from '@react-three/cannon'
+
 import JoyStick                 from "react-joystick"
 
 import DatGui                   from 'react-dat-gui';
@@ -24,6 +30,8 @@ import { DatButton }            from 'react-dat-gui';
 import "../Gui/Gui.scss"
 
 import Camera                   from "../Camera/Camera"
+import Floor                    from "./Floor/Floor"
+import Wall                     from "./Wall/Wall"
 
 
 //--------------------------------------------------------------
@@ -40,18 +48,13 @@ const Museum = (props) => {
     // DAT GUI State
     const defaultState = {
         posX: 0,
-        posY: -360,
-        posZ: 55,
-        rotX: (Math.PI * .40),
-        rotY: 0,
-        rotZ: (Math.PI * .25),
-        scX: 1.0,
-        scY: 1.0,
-        scZ: 1.0,
-        lPosX: 0,
-        lPosY: -360,
-        lPosZ: 55
+        posY: 0,
+        posZ: 0,
+        sizeX: 1.0,
+        sizeY: 1.0,
+        sizeZ: 1.0
     }
+
     const [dat, setDat] = useState(defaultState)
     const [position, setPosition] = useState({x:0, y:0})
 
@@ -130,28 +133,22 @@ const Museum = (props) => {
                         style={{zIndex:9999, left: 0 + 'px'}}
                         labelWidth={'10%'}
                 >
-                    <DatFolder title={'Sky Position'} closed={true}>
-                        <DatNumber path='posX' label='X' min={-500} max={1000} step={0.1}/>
-                        <DatNumber path='posY' label='Y' min={-500} max={1000} step={0.1}/>
-                        <DatNumber path='posZ' label='Z' min={-500} max={1000} step={0.1}/>
+
+                    <DatFolder title={'Wall Position'} closed={false}>
+                        <DatNumber path='posX' label='X' min={-500} max={500} step={10}/>
+                        <DatNumber path='posY' label='Y' min={0} max={180} step={5}/>
+                        <DatNumber path='posZ' label='Z' min={-500} max={500} step={10}/>
                     </DatFolder>
-                    <DatFolder title={'Sky Rotation'} closed={true}>
-                        <DatNumber path='rotX' label='X' min={-(Math.PI * 2)} max={(Math.PI * 2)} step={0.00001}/>
-                        <DatNumber path='rotY' label='Y' min={-(Math.PI * 2)} max={(Math.PI * 2)} step={0.00001}/>
-                        <DatNumber path='rotZ' label='Z' min={-(Math.PI * 2)} max={(Math.PI * 2)} step={0.00001}/>
+
+                    <DatFolder title={'Wall Size'} closed={false}>
+                        <DatNumber path='sizeX' label='X' min={1} max={800} step={10}/>
+                        <DatNumber path='sizeY' label='Y' min={1} max={800} step={10}/>
+                        <DatNumber path='sizeZ' label='Z' min={4} max={800} step={10}/>
                     </DatFolder>
-                    <DatFolder title={'Sky Scale'} closed={true}>
-                        <DatNumber path='scX' label='X' min={1} max={20} step={0.01}/>
-                        <DatNumber path='scY' label='Y' min={1} max={20} step={0.01}/>
-                        <DatNumber path='scZ' label='Z' min={4} max={20} step={0.01}/>
-                    </DatFolder>
-                    <DatFolder title={'2nd Light Position'} closed={true}>
-                        <DatNumber path='lPosX' label='X' min={-500} max={1000} step={0.1}/>
-                        <DatNumber path='lPosY' label='Y' min={-500} max={1000} step={0.1}/>
-                        <DatNumber path='lPosZ' label='Z' min={-500} max={1000} step={0.1}/>
-                    </DatFolder>
+
                     <DatButton label='Save Data' onClick={() => { SaveDatGui() }}/>
                     <DatButton label='Load Data' onClick={async () => { await LoadDatGui() }}/>
+
                 </DatGui>
                 <div className="debug-container">
                     <div className="debug">
@@ -166,60 +163,75 @@ const Museum = (props) => {
 
             {/* 3D Render */}
             <Canvas>
+                <Physics>
 
-                {/* First Person Camera */}
-                <Camera target={world}
-                        XY={position}
-                />
-
-                {/* World */}
-                <group ref={world}>
-                    <primitive object={museum.scene}
-                                position={[0,-174,-50]}
+                    {/* First Person Camera */}
+                    <Camera target={world}
+                            XY={position}
                     />
 
-                    <Plane args={[1000,1000]}
-                        position={[
-                            -62.2,
-                            242.6,
-                            661.9
-                        ]}
-                        rotation={[
-                            1.614,
-                            0,
-                            2.97191
-                        ]}
-                        scale={[
-                            4.73,
-                            4.73,
-                            1.0
-                        ]}
-                    >
-                        <meshStandardMaterial
-                            attach="material"
-                            map={sky}
-                            color={"white"}
-                            side={THREE.DoubleSide}
+                    {/* World */}
+                    <group ref={world}>
+                        <primitive object={museum.scene}
+                                    position={[0,-174,-50]}
                         />
-                    </Plane>
 
-                    <pointLight
-                        position={[
-                            dat.posX,
-                            (dat.posY - 200),
-                            (dat.posZ + 180)
-                        ]}
+                        <Plane args={[1000,1000]}
+                            position={[
+                                -62.2,
+                                242.6,
+                                661.9
+                            ]}
+                            rotation={[
+                                1.614,
+                                0,
+                                2.97191
+                            ]}
+                            scale={[
+                                4.73,
+                                4.73,
+                                1.0
+                            ]}
+                        >
+                            <meshStandardMaterial
+                                attach="material"
+                                map={sky}
+                                color={"white"}
+                                side={THREE.DoubleSide}
+                            />
+                        </Plane>
+
+                        <pointLight
+                            position={[
+                                -50,
+                                -200,
+                                -40
+                            ]}
+                        />
+                        <pointLight color={'white'}
+
+                            position={[
+                                -72.0,
+                                -481.8,
+                                652.4
+                            ]}
+                        />
+
+                        <Floor/>
+
+
+                    </group>
+
+                    <Wall
+                        posX={dat.posX}
+                        posY={dat.posY}
+                        posZ={dat.posZ}
+                        sizeX={dat.sizeX}
+                        sizeY={dat.sizeY}
+                        sizeZ={dat.sizeZ}
                     />
-                    <pointLight color={'white'}
 
-                        position={[
-                            -72.0,
-                            -481.8,
-                            652.4
-                        ]}
-                    />
-
-                </group>
+                </Physics>
 
             </Canvas>
 
