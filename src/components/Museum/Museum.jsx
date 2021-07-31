@@ -144,7 +144,7 @@ const Museum = (props) => {
                     <DatFolder title={'Wall Size'} closed={false}>
                         <DatNumber path='sizeX' label='X' min={1} max={1800} step={1}/>
                         <DatNumber path='sizeY' label='Y' min={1} max={400} step={1}/>
-                        <DatNumber path='sizeZ' label='Z' min={4} max={500} step={5}/>
+                        <DatNumber path='sizeZ' label='Z' min={4} max={2000} step={5}/>
                     </DatFolder>
 
                     <DatButton label='Save Data' onClick={() => { SaveDatGui() }}/>
@@ -248,10 +248,30 @@ const Museum = (props) => {
                         <Wall
                             posX={-105}
                             posY={-5}
-                            posZ={-1095}
+                            posZ={-1100}
                             sizeX={1097}
                             sizeY={320}
                             sizeZ={20}
+                        />
+
+                        {/* Right Wall */}
+                        <Wall
+                            posX={520}
+                            posY={-20}
+                            posZ={-60}
+                            sizeX={23}
+                            sizeY={313}
+                            sizeZ={2000}
+                        />
+
+                        {/* Left Wall */}
+                        <Wall
+                            posX={-715}
+                            posY={-20}
+                            posZ={-60}
+                            sizeX={23}
+                            sizeY={313}
+                            sizeZ={2000}
                         />
                     </group>
 
