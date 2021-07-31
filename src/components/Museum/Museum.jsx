@@ -59,6 +59,7 @@ const Museum = (props) => {
     const [position, setPosition] = useState({x:0, y:0})
 
     const world = useRef()
+    const physicalWalls = useRef()
 
 
     //----------------------------------------------------------
@@ -135,15 +136,15 @@ const Museum = (props) => {
                 >
 
                     <DatFolder title={'Wall Position'} closed={false}>
-                        <DatNumber path='posX' label='X' min={-500} max={500} step={10}/>
-                        <DatNumber path='posY' label='Y' min={0} max={180} step={5}/>
-                        <DatNumber path='posZ' label='Z' min={-500} max={500} step={10}/>
+                        <DatNumber path='posX' label='X' min={-700} max={700} step={5}/>
+                        <DatNumber path='posY' label='Y' min={-20} max={180} step={5}/>
+                        <DatNumber path='posZ' label='Z' min={-1200} max={1200} step={5}/>
                     </DatFolder>
 
                     <DatFolder title={'Wall Size'} closed={false}>
-                        <DatNumber path='sizeX' label='X' min={1} max={800} step={10}/>
-                        <DatNumber path='sizeY' label='Y' min={1} max={800} step={10}/>
-                        <DatNumber path='sizeZ' label='Z' min={4} max={800} step={10}/>
+                        <DatNumber path='sizeX' label='X' min={1} max={1800} step={1}/>
+                        <DatNumber path='sizeY' label='Y' min={1} max={400} step={1}/>
+                        <DatNumber path='sizeZ' label='Z' min={4} max={500} step={5}/>
                     </DatFolder>
 
                     <DatButton label='Save Data' onClick={() => { SaveDatGui() }}/>
@@ -222,6 +223,7 @@ const Museum = (props) => {
 
                     </group>
 
+                    {/* Physics Walls */}
                     <Wall
                         posX={dat.posX}
                         posY={dat.posY}
@@ -230,6 +232,28 @@ const Museum = (props) => {
                         sizeY={dat.sizeY}
                         sizeZ={dat.sizeZ}
                     />
+
+                    <group ref={physicalWalls}>
+                        {/* Back Wall */}
+                        <Wall
+                            posX={-95}
+                            posY={-20}
+                            posZ={970}
+                            sizeX={1223}
+                            sizeY={373}
+                            sizeZ={30}
+                        />
+
+                        {/* Front Wall */}
+                        <Wall
+                            posX={-105}
+                            posY={-5}
+                            posZ={-1095}
+                            sizeX={1097}
+                            sizeY={320}
+                            sizeZ={20}
+                        />
+                    </group>
 
                 </Physics>
 

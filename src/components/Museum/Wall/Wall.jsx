@@ -27,6 +27,9 @@ const Wall = (props) => {
     //----------------------------------------------------------
     // Event Handler Methods Section
     //----------------------------------------------------------
+    useEffect(() => {
+        void api.position.set(props.posX, props.posY, props.posZ)
+    }, [props.posX, props.posY, props.posZ])
 
 
 
@@ -38,7 +41,7 @@ const Wall = (props) => {
     //----------------------------------------------------------
     // Physics Initialization Section
     //----------------------------------------------------------
-    const [ref] = useBox(() => (
+    const [ref, api] = useBox(() => (
         {
             ...props,
             mass: 0,
