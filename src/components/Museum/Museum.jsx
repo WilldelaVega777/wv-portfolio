@@ -17,6 +17,7 @@ import { Plane }                from "@react-three/drei"
 import { useTexture }           from '@react-three/drei'
 
 import { Physics }              from '@react-three/cannon'
+import { Debug }                from '@react-three/cannon'
 import { usePlane }             from '@react-three/cannon'
 import { useBox }               from '@react-three/cannon'
 import { useSphere }            from '@react-three/cannon'
@@ -32,6 +33,8 @@ import "../Gui/Gui.scss"
 import Camera                   from "../Camera/Camera"
 import Floor                    from "./Floor/Floor"
 import Wall                     from "./Wall/Wall"
+
+import { Cubito } from './Cubito'
 
 
 //--------------------------------------------------------------
@@ -164,8 +167,20 @@ const Museum = (props) => {
 
             {/* 3D Render */}
             <Canvas>
-                <Physics>
-
+                <Physics iterations={20}
+                        tolerance={0.0001}
+                        defaultContactMaterial={{
+                            friction: 0.9,
+                            restitution: 0.7,
+                            contactEquationStiffness: 1e7,
+                            contactEquationRelaxation: 1,
+                            frictionEquationStiffness: 1e7,
+                            frictionEquationRelaxation: 2,
+                        }}
+                        gravity={[0, -40, 0]}
+                        allowSleep={false}
+                    >
+                    <Debug>
                     {/* First Person Camera */}
                     <Camera target={world}
                             XY={position}
@@ -174,17 +189,17 @@ const Museum = (props) => {
                     {/* World */}
                     <group ref={world}>
                         <primitive object={museum.scene}
-                                    position={[0,-174,-50]}
+                                    position={[0,0,0]}
                         />
 
                         <Plane args={[1000,1000]}
                             position={[
                                 -62.2,
-                                242.6,
-                                661.9
+                                400,
+                                660
                             ]}
                             rotation={[
-                                1.614,
+                                (-Math.PI /2),
                                 0,
                                 2.97191
                             ]}
@@ -204,8 +219,8 @@ const Museum = (props) => {
 
                         <pointLight
                             position={[
-                                -50,
-                                -200,
+                                0,
+                                200,
                                 -40
                             ]}
                         />
@@ -218,63 +233,21 @@ const Museum = (props) => {
                             ]}
                         />
 
+                        {/* Floor */}
                         <Floor/>
 
 
+                        {/* Physics Walls */}
+
+                        {/* Right Wall 1 */}
+                        <Wall position={[385,120,-200]}
+                              args={[366,240,15]}
+                        />
+
                     </group>
 
-                    {/* Physics Walls */}
-                    <Wall
-                        posX={dat.posX}
-                        posY={dat.posY}
-                        posZ={dat.posZ}
-                        sizeX={dat.sizeX}
-                        sizeY={dat.sizeY}
-                        sizeZ={dat.sizeZ}
-                    />
 
-                    <group ref={physicalWalls}>
-                        {/* Back Wall */}
-                        <Wall
-                            posX={-95}
-                            posY={-20}
-                            posZ={970}
-                            sizeX={1223}
-                            sizeY={373}
-                            sizeZ={30}
-                        />
-
-                        {/* Front Wall */}
-                        <Wall
-                            posX={-105}
-                            posY={-5}
-                            posZ={-1100}
-                            sizeX={1097}
-                            sizeY={320}
-                            sizeZ={20}
-                        />
-
-                        {/* Right Wall */}
-                        <Wall
-                            posX={520}
-                            posY={-20}
-                            posZ={-60}
-                            sizeX={23}
-                            sizeY={313}
-                            sizeZ={2000}
-                        />
-
-                        {/* Left Wall */}
-                        <Wall
-                            posX={-715}
-                            posY={-20}
-                            posZ={-60}
-                            sizeX={23}
-                            sizeY={313}
-                            sizeZ={2000}
-                        />
-                    </group>
-
+                    </Debug>
                 </Physics>
 
             </Canvas>
