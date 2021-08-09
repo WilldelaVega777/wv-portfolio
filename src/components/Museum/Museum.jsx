@@ -6,7 +6,7 @@ import { useState }             from "react"
 import { useEffect }            from "react"
 import { useRef }               from "react"
 import { Suspense }             from "react"
-import "./Museum.scss"
+import "./styles/Museum.scss"
 
 import * as THREE               from 'three'
 import { Canvas }               from "@react-three/fiber"
@@ -17,10 +17,6 @@ import { Plane }                from "@react-three/drei"
 import { useTexture }           from '@react-three/drei'
 
 import { Physics }              from '@react-three/cannon'
-import { Debug }                from '@react-three/cannon'
-import { usePlane }             from '@react-three/cannon'
-import { useBox }               from '@react-three/cannon'
-import { useSphere }            from '@react-three/cannon'
 
 import JoyStick                 from "react-joystick"
 
@@ -30,11 +26,8 @@ import { DatNumber }            from 'react-dat-gui';
 import { DatButton }            from 'react-dat-gui';
 import "../Gui/Gui.scss"
 
-import Camera                   from "../Camera/Camera"
-import Floor                    from "./Floor/Floor"
-import Wall                     from "./Wall/Wall"
-
-import { Cubito } from './Cubito'
+import Camera                   from "./Camera"
+import PhysicalSpace            from "./PhysicalSpace"
 
 
 //--------------------------------------------------------------
@@ -46,7 +39,6 @@ const Museum = (props) => {
     //----------------------------------------------------------
     const museum    = useLoader(GLTFLoader, '/models/Museum/scene.gltf')
     const sky       = useTexture('/models/Museum/sky.jpeg')
-
 
     // DAT GUI State
     const defaultState = {
@@ -61,8 +53,12 @@ const Museum = (props) => {
     const [dat, setDat] = useState(defaultState)
     const [position, setPosition] = useState({x:0, y:0})
 
-    const world = useRef()
-    const physicalWalls = useRef()
+    const graphicsWorld = useRef()
+    const physicsWorld  = useRef()
+    const refDebug      = useRef()
+
+    let debugDataLabel = '';
+    let debugDataValue = '';
 
 
     //----------------------------------------------------------
@@ -113,6 +109,11 @@ const Museum = (props) => {
         return { x: xPos.toFixed(2), y: yPos.toFixed(2) }
     }
 
+    //----------------------------------------------------------
+    const dbug = (debugData) => {
+        refDebug.current.innerHTML =
+            `${debugData.dataLabel}: &nbsp; ${debugData.dataValue}`
+    }
 
     //----------------------------------------------------------
     // Render Section
@@ -138,13 +139,13 @@ const Museum = (props) => {
                         labelWidth={'10%'}
                 >
 
-                    <DatFolder title={'Wall Position'} closed={false}>
+                    <DatFolder title={'Wall Position'} closed={true}>
                         <DatNumber path='posX' label='X' min={-700} max={700} step={5}/>
                         <DatNumber path='posY' label='Y' min={-20} max={180} step={5}/>
                         <DatNumber path='posZ' label='Z' min={-1200} max={1200} step={5}/>
                     </DatFolder>
 
-                    <DatFolder title={'Wall Size'} closed={false}>
+                    <DatFolder title={'Wall Size'} closed={true}>
                         <DatNumber path='sizeX' label='X' min={1} max={1800} step={1}/>
                         <DatNumber path='sizeY' label='Y' min={1} max={400} step={1}/>
                         <DatNumber path='sizeZ' label='Z' min={4} max={2000} step={5}/>
@@ -155,8 +156,8 @@ const Museum = (props) => {
 
                 </DatGui>
                 <div className="debug-container">
-                    <div className="debug">
-                        {`Position X: ${position.x}`}
+                    <div ref={refDebug} className="debug">
+                        {`${debugDataLabel}: ${debugDataValue}`}
                         <p/>
                         {`Position Y: ${position.y}`}
                     </div>
@@ -167,88 +168,85 @@ const Museum = (props) => {
 
             {/* 3D Render */}
             <Canvas>
-                <Physics iterations={20}
+
+                {/* Graphics World */}
+                <group ref={graphicsWorld}>
+                    <primitive object={museum.scene}
+                                position={[0,0,0]}
+                    />
+
+                    <Plane args={[1000,1000]}
+                        position={[
+                            -62.2,
+                            400,
+                            660
+                        ]}
+                        rotation={[
+                            (-Math.PI /2),
+                            0,
+                            2.97191
+                        ]}
+                        scale={[
+                            4.73,
+                            4.73,
+                            1.0
+                        ]}
+                    >
+                        <meshStandardMaterial
+                            attach="material"
+                            map={sky}
+                            color={"white"}
+                            side={THREE.DoubleSide}
+                        />
+                    </Plane>
+
+                    <pointLight
+                        position={[
+                            0,
+                            200,
+                            -40
+                        ]}
+                    />
+                    <pointLight color={'white'}
+
+                        position={[
+                            -72.0,
+                            -481.8,
+                            652.4
+                        ]}
+                    />
+
+                </group>
+
+                {/* Physics World */}
+                <group ref={physicsWorld}>
+                    <Physics
+                        gravity={[0, -980, 0]}
+                        iterations={20}
                         tolerance={0.0001}
                         defaultContactMaterial={{
-                            friction: 0.9,
-                            restitution: 0.7,
-                            contactEquationStiffness: 1e7,
-                            contactEquationRelaxation: 1,
+                            friction: 0.1,
+                            restitution: 0.1,
+                            contactEquationStiffness: 1e9,
+                            contactEquationRelaxation: 4,
                             frictionEquationStiffness: 1e7,
                             frictionEquationRelaxation: 2,
                         }}
-                        gravity={[0, -40, 0]}
                         allowSleep={false}
+                        damping={1}
                     >
-                    <Debug>
-                    {/* First Person Camera */}
-                    <Camera target={world}
-                            XY={position}
-                    />
 
-                    {/* World */}
-                    <group ref={world}>
-                        <primitive object={museum.scene}
-                                    position={[0,0,0]}
+                        {/* Physic Constructs */}
+                        <PhysicalSpace/>
+
+                        {/* First Person Camera */}
+                        <Camera target={graphicsWorld}
+                                XY={position}
+                                onDebug={(debugData) => dbug(debugData)}
                         />
 
-                        <Plane args={[1000,1000]}
-                            position={[
-                                -62.2,
-                                400,
-                                660
-                            ]}
-                            rotation={[
-                                (-Math.PI /2),
-                                0,
-                                2.97191
-                            ]}
-                            scale={[
-                                4.73,
-                                4.73,
-                                1.0
-                            ]}
-                        >
-                            <meshStandardMaterial
-                                attach="material"
-                                map={sky}
-                                color={"white"}
-                                side={THREE.DoubleSide}
-                            />
-                        </Plane>
-
-                        <pointLight
-                            position={[
-                                0,
-                                200,
-                                -40
-                            ]}
-                        />
-                        <pointLight color={'white'}
-
-                            position={[
-                                -72.0,
-                                -481.8,
-                                652.4
-                            ]}
-                        />
-
-                        {/* Floor */}
-                        <Floor/>
-
-
-                        {/* Physics Walls */}
-
-                        {/* Right Wall 1 */}
-                        <Wall position={[385,120,-200]}
-                              args={[366,240,15]}
-                        />
-
-                    </group>
-
-
-                    </Debug>
-                </Physics>
+                    </Physics>
+                </group>
 
             </Canvas>
 
