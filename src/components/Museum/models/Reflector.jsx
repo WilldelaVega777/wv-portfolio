@@ -41,6 +41,8 @@ const Reflector = (props) => {
         <group>
             <group ref={group} {...props} dispose={null}>
                 <group position={[0.01, -23.31, 0]}>
+                   <mesh geometry={nodes.Lower_cable_90.geometry} material={nodes.Lower_cable_90.material} />
+                    {/*
                     <mesh geometry={nodes.Lower_cable_0.geometry} material={nodes.Lower_cable_0.material} />
                     <mesh geometry={nodes.Lower_cable_10.geometry} material={nodes.Lower_cable_10.material} />
                     <mesh geometry={nodes.Lower_cable_20.geometry} material={nodes.Lower_cable_20.material} />
@@ -50,7 +52,7 @@ const Reflector = (props) => {
                     <mesh geometry={nodes.Lower_cable_60.geometry} material={nodes.Lower_cable_60.material} />
                     <mesh geometry={nodes.Lower_cable_70.geometry} material={nodes.Lower_cable_70.material} />
                     <mesh geometry={nodes.Lower_cable_80.geometry} material={nodes.Lower_cable_80.material} />
-                    <mesh geometry={nodes.Lower_cable_90.geometry} material={nodes.Lower_cable_90.material} />
+                    */}
                 </group>
                 <group position={[-0.01, -18.64, 0]}>
                     <mesh
