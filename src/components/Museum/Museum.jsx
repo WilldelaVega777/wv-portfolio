@@ -2,10 +2,10 @@
 // Imports Section
 //--------------------------------------------------------------
 import * as React               from "react"
+import { Suspense }             from "react"
 import { useState }             from "react"
 import { useEffect }            from "react"
 import { useRef }               from "react"
-import { Suspense }             from "react"
 import "./styles/Museum.scss"
 
 import * as THREE               from 'three'
@@ -29,6 +29,9 @@ import "../Gui/Gui.scss"
 import Camera                   from "./Camera"
 import PhysicalSpace            from "./PhysicalSpace"
 
+import Frames                   from "./Frames"
+import Reflectors               from "./Reflectors"
+
 
 //--------------------------------------------------------------
 // Component Section
@@ -37,17 +40,15 @@ const Museum = (props) => {
     //----------------------------------------------------------
     // Initialization Section
     //----------------------------------------------------------
-    const museum    = useLoader(GLTFLoader, '/models/Museum/scene.gltf')
-    const sky       = useTexture('/models/Museum/sky.jpeg')
+    const museum    = useLoader(GLTFLoader, '/models/Museum/room/scene.gltf')
+    const lamp      = useLoader(GLTFLoader, '/models/Museum/reflector/reflector.gltf')
+    const sky       = useTexture('/models/Museum/textures/sky.jpeg')
 
     // DAT GUI State
     const defaultState = {
         posX: 0,
         posY: 0,
-        posZ: 0,
-        sizeX: 1.0,
-        sizeY: 1.0,
-        sizeZ: 1.0
+        posZ: 0
     }
 
     const [dat, setDat] = useState(defaultState)
@@ -59,7 +60,6 @@ const Museum = (props) => {
 
     let debugDataLabel = '';
     let debugDataValue = '';
-
 
     //----------------------------------------------------------
     // Event Handler Methods Section
@@ -139,20 +139,14 @@ const Museum = (props) => {
                         labelWidth={'10%'}
                 >
 
-                    <DatFolder title={'Wall Position'} closed={true}>
-                        <DatNumber path='posX' label='X' min={-700} max={700} step={5}/>
-                        <DatNumber path='posY' label='Y' min={-20} max={180} step={5}/>
-                        <DatNumber path='posZ' label='Z' min={-1200} max={1200} step={5}/>
+                    <DatFolder title={'Diploma Position'} closed={true}>
+                        <DatNumber path='posX' label='X' min={-700} max={700} step={2.5}/>
+                        <DatNumber path='posY' label='Y' min={-20} max={300} step={2.5}/>
+                        <DatNumber path='posZ' label='Z' min={-1200} max={1200} step={2.5}/>
                     </DatFolder>
 
-                    <DatFolder title={'Wall Size'} closed={true}>
-                        <DatNumber path='sizeX' label='X' min={1} max={1800} step={1}/>
-                        <DatNumber path='sizeY' label='Y' min={1} max={400} step={1}/>
-                        <DatNumber path='sizeZ' label='Z' min={4} max={2000} step={5}/>
-                    </DatFolder>
-
-                    <DatButton label='Save Data' onClick={() => { SaveDatGui() }}/>
-                    <DatButton label='Load Data' onClick={async () => { await LoadDatGui() }}/>
+                    <DatButton label='Save Position Data' onClick={() => { SaveDatGui() }}/>
+                    <DatButton label='Load Position Data' onClick={async () => { await LoadDatGui() }}/>
 
                 </DatGui>
                 <div className="debug-container">
@@ -171,10 +165,12 @@ const Museum = (props) => {
 
                 {/* Graphics World */}
                 <group ref={graphicsWorld}>
+                    {/* 3D Expo Room */}
                     <primitive object={museum.scene}
                                 position={[0,0,0]}
                     />
 
+                    {/* Sky */}
                     <Plane args={[1000,1000]}
                         position={[
                             -62.2,
@@ -200,6 +196,7 @@ const Museum = (props) => {
                         />
                     </Plane>
 
+                    {/* Sky Lights */}
                     <pointLight
                         position={[
                             0,
@@ -215,6 +212,12 @@ const Museum = (props) => {
                             652.4
                         ]}
                     />
+
+                    {/* Diplomas */}
+                    <Frames/>
+
+                    {/* Ceiling Lights */}
+                    <Reflectors/>
 
                 </group>
 
@@ -261,7 +264,7 @@ const Museum = (props) => {
                         }}
                         containerStyle={{
                             width: '150px',
-                            height: '180px',
+                            height: '118px',
                             position: 'relative',
                             background: 'rgba(0,0,0,0)'
                         }}

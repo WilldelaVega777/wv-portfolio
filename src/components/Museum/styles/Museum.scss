@@ -2,17 +2,18 @@ div.bottom-nav
 {
     position:absolute;
     max-width: 1400px;
-    min-height: 180px;
+    min-height: 120px;
     min-width: 150px;
     text-align: center;
     top: 730px;
-    transform: translate(calc((100vw - 100px) / 2));
+    transform: translate(calc((100vw - 240px) / 2));
     color: #b5a642;
     font-family: 'Poppins Regular';
     font-size: 14px;
     background: rgba(0, 0, 0, 0);
     border-radius: 6;
     padding: 45px;
+    padding-bottom: 0px;
     text-shadow: 2px 2px 2px #000;
     z-index: 9990;
     cursor: grab;
@@ -27,7 +28,7 @@ figure
     padding: 0px;
     margin: 0px;
     max-width: 1400px;
-    min-height: 200px;
+    min-height: 150px;
     min-width: 280px;
     color: #b5a642;
     font-family: 'Poppins Regular';
@@ -43,7 +44,8 @@ figure
         flex-direction: row;
         align-items: center;
         align-content: flex-end;
-        min-height: 240px !important;
+        min-height: 150px !important;
+        max-height: 150px !important;
 
         .debug
         {
@@ -51,7 +53,7 @@ figure
             bottom: 0;
             left: 0;
             flex: 1;
-            padding-bottom: 14px;
+            padding-bottom: 12px;
             text-align: center;
             min-width: 100%;
         }
