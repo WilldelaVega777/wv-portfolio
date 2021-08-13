@@ -32,6 +32,8 @@ import PhysicalSpace            from "./PhysicalSpace"
 import Frames                   from "./Frames"
 import Reflectors               from "./Reflectors"
 
+import Chair                    from "./models/Chair"
+
 
 //--------------------------------------------------------------
 // Component Section
@@ -217,8 +219,35 @@ const Museum = (props) => {
                     <Frames/>
 
                     {/* Ceiling Lights */}
-                    <Reflectors/>
+                    <Reflectors
+                        position={
+                            [
+                                455,
+                                270,
+                                537.5
+                            ]
+                        }
+                    />
 
+                    <Chair
+                        position={[-105,0,-332.5]}
+                        rotation={[0,-0.5,0]}
+
+                    />
+
+                    <Text
+                        scale={1.5}
+                        fontSize={1.0}
+                        textAlign='justify'
+                        maxWidth={200}
+                        lineHeight={115}
+                        font='Helvetica'
+                        color="yellow"
+                        anchorX="center"
+                        anchorY="middle"
+                    >
+                        Databases
+                    </Text>
                 </group>
 
                 {/* Physics World */}

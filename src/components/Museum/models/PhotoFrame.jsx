@@ -7,11 +7,13 @@ import { useTexture }       from '@react-three/drei'
 import { useNormalTexture } from '@react-three/drei'
 import { useGLTF }          from '@react-three/drei'
 
+import PictureReflector     from './PictureReflector'
+
 
 //--------------------------------------------------------------
 // Component Section
 //--------------------------------------------------------------
-export default function WhiteFrame(props)
+export default function PhotoFrame(props)
 {
     //----------------------------------------------------------
     // Initialization Section
@@ -41,37 +43,43 @@ export default function WhiteFrame(props)
     // Render Section
     //----------------------------------------------------------
     return (
-        <group ref={group} {...props} dispose={null} scale={[1.9,1.9,1.8]}>
-            <mesh
-                geometry={nodes.picture_frame_2.geometry}
-                material-color={props.externalColor}
-                position={[-12.5, 0, 0]}
-                rotation={[0, 0, -Math.PI / 2]}
-                scale={[1.8,2.0,1.8]}
-            >
-                <meshStandardMaterial
-                    map={base}
-                    aoMap={ao}
-                    metalnessMap={metallic}
-                    normalMap={normalMap}
-                    roughnessMap={roughness}
-                    metalness={0.6}
-                    roughness={0.75}
-                    reflectivity={0.7}
-                    specular={0x888888}
+        <>
+
+            <group ref={group} {...props} dispose={null} scale={[1.9,1.9,1.8]}>
+                <PictureReflector
+                    position={[12,27.5,0]}
                 />
-            </mesh>
-            <mesh position={[12.45,0,2]}>
-                <planeBufferGeometry
-                    args={[42.6,29]}
-                    attach="geometry"
-                />
-                <meshStandardMaterial
-                    map={props.content}
-                    attach="material"
-                />
-            </mesh>
-        </group>
+                <mesh
+                    geometry={nodes.picture_frame_2.geometry}
+                    material-color={props.externalColor}
+                    position={[-12.5, 0, 0]}
+                    rotation={[0, 0, -Math.PI / 2]}
+                    scale={[1.8,2.0,1.8]}
+                >
+                    <meshStandardMaterial
+                        map={base}
+                        aoMap={ao}
+                        metalnessMap={metallic}
+                        normalMap={normalMap}
+                        roughnessMap={roughness}
+                        metalness={0.6}
+                        roughness={0.75}
+                        reflectivity={0.7}
+                        specular={0x888888}
+                    />
+                </mesh>
+                <mesh position={[12.45,0,2]}>
+                    <planeBufferGeometry
+                        args={[42.6,29]}
+                        attach="geometry"
+                    />
+                    <meshStandardMaterial
+                        map={props.content}
+                        attach="material"
+                    />
+                </mesh>
+            </group>
+        </>
     )
 }
 
