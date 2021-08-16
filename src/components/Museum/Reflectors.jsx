@@ -23,10 +23,31 @@ const Reflectors = (props) => {
     return (
         <>
             <Reflector
-                position={props.position}
+                position={[435,270,100]}
                 scale={[100,100,100]}
-                targetRotationH={0.2}
-                targetRotationV={8}
+                targetRotationH={0.225}
+                targetRotationV={2.4}
+                distance={600}
+                intensity={10}
+                color='white'
+            />
+            <Reflector
+                position={[435,270,660]}
+                scale={[100,100,100]}
+                targetRotationH={0.225}
+                targetRotationV={2.7}
+                distance={640}
+                intensity={10}
+                color='white'
+            />
+            <Reflector
+                position={[435,270,980]}
+                scale={[100,100,100]}
+                targetRotationH={0.230}
+                targetRotationV={3.0}
+                distance={480}
+                intensity={15}
+                color='white'
             />
         </>
     )

@@ -46,6 +46,7 @@ const Reflector = (props) => {
             {...props}
             dispose={null}
             rotation={[0,(-Math.PI / props.targetRotationH),0]}
+            position={props.position}
         >
             <group
                 position={[0, 0.37, 0]}
@@ -77,11 +78,11 @@ const Reflector = (props) => {
                     <spotLight
                         ref={refLight}
                         position={[0,0,10]}
-                        color="#ff0000"
-                        intensity={5000}
-                        distance={300}
+                        color={props.color}
+                        intensity={props.intensity}
+                        distance={props.distance}
                         angle={Math.PI * 0.1}
-                        penumbra={0.25}
+                        penumbra={1}
                         decay={1}
                         target={lightTargetRef.current}
                     />

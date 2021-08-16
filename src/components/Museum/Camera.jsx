@@ -185,6 +185,7 @@ function Camera(props)
     //----------------------------------------------------------
     return (
         <PerspectiveCamera
+
             makeDefault
             ref={thisCamera}
         >

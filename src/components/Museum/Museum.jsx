@@ -4,18 +4,13 @@
 import * as React               from "react"
 import { Suspense }             from "react"
 import { useState }             from "react"
-import { useEffect }            from "react"
 import { useRef }               from "react"
 import "./styles/Museum.scss"
 
-import * as THREE               from 'three'
 import { Canvas }               from "@react-three/fiber"
 import { Text }                 from "@react-three/drei"
 import { useLoader }            from '@react-three/fiber'
 import { GLTFLoader }           from 'three/examples/jsm/loaders/GLTFLoader'
-import { Plane }                from "@react-three/drei"
-import { useTexture }           from '@react-three/drei'
-
 import { Physics }              from '@react-three/cannon'
 
 import JoyStick                 from "react-joystick"
@@ -26,13 +21,8 @@ import { DatNumber }            from 'react-dat-gui';
 import { DatButton }            from 'react-dat-gui';
 import "../Gui/Gui.scss"
 
+import Room                     from "./Room"
 import Camera                   from "./Camera"
-import PhysicalSpace            from "./PhysicalSpace"
-
-import Frames                   from "./Frames"
-import Reflectors               from "./Reflectors"
-
-import Chair                    from "./models/Chair"
 
 
 //--------------------------------------------------------------
@@ -44,7 +34,7 @@ const Museum = (props) => {
     //----------------------------------------------------------
     const museum    = useLoader(GLTFLoader, '/models/Museum/room/scene.gltf')
     const lamp      = useLoader(GLTFLoader, '/models/Museum/reflector/reflector.gltf')
-    const sky       = useTexture('/models/Museum/textures/sky.jpeg')
+
 
     // DAT GUI State
     const defaultState = {
@@ -165,120 +155,34 @@ const Museum = (props) => {
             {/* 3D Render */}
             <Canvas>
 
-                {/* Graphics World */}
-                <group ref={graphicsWorld}>
-                    {/* 3D Expo Room */}
-                    <primitive object={museum.scene}
-                                position={[0,0,0]}
-                    />
-
-                    {/* Sky */}
-                    <Plane args={[1000,1000]}
-                        position={[
-                            -62.2,
-                            400,
-                            660
-                        ]}
-                        rotation={[
-                            (-Math.PI /2),
-                            0,
-                            2.97191
-                        ]}
-                        scale={[
-                            4.73,
-                            4.73,
-                            1.0
-                        ]}
-                    >
-                        <meshStandardMaterial
-                            attach="material"
-                            map={sky}
-                            color={"white"}
-                            side={THREE.DoubleSide}
-                        />
-                    </Plane>
-
-                    {/* Sky Lights */}
-                    <pointLight
-                        position={[
-                            0,
-                            200,
-                            -40
-                        ]}
-                    />
-                    <pointLight color={'white'}
-
-                        position={[
-                            -72.0,
-                            -481.8,
-                            652.4
-                        ]}
-                    />
-
-                    {/* Diplomas */}
-                    <Frames/>
-
-                    {/* Ceiling Lights */}
-                    <Reflectors
-                        position={
-                            [
-                                455,
-                                270,
-                                537.5
-                            ]
-                        }
-                    />
-
-                    <Chair
-                        position={[-105,0,-332.5]}
-                        rotation={[0,-0.5,0]}
-
-                    />
-
-                    <Text
-                        scale={1.5}
-                        fontSize={1.0}
-                        textAlign='justify'
-                        maxWidth={200}
-                        lineHeight={115}
-                        font='Helvetica'
-                        color="yellow"
-                        anchorX="center"
-                        anchorY="middle"
-                    >
-                        Databases
-                    </Text>
-                </group>
-
                 {/* Physics World */}
-                <group ref={physicsWorld}>
-                    <Physics
-                        gravity={[0, -980, 0]}
-                        iterations={20}
-                        tolerance={0.0001}
-                        defaultContactMaterial={{
-                            friction: 0.1,
-                            restitution: 0.1,
-                            contactEquationStiffness: 1e9,
-                            contactEquationRelaxation: 4,
-                            frictionEquationStiffness: 1e7,
-                            frictionEquationRelaxation: 2,
-                        }}
-                        allowSleep={false}
-                        damping={1}
-                    >
+                <Physics
+                    gravity={[0, -980, 0]}
+                    iterations={20}
+                    tolerance={0.0001}
+                    defaultContactMaterial={{
+                        friction: 0.1,
+                        restitution: 0.1,
+                        contactEquationStiffness: 1e9,
+                        contactEquationRelaxation: 4,
+                        frictionEquationStiffness: 1e7,
+                        frictionEquationRelaxation: 2,
+                    }}
+                    allowSleep={false}
+                    damping={1}
+                >
 
-                        {/* Physic Constructs */}
-                        <PhysicalSpace/>
+                    {/* 3D Expo Room */}
+                    <Room position={[0,0,0]}/>
 
-                        {/* First Person Camera */}
-                        <Camera target={graphicsWorld}
-                                XY={position}
-                                onDebug={(debugData) => dbug(debugData)}
-                        />
 
-                    </Physics>
-                </group>
+                    {/* First Person Camera */}
+                    <Camera target={graphicsWorld}
+                            XY={position}
+                            onDebug={(debugData) => dbug(debugData)}
+                    />
+
+                </Physics>
 
             </Canvas>
 

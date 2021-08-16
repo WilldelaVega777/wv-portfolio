@@ -13,7 +13,7 @@ import PictureReflector     from './PictureReflector'
 //--------------------------------------------------------------
 // Component Section
 //--------------------------------------------------------------
-export default function PhotoFrame(props)
+export function PhotoFrame(props)
 {
     //----------------------------------------------------------
     // Initialization Section
@@ -45,7 +45,11 @@ export default function PhotoFrame(props)
     return (
         <>
 
-            <group ref={group} {...props} dispose={null} scale={[1.9,1.9,1.8]}>
+            <group ref={group}
+                   {...props}
+                   dispose={null}
+                   scale={[1.9,1.9,1.8]}
+            >
                 <PictureReflector
                     position={[12,27.5,0]}
                 />
@@ -88,3 +92,9 @@ export default function PhotoFrame(props)
 // Preload GLTF
 //--------------------------------------------------------------
 useGLTF.preload('/models/Museum/frames/photo_frame.gltf')
+
+
+//--------------------------------------------------------------
+// Exports Section
+//--------------------------------------------------------------
+export default PhotoFrame
