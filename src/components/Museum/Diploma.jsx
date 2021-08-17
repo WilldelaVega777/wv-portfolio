@@ -36,7 +36,7 @@ const Diploma = (props) => {
             {
                 (props.type === 2) && (
                     <PhotoFrame
-                        position={[242.5,205,132.5]}
+                        position={props.position}
                         content={diploma}
                     />
                 )

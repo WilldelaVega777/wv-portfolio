@@ -3,7 +3,6 @@
 //--------------------------------------------------------------
 import React                    from 'react'
 import { useRef }               from 'react'
-import { useEffect }            from 'react'
 import * as THREE               from 'three'
 import { useGLTF }              from '@react-three/drei'
 import { useTexture }           from '@react-three/drei'
@@ -25,23 +24,23 @@ const MeshSign = (props) =>
 
 
     //----------------------------------------------------------
-    const base      = useTexture(
+    const base = useTexture(
         '/models/Museum/textures/metal01/Metal01BaseColor.jpg'
     )
-    const ao        = useTexture(
+    const ao = useTexture(
         '/models/Museum/textures/metal01/Metal01AO.jpg'
     )
-    const height    = useTexture(
+    const height = useTexture(
         '/models/Museum/textures/metal01/Metal01Height.png'
     )
-    const metallic  = useTexture(
+    const metallic = useTexture(
         '/models/Museum/textures/metal01/Metal01Metallic.jpg'
     )
     const [normalMap, url] = useNormalTexture(
         51,
         {
           offset: [0, 0],
-          repeat: [8, 8],
+          repeat: [32, 32],
           anisotropy: 16
         }
     )
@@ -60,31 +59,42 @@ const MeshSign = (props) =>
             scale={[27,27,27]}
             {...props}
         >
-
-            <mesh
-                castShadow
-                receiveShadow
-                geometry={nodes.Text.geometry}
-                position={[-1.37, 0.16, 0]}
-                rotation={[1.56, 0, 0]}
-            >
-                <meshStandardMaterial
-                    attach='material'
-                    map={base}
-                    aoMap={ao}
-                    metalnessMap={metallic}
-                    normalMap={normalMap}
-                    roughnessMap={roughness}
-                    metalness={0.3}
-                    roughness={0.95}
-                    reflectivity={0.7}
-                    specular={0x888888}
-                    depthText={false}
-                    depthWrite={false}
-                    side={THREE.DoubleSide}
-                    color={props.color || 'goldenrod'}
-                />
-            </mesh>
+            <group>
+                <mesh
+                    position={[(props.backAlign),0.45,0]}
+                >
+                    <planeBufferGeometry
+                        args={[5,1]}
+                    />
+                    <meshStandardMaterial
+                        color='black'
+                    />
+                </mesh>
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Text.geometry}
+                    position={[-1.37, 0.16, 0]}
+                    rotation={[1.56, 0, 0]}
+                >
+                    <meshStandardMaterial
+                        attach='material'
+                        map={base}
+                        aoMap={ao}
+                        metalnessMap={metallic}
+                        normalMap={normalMap}
+                        roughnessMap={roughness}
+                        metalness={0.3}
+                        roughness={0.95}
+                        reflectivity={0.7}
+                        specular={0x888888}
+                        depthText={false}
+                        depthWrite={false}
+                        side={THREE.DoubleSide}
+                        color={props.color || 'goldenrod'}
+                    />
+                </mesh>
+            </group>
         </group>
     )
 }

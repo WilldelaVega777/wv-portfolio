@@ -152,7 +152,7 @@ const Museum = (props) => {
                         labelWidth={'10%'}
                 >
 
-                    <DatFolder title={'Diploma Position'} closed={true}>
+                    <DatFolder title={'Sign Position'} closed={true}>
                         <DatNumber path='posX' label='X' min={-700} max={700} step={2.5}/>
                         <DatNumber path='posY' label='Y' min={-20} max={300} step={2.5}/>
                         <DatNumber path='posZ' label='Z' min={-1200} max={1200} step={2.5}/>
@@ -194,7 +194,10 @@ const Museum = (props) => {
                 >
 
                     {/* 3D Expo Room */}
-                    <Room position={[0,0,0]}/>
+                    <Room
+                        position={[0,0,0]}
+                        posDebug={[dat.posX, dat.posY, dat.posZ]}
+                    />
 
 
                     {/* First Person Camera */}

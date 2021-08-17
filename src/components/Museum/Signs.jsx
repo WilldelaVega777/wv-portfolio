@@ -2,11 +2,8 @@
 // Imports Section
 //--------------------------------------------------------------
 import React                    from 'react'
-import Sign                     from './Sign'
-import Text                     from './Text'
 import MeshSign              from './MeshSign'
 import { useRef }               from 'react'
-import { useFrame }             from '@react-three/fiber'
 
 
 //--------------------------------------------------------------
@@ -19,8 +16,6 @@ const Signs = (props) =>
     //----------------------------------------------------------
     const ref = useRef()
 
-    //useFrame(({ clock }) => (ref.current.rotation.x = ref.current.rotation.y = ref.current.rotation.z = Math.sin(clock.getElapsedTime()) * 0.3))
-
 
     //----------------------------------------------------------
     // Render Section
@@ -28,24 +23,28 @@ const Signs = (props) =>
     return (
         <group ref={ref}>
 
-            {/* Thanks for Visiting */}
-            <MeshSign
-                position={[-140,200,-1029]}
-                color='white'
-                file='angular'
-            />
-
             {/* Databases */}
             <MeshSign
-                position={[245,10,690]}
+                position={[245,10,686]}
                 color='white'
-                file='angular'
+                backAlign={1}
+                file='databases'
             />
 
             {/* Angular */}
             <MeshSign
                 position={[245,10,132.5]}
                 color='white'
+                backAlign={1}
+                file='angular'
+            />
+
+            {/* Angular */}
+            <MeshSign
+                position={[245,10,662.5]}
+                rotation={[0, (Math.PI), 0]}
+                color='white'
+                backAlign={-1.6}
                 file='angular'
             />
 
@@ -53,7 +52,70 @@ const Signs = (props) =>
             <MeshSign
                 position={[245,10,-413]}
                 color='white'
-                file='angular'
+                backAlign={1}
+                file='react'
+            />
+
+            {/* React */}
+            <MeshSign
+                position={[225,10,112.5]}
+                rotation={[0, (Math.PI), 0]}
+                color='white'
+                backAlign={-1.6}
+                file='react'
+            />
+
+            {/* DevOps */}
+            <MeshSign
+                position={[-202.5,10,705]}
+                rotation={[0, (Math.PI), 0]}
+                color='white'
+                backAlign={1}
+                file='devops'
+            />
+
+            <MeshSign
+                position={[-190,10,725]}
+                color='white'
+                backAlign={-1.6}
+                file='devops'
+            />
+
+            <MeshSign
+                position={[-162, 10, 445]}
+                color='white'
+                backAlign={-2.08}
+                file='java'
+            />
+
+            <MeshSign
+                position={[-200, 10, -371]}
+                color='white'
+                file='net'
+                backAlign={-0.68}
+            />
+
+            <MeshSign
+                position={[-191.5,10,412]}
+                rotation={[0, (Math.PI), 0]}
+                color='white'
+                backAlign={1}
+                file='net'
+            />
+
+            <MeshSign
+                position={[-192,10,-407.5]}
+                rotation={[0, (Math.PI), 0]}
+                color='white'
+                backAlign={0.9}
+                file='node'
+            />
+
+            <MeshSign
+                position={[-700,10,-455]}
+                rotation={[0, (Math.PI / 2), 0]}
+                color='white'
+                file='node'
             />
 
         </group>

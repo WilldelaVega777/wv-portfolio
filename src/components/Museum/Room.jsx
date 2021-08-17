@@ -175,8 +175,7 @@ const Room = (props) =>
 
 
             {/* Signs */}
-            <Signs/>
-
+            <Signs position={props.posDebug}/>
 
         </>
     )

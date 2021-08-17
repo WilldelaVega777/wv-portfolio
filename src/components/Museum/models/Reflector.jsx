@@ -27,7 +27,7 @@ const Reflector = (props) => {
 
 
 
-    useHelper(refLight, SpotLightHelper, 'cyan')
+    //useHelper(refLight, SpotLightHelper, 'cyan')
 
 
 
