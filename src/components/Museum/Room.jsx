@@ -158,7 +158,6 @@ const Room = (props) =>
                 ]}
             />
 
-
             {/* Physical Constructs */}
             <PhysicalSpace/>
 
@@ -174,8 +173,10 @@ const Room = (props) =>
                 rotation={[0,-0.5,0]}
             />
 
+
             {/* Signs */}
             <Signs/>
+
 
         </>
     )

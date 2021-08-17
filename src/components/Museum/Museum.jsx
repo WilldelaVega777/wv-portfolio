@@ -4,11 +4,13 @@
 import * as React               from "react"
 import { Suspense }             from "react"
 import { useState }             from "react"
+import { useEffect }            from "react"
 import { useRef }               from "react"
 import "./styles/Museum.scss"
 
 import { Canvas }               from "@react-three/fiber"
 import { Text }                 from "@react-three/drei"
+import { Stats }                from "@react-three/drei"
 import { useLoader }            from '@react-three/fiber'
 import { GLTFLoader }           from 'three/examples/jsm/loaders/GLTFLoader'
 import { Physics }              from '@react-three/cannon'
@@ -25,10 +27,13 @@ import Room                     from "./Room"
 import Camera                   from "./Camera"
 
 
+
+
 //--------------------------------------------------------------
 // Component Section
 //--------------------------------------------------------------
 const Museum = (props) => {
+
     //----------------------------------------------------------
     // Initialization Section
     //----------------------------------------------------------
@@ -47,11 +52,27 @@ const Museum = (props) => {
     const [position, setPosition] = useState({x:0, y:0})
 
     const graphicsWorld = useRef()
-    const physicsWorld  = useRef()
     const refDebug      = useRef()
+
+    //const node = useRef(useStore(state => state.diplomasContainer))
 
     let debugDataLabel = '';
     let debugDataValue = '';
+
+
+    //----------------------------------------------------------
+    // Lifecycle Event Handler Methods Section
+    //----------------------------------------------------------
+    useEffect(() => {
+
+        // OnMount
+        //node.current.id = 'fps'
+        //document.appendChild(node.current)
+
+        // OnUnMount
+        //return () => document.removeChild(node.current)
+
+    }, [])
 
     //----------------------------------------------------------
     // Event Handler Methods Section
@@ -183,6 +204,13 @@ const Museum = (props) => {
                     />
 
                 </Physics>
+
+                <Stats
+                    showPanel={0} // Start-up panel (default=0)
+                    className="stats" // Optional className to add to the stats container dom element
+                    {...props} // All stats.js props are valid
+                />
+
 
             </Canvas>
 

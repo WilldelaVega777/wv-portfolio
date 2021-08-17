@@ -105,10 +105,10 @@ function Camera(props)
             thisCamera.current.position
         )
 
-        props.onDebug({
-             dataLabel: 'Rotation Y',
-             dataValue: delta
-        })
+        // props.onDebug({
+        //      dataLabel: 'Rotation Y',
+        //      dataValue: delta
+        // })
 
         frontVector.set(0, 0, -move.forward || (Number(backward) - Number(forward)))
         sideVector.set(move.turn || (Number(left) - Number(right)), 0, 0)
@@ -188,6 +188,7 @@ function Camera(props)
 
             makeDefault
             ref={thisCamera}
+            far={2500}
         >
         </PerspectiveCamera>
     )

@@ -3,6 +3,10 @@
 //--------------------------------------------------------------
 import React                    from 'react'
 import Sign                     from './Sign'
+import Text                     from './Text'
+import MeshSign              from './MeshSign'
+import { useRef }               from 'react'
+import { useFrame }             from '@react-three/fiber'
 
 
 //--------------------------------------------------------------
@@ -11,34 +15,48 @@ import Sign                     from './Sign'
 const Signs = (props) =>
 {
     //----------------------------------------------------------
+    // Initialization Section
+    //----------------------------------------------------------
+    const ref = useRef()
+
+    //useFrame(({ clock }) => (ref.current.rotation.x = ref.current.rotation.y = ref.current.rotation.z = Math.sin(clock.getElapsedTime()) * 0.3))
+
+
+    //----------------------------------------------------------
     // Render Section
     //----------------------------------------------------------
     return (
-       <>
-            <Sign
+        <group ref={ref}>
+
+            {/* Thanks for Visiting */}
+            <MeshSign
                 position={[-140,200,-1029]}
-                text='Thanks for Visiting'
-                fsize={30.0}
-                color='#888'
-            />
-            <Sign
-                position={[210,15,690]}
-                text='Databases'
-                fsize={15.0}
+                color='white'
+                file='angular'
             />
 
-            <Sign
-                position={[210,15,136]}
-                text='Angular'
-                fsize={15.0}
+            {/* Databases */}
+            <MeshSign
+                position={[245,10,690]}
+                color='white'
+                file='angular'
             />
 
-            <Sign
-                position={[210,15,-413]}
-                text='React'
-                fsize={15.0}
+            {/* Angular */}
+            <MeshSign
+                position={[245,10,132.5]}
+                color='white'
+                file='angular'
             />
-        </>
+
+            {/* React */}
+            <MeshSign
+                position={[245,10,-413]}
+                color='white'
+                file='angular'
+            />
+
+        </group>
     )
 }
 

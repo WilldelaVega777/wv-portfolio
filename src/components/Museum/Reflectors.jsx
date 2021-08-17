@@ -45,7 +45,7 @@ const Reflectors = (props) => {
                 scale={[100,100,100]}
                 targetRotationH={0.230}
                 targetRotationV={3.0}
-                distance={480}
+                distance={380}
                 intensity={15}
                 color='white'
             />
