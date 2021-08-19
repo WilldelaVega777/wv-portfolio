@@ -169,13 +169,13 @@ const Room = (props) =>
 
             {/* Chair */}
             <Chair
-                position={[-105,0,-332.5]}
-                rotation={[0,-0.5,0]}
+                position={[-657.5,0,355]}
+                rotation={[0,-5.0,0]}
             />
 
 
             {/* Signs */}
-            <Signs position={props.posDebug}/>
+            <Signs/>
 
         </>
     )

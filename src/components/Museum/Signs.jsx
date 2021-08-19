@@ -25,7 +25,8 @@ const Signs = (props) =>
 
             {/* Databases */}
             <MeshSign
-                position={[245,10,686]}
+                position={[500,10,730]}
+                rotation={[0,(-Math.PI/2),0]}
                 color='white'
                 backAlign={1}
                 file='databases'
@@ -89,6 +90,13 @@ const Signs = (props) =>
             />
 
             <MeshSign
+                position={[-700,10,950]}
+                rotation={[0, (Math.PI / 2), 0]}
+                color='white'
+                file='ionic'
+            />
+
+            <MeshSign
                 position={[-200, 10, -371]}
                 color='white'
                 file='net'
@@ -96,18 +104,10 @@ const Signs = (props) =>
             />
 
             <MeshSign
-                position={[-191.5,10,412]}
+                position={[-192,10,412]}
                 rotation={[0, (Math.PI), 0]}
                 color='white'
                 backAlign={1}
-                file='net'
-            />
-
-            <MeshSign
-                position={[-192,10,-407.5]}
-                rotation={[0, (Math.PI), 0]}
-                color='white'
-                backAlign={0.9}
                 file='node'
             />
 
@@ -115,7 +115,7 @@ const Signs = (props) =>
                 position={[-700,10,-455]}
                 rotation={[0, (Math.PI / 2), 0]}
                 color='white'
-                file='node'
+                file='soft_skills'
             />
 
         </group>

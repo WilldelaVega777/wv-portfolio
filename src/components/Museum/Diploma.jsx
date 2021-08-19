@@ -27,6 +27,7 @@ const Diploma = (props) => {
                 (props.type === 1) && (
                 <WhiteFrame
                     position={props.position}
+                    rotation={props.rotation}
                     scale={[1,1,1]}
                     externalColor={props.externalColor}
                     internalColor={props.internalColor}
@@ -37,6 +38,7 @@ const Diploma = (props) => {
                 (props.type === 2) && (
                     <PhotoFrame
                         position={props.position}
+                        rotation={props.rotation}
                         content={diploma}
                     />
                 )
