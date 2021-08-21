@@ -9,15 +9,15 @@ import { useGLTF }                      from '@react-three/drei'
 //--------------------------------------------------------------
 // Component Section
 //--------------------------------------------------------------
-const Chair = (props) => {
+const Doryphoros = (props) => {
 
     //----------------------------------------------------------
     // Initialization Section
     //----------------------------------------------------------
     const group = useRef()
 
-    const { nodes, materials } =
-        useGLTF('/models/Museum/chair/Black_leather_chair.gltf')
+    const { nodes } =
+        useGLTF('/models/Museum/doryphoros/scene.gltf')
 
 
     //----------------------------------------------------------
@@ -28,18 +28,36 @@ const Chair = (props) => {
             ref={group}
             {...props}
             dispose={null}
-            scale={[135,135,135]}
+            scale={[.11,.11,.11]}
         >
-            <mesh
-                castShadow
-                receiveShadow
-                geometry={nodes.koltuk.geometry}
-                material={materials.chair}
-                rotation={[0, -0.5, 0]}
-            />
-        </group>
+            <group
+                rotation={[-Math.PI / 2, 0, 0]}
+            >
+                <group
+                    position={[-356.11, -442.95, -0.48]}
+                >
+                    <mesh
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.mesh_0.geometry}
+                        material={nodes.mesh_0.material}
+                    />
+                    <mesh
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.mesh_1.geometry}
+                        material={nodes.mesh_1.material}
+                    />
+                    <mesh
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.mesh_2.geometry}
+                        material={nodes.mesh_2.material}
+                    />
+                </group>
+            </group>
+      </group>
     )
-
 }
 
 
@@ -47,28 +65,13 @@ const Chair = (props) => {
 // Preload GLTF
 //--------------------------------------------------------------
 useGLTF.preload(
-    '/models/Museum/chair/Black_leather_chair.gltf'
+    '/models/Museum/doryphoros/scene.gltf'
 )
 
 
 //--------------------------------------------------------------
 // Exports Section
 //--------------------------------------------------------------
-export default Chair
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default Doryphoros
 
 

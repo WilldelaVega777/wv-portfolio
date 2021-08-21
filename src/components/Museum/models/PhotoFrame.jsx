@@ -20,15 +20,14 @@ export function PhotoFrame(props)
     //----------------------------------------------------------
     const group = useRef()
 
-    const { nodes, materials } =
+    const { nodes } =
         useGLTF('/models/Museum/frames/photo_frame.gltf')
 
 
     const base      = useTexture('/models/Museum/textures/metal01/Metal01BaseColor.jpg')
     const ao        = useTexture('/models/Museum/textures/metal01/Metal01AO.jpg')
-    const height    = useTexture('/models/Museum/textures/metal01/Metal01Height.png')
     const metallic  = useTexture('/models/Museum/textures/metal01/Metal01Metallic.jpg')
-    const [normalMap, url] = useNormalTexture(
+    const [normalMap] = useNormalTexture(
         51,
         {
           offset: [0, 0],
@@ -53,6 +52,8 @@ export function PhotoFrame(props)
                 <PictureReflector
                     position={[12,27.5,0]}
                 />
+
+
                 <mesh
                     geometry={nodes.picture_frame_2.geometry}
                     material-color={props.externalColor}

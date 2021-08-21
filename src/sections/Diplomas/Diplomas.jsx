@@ -1,8 +1,12 @@
 //--------------------------------------------------------------
+// Supress React Warnings Section
+//--------------------------------------------------------------
+/* eslint-disable */
+
+//--------------------------------------------------------------
 // Imports Section
 //--------------------------------------------------------------
 import * as React               from "react"
-import { useEffect }            from "react"
 import { useRef }               from "react"
 import { Suspense }             from "react"
 import { useStore }             from "../../store/store"

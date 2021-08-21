@@ -2,7 +2,7 @@
 // Imports Section
 //--------------------------------------------------------------
 import React                    from 'react'
-import MeshSign              from './MeshSign'
+import MeshSign                 from './MeshSign'
 import { useRef }               from 'react'
 
 
@@ -117,6 +117,15 @@ const Signs = (props) =>
                 color='white'
                 file='soft_skills'
             />
+
+            <MeshSign
+                position={[-70, 230, -1017.5]}
+                scale={[60,60,60]}
+                color='white'
+                file='thanks'
+            />
+
+
 
         </group>
     )

@@ -22,9 +22,8 @@ const PictureReflector = (props) => {
     //----------------------------------------------------------
     const group             = useRef()
     const refLight          = useRef()
-    const lightTargetRef    = useRef()
 
-    const { nodes, materials } =
+    const { nodes } =
         useGLTF('/models/Museum/picture_reflector/picture_reflector.gltf')
 
     const texture = useTexture(

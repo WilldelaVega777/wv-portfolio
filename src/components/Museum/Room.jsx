@@ -1,4 +1,9 @@
 //--------------------------------------------------------------
+// Supress React Warnings Section
+//--------------------------------------------------------------
+/* eslint-disable */
+
+//--------------------------------------------------------------
 // Imports Section
 //--------------------------------------------------------------
 import React                from 'react'
@@ -7,12 +12,20 @@ import { useRef }           from 'react'
 import { useTexture }       from '@react-three/drei'
 import { useGLTF }          from '@react-three/drei'
 import { Plane }            from "@react-three/drei"
+import { PositionalAudio }  from '@react-three/drei'
+
 import PhysicalSpace        from "./PhysicalSpace"
 
 import Frames               from "./Frames"
 import Reflectors           from "./Reflectors"
 import Chair                from "./models/Chair"
 import Signs                from "./Signs"
+import Doryphoros           from "./models/Doryphoros"
+import Slave                from "./models/Slave"
+import Baluster             from "./models/Baluster"
+import Techichi             from "./models/Techichi"
+import Speaker              from "./models/Speaker"
+import WV                   from "./models/WV"
 
 
 //--------------------------------------------------------------
@@ -23,9 +36,9 @@ const Room = (props) =>
     //----------------------------------------------------------
     // Initialization Section
     //----------------------------------------------------------
-    const group = useRef()
+    const group     = useRef()
 
-    const sky   = useTexture('/models/Museum/textures/sky.jpeg')
+    const sky       = useTexture('/models/Museum/textures/sky.jpeg')
 
     const { nodes, materials } =
         useGLTF('/models/Museum/room/scene.gltf')
@@ -169,7 +182,7 @@ const Room = (props) =>
 
             {/* Chair */}
             <Chair
-                position={[-657.5,0,355]}
+                position={[-652.5,0,355]}
                 rotation={[0,-5.0,0]}
             />
 
@@ -177,6 +190,60 @@ const Room = (props) =>
             {/* Signs */}
             <Signs/>
 
+
+            {/* Doryphoros */}
+            <Doryphoros
+                position={[-637,0,-972.5]}
+                rotation={[0,(Math.PI /4), 0]}
+            />
+
+
+            {/* Slave */}
+            <Slave
+                position={[455,97.5,-1002.5]}
+            />
+
+
+            {/* Balusters */}
+            <Baluster
+                position={[-647.5,-40,567.5]}
+            />
+            <Baluster
+                position={[-664,-40,120]}
+            />
+
+            {/* Techichi */}
+            <Techichi
+                position={[-657.5,15,270]}
+                rotation={[0,(-Math.PI / 1.5),0]}
+            />
+
+            {/* WV */}
+            <WV
+                position={[37.5,90,-1032.5]}
+                rotation={[(Math.PI /2), 0, 0]}
+                scale={[10,10,10]}
+            />
+
+            <Speaker
+                position={[-80,-2.5,-987.5]}
+                rotation={[0,((Math.PI /2) + .2),0]}
+                scale={[30,30,30]}
+            />
+
+            <Speaker
+                position={[220,-2.5,-942.5]}
+                rotation={[0,((Math.PI /2) -.5),0]}
+                scale={[30,30,30]}
+                onClick={() => { props.toggleSound() }}
+            >
+                <PositionalAudio
+                    url="/audio/soundtrack.mp3"
+                    distance={2000}
+                    loop
+                    play
+                />
+            </Speaker>
         </>
     )
 }

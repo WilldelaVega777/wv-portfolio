@@ -2,22 +2,28 @@
 // Imports Section
 //--------------------------------------------------------------
 import React                            from 'react'
+import * as THREE                       from 'three'
 import { useRef }                       from 'react'
 import { useGLTF }                      from '@react-three/drei'
+import { useTexture }                   from '@react-three/drei'
 
 
 //--------------------------------------------------------------
 // Component Section
 //--------------------------------------------------------------
-const Chair = (props) => {
+const Speaker = (props) => {
 
     //----------------------------------------------------------
     // Initialization Section
     //----------------------------------------------------------
     const group = useRef()
 
-    const { nodes, materials } =
-        useGLTF('/models/Museum/chair/Black_leather_chair.gltf')
+    const { nodes } =
+        useGLTF('/models/Museum/speaker/speaker.glb')
+
+    const texture = useTexture('/models/Museum/speaker/texture.jpg')
+    texture.center.set(.5, .5);
+    texture.rotation = THREE.MathUtils.degToRad(180);
 
 
     //----------------------------------------------------------
@@ -28,18 +34,23 @@ const Chair = (props) => {
             ref={group}
             {...props}
             dispose={null}
-            scale={[135,135,135]}
         >
             <mesh
                 castShadow
                 receiveShadow
-                geometry={nodes.koltuk.geometry}
-                material={materials.chair}
-                rotation={[0, -0.5, 0]}
-            />
+                geometry={nodes.Cube.geometry}
+                position={[-0.01, 1.75, -1.24]}
+                rotation={[0, 0.21, 0]}
+                scale={[1, 1.57, 1]}
+            >
+                <meshStandardMaterial
+                    color='white'
+                    map={texture}
+                />
+            </mesh>
+
         </group>
     )
-
 }
 
 
@@ -47,28 +58,11 @@ const Chair = (props) => {
 // Preload GLTF
 //--------------------------------------------------------------
 useGLTF.preload(
-    '/models/Museum/chair/Black_leather_chair.gltf'
+    '/models/Museum/Speaker/speaker.glb'
 )
 
 
 //--------------------------------------------------------------
 // Exports Section
 //--------------------------------------------------------------
-export default Chair
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default Speaker

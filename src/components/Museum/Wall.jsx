@@ -4,11 +4,6 @@
 import * as React               from "react"
 import { useBox }               from '@react-three/cannon'
 
-// props
-// Width
-// SidePosition
-// DepthPosition
-
 
 //--------------------------------------------------------------
 // Component Section

@@ -25,9 +25,10 @@ const WhiteFrame = (props) =>
     //----------------------------------------------------------
     return (
         <group ref={group} {...props} dispose={null}>
+
             <PictureReflector
                 position={[0,50.5,-3.5]}
-                scale={1.8,1.8,1.8}
+                scale={[1.8,1.8,1.8]}
             />
             <group position={[-0.19, -0.35, -1.23]} rotation={[0, 0, -2.36]}>
                 {/* External Frame */}

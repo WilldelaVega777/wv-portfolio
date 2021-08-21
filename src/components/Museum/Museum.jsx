@@ -1,4 +1,9 @@
 //--------------------------------------------------------------
+// Supress React Warnings Section
+//--------------------------------------------------------------
+/* eslint-disable */
+
+//--------------------------------------------------------------
 // Imports Section
 //--------------------------------------------------------------
 import * as React               from "react"
@@ -11,8 +16,6 @@ import "./styles/Museum.scss"
 import { Canvas }               from "@react-three/fiber"
 import { Text }                 from "@react-three/drei"
 import { Stats }                from "@react-three/drei"
-import { useLoader }            from '@react-three/fiber'
-import { GLTFLoader }           from 'three/examples/jsm/loaders/GLTFLoader'
 import { Physics }              from '@react-three/cannon'
 
 import JoyStick                 from "react-joystick"
@@ -37,10 +40,6 @@ const Museum = (props) => {
     //----------------------------------------------------------
     // Initialization Section
     //----------------------------------------------------------
-    const museum    = useLoader(GLTFLoader, '/models/Museum/room/scene.gltf')
-    const lamp      = useLoader(GLTFLoader, '/models/Museum/reflector/reflector.gltf')
-
-
     // DAT GUI State
     const defaultState = {
         posX: 0,
@@ -123,6 +122,11 @@ const Museum = (props) => {
     }
 
     //----------------------------------------------------------
+    const toggleMusic = () => {
+        alert('demo')
+    }
+
+    //----------------------------------------------------------
     const dbug = (debugData) => {
         refDebug.current.innerHTML =
             `${debugData.dataLabel}: &nbsp; ${debugData.dataValue}`
@@ -154,7 +158,7 @@ const Museum = (props) => {
 
                     <DatFolder title={'Sign Position'} closed={true}>
                         <DatNumber path='posX' label='X' min={-700} max={700} step={2.5}/>
-                        <DatNumber path='posY' label='Y' min={-20} max={300} step={2.5}/>
+                        <DatNumber path='posY' label='Y' min={-60} max={300} step={2.5}/>
                         <DatNumber path='posZ' label='Z' min={-1200} max={1200} step={2.5}/>
                     </DatFolder>
 
@@ -175,7 +179,6 @@ const Museum = (props) => {
 
             {/* 3D Render */}
             <Canvas>
-
                 {/* Physics World */}
                 <Physics
                     gravity={[0, -980, 0]}
@@ -197,6 +200,7 @@ const Museum = (props) => {
                     <Room
                         position={[0,0,0]}
                         posDebug={[dat.posX, dat.posY, dat.posZ]}
+                        toggleSound={() => toggleMusic()}
                     />
 
 

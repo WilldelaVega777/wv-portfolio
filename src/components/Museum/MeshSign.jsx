@@ -19,7 +19,7 @@ const MeshSign = (props) =>
     //----------------------------------------------------------
     const group = useRef()
 
-    const { nodes, materials } =
+    const { nodes } =
         useGLTF(`/models/Museum/signs/${props.file}.glb`)
 
 
@@ -30,13 +30,10 @@ const MeshSign = (props) =>
     const ao = useTexture(
         '/models/Museum/textures/metal01/Metal01AO.jpg'
     )
-    const height = useTexture(
-        '/models/Museum/textures/metal01/Metal01Height.png'
-    )
     const metallic = useTexture(
         '/models/Museum/textures/metal01/Metal01Metallic.jpg'
     )
-    const [normalMap, url] = useNormalTexture(
+    const [normalMap] = useNormalTexture(
         51,
         {
           offset: [0, 0],

@@ -2,11 +2,11 @@
 // Imports Section
 //--------------------------------------------------------------
 import React                            from 'react'
-import * as THREE                       from 'three'
+//import * as THREE                       from 'three'
 import { useRef }                       from 'react'
 import { useGLTF }                      from '@react-three/drei'
-import { SpotLightHelper }              from "three"
-import { useHelper }                    from '@react-three/drei'
+//import { SpotLightHelper }              from "three"
+//import { useHelper }                    from '@react-three/drei'
 import { useFrame }                     from '@react-three/fiber';
 
 

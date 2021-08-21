@@ -1,4 +1,9 @@
 //--------------------------------------------------------------
+// Supress React Warnings Section
+//--------------------------------------------------------------
+/* eslint-disable */
+
+//--------------------------------------------------------------
 // Imports Section
 //--------------------------------------------------------------
 import * as React               from "react"
@@ -22,7 +27,6 @@ function Camera(props)
     //----------------------------------------------------------
     // Refs
     const thisCamera     = useRef()
-    const meshRef        = useRef()
     const velocity       = useRef([0, 0, 0])
     const SPEED          = 150
 
@@ -40,8 +44,7 @@ function Camera(props)
         forward,
         backward,
         left,
-        right,
-        jump
+        right
     } = usePlayerControls()
 
 
@@ -105,10 +108,10 @@ function Camera(props)
             thisCamera.current.position
         )
 
-        // props.onDebug({
+        //props.onDebug({
         //      dataLabel: 'Rotation Y',
         //      dataValue: delta
-        // })
+        //})
 
         frontVector.set(0, 0, -move.forward || (Number(backward) - Number(forward)))
         sideVector.set(move.turn || (Number(left) - Number(right)), 0, 0)

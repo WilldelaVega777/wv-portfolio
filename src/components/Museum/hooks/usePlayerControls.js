@@ -9,11 +9,13 @@ import { useEffect }            from "react"
 // Global Initialization Section
 //--------------------------------------------------------------
 const keys = {
-    ArrowUp     : "forward",
-    ArrowDown   : "backward",
-    ArrowLeft   : "left",
-    ArrowRight  : "right",
-    Space       : "jump"
+    ArrowUp         : "forward",
+    ArrowDown       : "backward",
+    ArrowLeft       : "left",
+    ArrowRight      : "right",
+    CtrlArrowLeft   : "tleft",
+    CtrlArrowRight  : "tleft",
+    Space           : "jump"
 }
 
 const moveFieldByKey = (key) => keys[key]
@@ -32,7 +34,9 @@ export const usePlayerControls = () => {
         backward: false,
         left: false,
         right: false,
-        jump: false
+        jump: false,
+        tleft: false,
+        tright:false,
     })
 
 

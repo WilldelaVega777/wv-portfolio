@@ -1,4 +1,9 @@
 //--------------------------------------------------------------
+// Supress React Warnings Section
+//--------------------------------------------------------------
+/* eslint-disable */
+
+//--------------------------------------------------------------
 // Imports Section
 //--------------------------------------------------------------
 import * as React           from "react"
@@ -33,13 +38,12 @@ const NavBar = (props) => {
     //----------------------------------------------------------
     useEffect(() => {
 
-        let timeline
         globalHistory.listen(async ({ action, location }) => {
             if (action === 'PUSH') {
                 switch (location.hash)
                 {
                     case '#hero':
-                        timeline = gsap.to(
+                        void gsap.to(
                             window,
                             {
                                 duration: 1,
@@ -65,7 +69,7 @@ const NavBar = (props) => {
                         )
                         break
                     case '#nav':
-                        timeline = gsap.to(
+                        void gsap.to(
                             window,
                             {
                                 duration: 1,
@@ -82,7 +86,7 @@ const NavBar = (props) => {
                         )
                         break
                     default:
-                        gsap.to(
+                        void gsap.to(
                             window,
                             {
                                 duration: 1,
@@ -99,8 +103,6 @@ const NavBar = (props) => {
         })
 
     }, [])
-
-
 
 
     //----------------------------------------------------------

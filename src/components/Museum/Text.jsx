@@ -5,8 +5,6 @@ import React                    from 'react'
 import * as THREE               from 'three'
 import { useMemo  }             from 'react'
 import { useRef }               from 'react'
-import { useLayoutEffect }      from 'react'
-import { useLoader }            from '@react-three/fiber'
 import roboto from '../../assets/fonts/Roboto/Roboto.json'
 
 //--------------------------------------------------------------
