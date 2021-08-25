@@ -9,27 +9,24 @@
 import * as React               from "react"
 import { Suspense }             from "react"
 import { useState }             from "react"
-import { useEffect }            from "react"
 import { useRef }               from "react"
+import { useEffect }            from "react"
 import "./styles/Museum.scss"
 
 import { Canvas }               from "@react-three/fiber"
-import { Text }                 from "@react-three/drei"
 import { Stats }                from "@react-three/drei"
-import { Physics }              from '@react-three/cannon'
+import { Center }               from "@react-three/drei"
+import { Preload }              from "@react-three/drei"
+import { Stage }                from "@react-three/drei"
+import { Physics }              from "@react-three/cannon"
 
 import JoyStick                 from "react-joystick"
 
-import DatGui                   from 'react-dat-gui';
-import { DatFolder }            from 'react-dat-gui';
-import { DatNumber }            from 'react-dat-gui';
-import { DatButton }            from 'react-dat-gui';
-import "../Gui/Gui.scss"
-
+import Dat                      from "./Dat/Dat"
 import Room                     from "./Room"
 import Camera                   from "./Camera"
 
-
+import Techichi                 from "./models/Techichi"
 
 
 //--------------------------------------------------------------
@@ -47,16 +44,16 @@ const Museum = (props) => {
         posZ: 0
     }
 
-    const [dat, setDat] = useState(defaultState)
-    const [position, setPosition] = useState({x:0, y:0})
+    const [dat, setDat]                 = useState(defaultState)
+
+    const [ready, setReady]             = useState(false)
+    const [quickTurn, setQuickTurn]     = useState(0)
+    const [dbug, setDbug]               = useState()
 
     const graphicsWorld = useRef()
-    const refDebug      = useRef()
+    const statsRef      = useRef(document.createElement('div'))
 
-    //const node = useRef(useStore(state => state.diplomasContainer))
-
-    let debugDataLabel = '';
-    let debugDataValue = '';
+    const cameraRef     = useRef()
 
 
     //----------------------------------------------------------
@@ -64,14 +61,14 @@ const Museum = (props) => {
     //----------------------------------------------------------
     useEffect(() => {
 
-        // OnMount
-        //node.current.id = 'fps'
-        //document.appendChild(node.current)
-
-        // OnUnMount
-        //return () => document.removeChild(node.current)
+        statsRef.current.id = 'statsParent'
+        document.getElementsByClassName('diplomas')[0].appendChild(
+            statsRef.current
+        )
+        statsRef.current.classList.add('stats-ref')
 
     }, [])
+
 
     //----------------------------------------------------------
     // Event Handler Methods Section
@@ -80,34 +77,28 @@ const Museum = (props) => {
         manager.on('move', (e, stick) => {
             if (stick.angle)
             {
-                setPosition(convertPosition(
-                        stick?.distance,
-                        stick?.angle?.radian
-                    )
-                )
+                cameraRef.current.setCoordinates(convertPosition(
+                    stick?.distance,
+                    stick?.angle?.radian
+                ))
             }
         })
         manager.on('end', () => {
-            setPosition({y: 0, x: 0})
-        })
-    }
-    //----------------------------------------------------------
-    const handleUpdate = (newData) => {
-        setDat({
-            ...dat,
-            ...newData
+            cameraRef.current.setCoordinates({
+                x:0,
+                y:0
+            })
         })
     }
 
     //----------------------------------------------------------
-    const SaveDatGui = () => {
-       localStorage.setItem('dat', JSON.stringify(dat))
+    const handleQuickTurn = (direction) => {
+        setQuickTurn(direction)
     }
 
     //----------------------------------------------------------
-    const LoadDatGui = async () => {
-        const storedState = await JSON.parse(localStorage.getItem('dat'))
-        setDat(storedState ? storedState : defaultState)
+    const datUpdate = (data) => {
+        setDat(data)
     }
 
 
@@ -121,16 +112,6 @@ const Museum = (props) => {
         return { x: xPos.toFixed(2), y: yPos.toFixed(2) }
     }
 
-    //----------------------------------------------------------
-    const toggleMusic = () => {
-        alert('demo')
-    }
-
-    //----------------------------------------------------------
-    const dbug = (debugData) => {
-        refDebug.current.innerHTML =
-            `${debugData.dataLabel}: &nbsp; ${debugData.dataValue}`
-    }
 
     //----------------------------------------------------------
     // Render Section
@@ -138,47 +119,43 @@ const Museum = (props) => {
     return (
         <Suspense fallback={
             <Canvas>
-                <Text color="white"
-                    anchorX="center"
-                    anchorY="middle"
-                    size="large"
-                >
-                    Loading...
-                </Text>
+                {/* Fallback GUI */}
+                <Stage>
+                    <Center>
+                        <Techichi/>
+                    </Center>
+                </Stage>
+                <Preload all/>
             </Canvas>
         }>
 
             {/* DAT GUI (HTML) Render */}
-            <figure>
-                <DatGui data={dat}
-                        onUpdate={(e) => handleUpdate(e)}
-                        style={{zIndex:9999, left: 0 + 'px'}}
-                        labelWidth={'10%'}
-                >
+            <Dat
+                datUpdate={(data) => {
+                    datUpdate(data)
+                }}
+                debug={dbug}
+            />
 
-                    <DatFolder title={'Sign Position'} closed={true}>
-                        <DatNumber path='posX' label='X' min={-700} max={700} step={2.5}/>
-                        <DatNumber path='posY' label='Y' min={-60} max={300} step={2.5}/>
-                        <DatNumber path='posZ' label='Z' min={-1200} max={1200} step={2.5}/>
-                    </DatFolder>
-
-                    <DatButton label='Save Position Data' onClick={() => { SaveDatGui() }}/>
-                    <DatButton label='Load Position Data' onClick={async () => { await LoadDatGui() }}/>
-
-                </DatGui>
-                <div className="debug-container">
-                    <div ref={refDebug} className="debug">
-                        {`${debugDataLabel}: ${debugDataValue}`}
-                        <p/>
-                        {`Position Y: ${position.y}`}
-                    </div>
-                </div>
-
-            </figure>
-
+            {/* Stats */}
+            <Stats
+                className="stats"
+                parent={statsRef}
+                showPanel={0}
+                {...props}
+            />
 
             {/* 3D Render */}
-            <Canvas>
+            <Canvas
+                concurrent
+                onCreated={() => setReady(true)}
+                gl={{
+                    antialias: true,
+                    premultipliedAlpha: false,
+                    stencil: false,
+                    powerPreference: "high-performance"
+                }}
+            >
                 {/* Physics World */}
                 <Physics
                     gravity={[0, -980, 0]}
@@ -200,48 +177,54 @@ const Museum = (props) => {
                     <Room
                         position={[0,0,0]}
                         posDebug={[dat.posX, dat.posY, dat.posZ]}
-                        toggleSound={() => toggleMusic()}
                     />
 
-
                     {/* First Person Camera */}
-                    <Camera target={graphicsWorld}
-                            XY={position}
-                            onDebug={(debugData) => dbug(debugData)}
+                    <Camera
+                        ref={cameraRef}
+                        target={graphicsWorld}
+                        quickTurn={quickTurn}
+                        onDebug={(data) => setDbug(data)}
                     />
 
                 </Physics>
-
-                <Stats
-                    showPanel={0} // Start-up panel (default=0)
-                    className="stats" // Optional className to add to the stats container dom element
-                    {...props} // All stats.js props are valid
-                />
-
-
             </Canvas>
 
             {/* Joystick */}
-            <div className="bottom-nav">
-                <JoyStick options={{
-                            mode: 'static',
-                            catchDistance: 150,
-                            color: 'white',
-                            follow: true,
-                            position: {top: '55px', left: '75px'}
-                        }}
-                        containerStyle={{
-                            width: '150px',
-                            height: '118px',
-                            position: 'relative',
-                            background: 'rgba(0,0,0,0)'
-                        }}
-                        managerListener={(manager) => managerListener(manager)}
-                />
-            </div>
+            {
+                (ready===true) &&
+                <div className="bottom-nav">
+                    <JoyStick
+                        options={{
+                                mode: 'static',
+                                catchDistance: 150,
+                                color: 'white',
+                                follow: false,
+                                position: {top: '55px', left: '75px'},
+                                multitouch: false,
+                                style: {
+                                    border: '1px solid'
+                                }
+                            }}
+                            containerStyle={{
+                                width: '150px',
+                                height: '118px',
+                                position: 'relative',
+                                background: 'rgba(0,0,0,0)'
+                            }}
+                            managerListener={(manager) => managerListener(manager)}
+                    />
+                    <div
+                        className="ctrl-left"
+                        onClick={() => cameraRef.current.quickTurn(1)}
+                    />
+                    <div
+                        className="ctrl-right"
+                        onClick={() => cameraRef.current.quickTurn(-1)}/>
+                </div>
+            }
 
         </Suspense>
-
     )
 
 }

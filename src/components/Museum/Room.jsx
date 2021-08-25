@@ -38,6 +38,8 @@ const Room = (props) =>
     //----------------------------------------------------------
     const group     = useRef()
 
+    const audioRef  = useRef()
+
     const sky       = useTexture('/models/Museum/textures/sky.jpeg')
 
     const { nodes, materials } =
@@ -158,8 +160,8 @@ const Room = (props) =>
             <pointLight
                 position={[
                     0,
-                    200,
-                    -40
+                    500,
+                    80
                 ]}
             />
             <pointLight color={'white'}
@@ -169,6 +171,7 @@ const Room = (props) =>
                     -481.8,
                     652.4
                 ]}
+                intensity={0.3}
             />
 
             {/* Physical Constructs */}
@@ -225,25 +228,29 @@ const Room = (props) =>
                 scale={[10,10,10]}
             />
 
-            <Speaker
-                position={[-80,-2.5,-987.5]}
-                rotation={[0,((Math.PI /2) + .2),0]}
-                scale={[30,30,30]}
-            />
-
-            <Speaker
-                position={[220,-2.5,-942.5]}
-                rotation={[0,((Math.PI /2) -.5),0]}
-                scale={[30,30,30]}
-                onClick={() => { props.toggleSound() }}
-            >
-                <PositionalAudio
-                    url="/audio/soundtrack.mp3"
-                    distance={2000}
-                    loop
-                    play
+            <group>
+                <Speaker
+                    position={[-80,-2.5,-987.5]}
+                    rotation={[0,((Math.PI /2) + .2),0]}
+                    scale={[30,30,30]}
                 />
-            </Speaker>
+
+                <Speaker
+                    onClick={() => {audioRef.current.play()}}
+                    position={[220,-2.5,-942.5]}
+                    rotation={[0,((Math.PI /2) -.5),0]}
+                    scale={[30,30,30]}
+                />
+
+                <PositionalAudio
+                    ref={audioRef}
+                    url="/audio/soundtrack.mp3"
+                    distance={1000}
+                    loop
+                    {...props}
+                />
+            </group>
+
         </>
     )
 }

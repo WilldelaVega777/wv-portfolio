@@ -2,7 +2,7 @@ div.bottom-nav
 {
     position:absolute;
     max-width: 1400px;
-    min-height: 120px;
+    min-height: 80px;
     min-width: 150px;
     text-align: center;
     top: 730px;
@@ -15,12 +15,65 @@ div.bottom-nav
     padding: 45px;
     padding-bottom: 0px;
     text-shadow: 2px 2px 2px #000;
-    z-index: 9990;
+    z-index: 10000;
     cursor: grab;
+
+    div.back
+    {
+        border: 2px solid #222
+    }
+
+    div.front
+    {
+        border: 1px solid #777
+    }
+
+    div.ctrl-left
+    {
+        position: absolute;
+        min-width: 30px;
+        min-height: 30px;
+        max-width: 30px;
+        max-height: 30px;
+        background-color: white;
+        opacity: 0.3;
+        border-radius: 50%;
+        border: 1px solid #222;
+        top: 85px;
+        left: 20px;
+    }
+
+    div.ctrl-right
+    {
+        position: absolute;
+        min-width: 30px;
+        min-height: 30px;
+        max-width: 30px;
+        max-height: 30px;
+        background-color: white;
+        opacity: 0.3;
+        border-radius: 50%;
+        border: 1px solid #222;
+        top: 85px;
+        left: 191px;
+    }
+
+    div.ctrl-left:hover, div.ctrl-right:hover
+    {
+        background-color: #aaa;
+        cursor: pointer;
+    }
+
+    div.ctrl-left:active, div.ctrl-right:active
+    {
+        background-color: #eedc9a;
+        cursor: pointer;
+    }
+
 }
 
 
-figure
+figure.dat
 {
     position:absolute;
     z-index: 9990;
@@ -58,4 +111,33 @@ figure
             min-width: 100%;
         }
     }
+}
+
+
+.stats
+{
+    position: relative !important;
+    z-index: 9990;
+    top: 0px !important;
+    padding: 0px;
+    margin: 0px;
+    max-width: 1400px;
+    min-height: 50px;
+    min-width: 80px;
+    color: #b5a642;
+    font-family: 'Poppins Regular';
+    font-size: 14px;
+    border-radius: 6;
+    left: 0;
+    text-shadow: 2px 2px 2px #000;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.stats-ref
+{
+    position: absolute;
+    top: 0px !important;
+    left: 0px;
+    margin: 0;
+    z-index: 9999 !important;
 }

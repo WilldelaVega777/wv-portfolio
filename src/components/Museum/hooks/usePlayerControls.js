@@ -13,9 +13,8 @@ const keys = {
     ArrowDown       : "backward",
     ArrowLeft       : "left",
     ArrowRight      : "right",
-    CtrlArrowLeft   : "tleft",
-    CtrlArrowRight  : "tleft",
-    Space           : "jump"
+    Space           : "jump",
+    Alt             : "alt"
 }
 
 const moveFieldByKey = (key) => keys[key]
@@ -35,8 +34,7 @@ export const usePlayerControls = () => {
         left: false,
         right: false,
         jump: false,
-        tleft: false,
-        tright:false,
+        alt: false
     })
 
 
@@ -45,10 +43,10 @@ export const usePlayerControls = () => {
     //----------------------------------------------------------
     useEffect(() => {
         const handleKeyDown = (e) => setMovement((m) =>
-            ({ ...m, [moveFieldByKey(e.code)]: true }))
+            ({ ...m, alt:e.altKey, [moveFieldByKey(e.code)]: true }))
 
         const handleKeyUp = (e) => setMovement(
-            (m) => ({ ...m, [moveFieldByKey(e.code)]: false }))
+            (m) => ({ ...m, alt:e.altKey, [moveFieldByKey(e.code)]: false }))
 
         document.addEventListener("keydown", handleKeyDown)
         document.addEventListener("keyup", handleKeyUp)
