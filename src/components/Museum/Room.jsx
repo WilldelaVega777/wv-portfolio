@@ -6,39 +6,43 @@
 //--------------------------------------------------------------
 // Imports Section
 //--------------------------------------------------------------
-import React                from 'react'
-import * as THREE           from 'three'
-import { useRef }           from 'react'
-import { useTexture }       from '@react-three/drei'
-import { useGLTF }          from '@react-three/drei'
-import { Plane }            from "@react-three/drei"
-import { PositionalAudio }  from '@react-three/drei'
+import React                    from 'react'
+import * as THREE               from 'three'
+import { useRef }               from 'react'
+import { forwardRef }           from 'react'
+import { useImperativeHandle }  from "react"
+import { useFrame }             from '@react-three/fiber'
+import { useTexture }           from '@react-three/drei'
+import { useGLTF }              from '@react-three/drei'
+import { Plane }                from "@react-three/drei"
+import { PositionalAudio }      from '@react-three/drei'
 
-import PhysicalSpace        from "./PhysicalSpace"
+import PhysicalSpace            from "./PhysicalSpace"
 
-import Frames               from "./Frames"
-import Reflectors           from "./Reflectors"
-import Chair                from "./models/Chair"
-import Signs                from "./Signs"
-import Doryphoros           from "./models/Doryphoros"
-import Slave                from "./models/Slave"
-import Baluster             from "./models/Baluster"
-import Techichi             from "./models/Techichi"
-import Speaker              from "./models/Speaker"
-import WV                   from "./models/WV"
+import Frames                   from "./Frames"
+import Reflectors               from "./Reflectors"
+import Chair                    from "./models/Chair"
+import Signs                    from "./Signs"
+import Doryphoros               from "./models/Doryphoros"
+import Slave                    from "./models/Slave"
+import Baluster                 from "./models/Baluster"
+import Techichi                 from "./models/Techichi"
+import Speaker                  from "./models/Speaker"
+import WV                       from "./models/WV"
+import Bystander                from "./models/Bystander"
 
 
 //--------------------------------------------------------------
 // Component Section
 //--------------------------------------------------------------
-const Room = (props) =>
+const Room = forwardRef((props, ref) =>
 {
     //----------------------------------------------------------
     // Initialization Section
     //----------------------------------------------------------
     const group     = useRef()
-
     const audioRef  = useRef()
+    const refLight  = useRef()
 
     const sky       = useTexture('/models/Museum/textures/sky.jpeg')
 
@@ -46,6 +50,53 @@ const Room = (props) =>
         useGLTF('/models/Museum/room/scene.gltf')
 
 
+    //----------------------------------------------------------
+    // Ref Component Extension Section
+    //----------------------------------------------------------
+    useImperativeHandle(ref, () => ({
+
+        startMusic()
+        {
+            if (!audioRef.current.isPlaying)
+            {
+                audioRef.current.play()
+            }
+        }
+
+    }))
+
+    //----------------------------------------------------------
+    // Event Handler Methods Section
+    //----------------------------------------------------------
+    const toggleMusic = () => {
+        if (!audioRef.current.isPlaying)
+        {
+            audioRef.current.play()
+        }
+        else
+        {
+            audioRef.current.pause()
+        }
+    }
+
+
+    //----------------------------------------------------------
+    // Animation Section
+    //----------------------------------------------------------
+    useFrame(({clock}) => {
+
+        const eTime  = clock.getElapsedTime()
+        const speed  = 0.1
+        const radiusV = 1500
+        const radiusH = 700
+
+        refLight.current.position.set(
+            (Math.cos(eTime * speed) * radiusH),
+            -1000 + (Math.sin(eTime * speed) * radiusV),
+            0
+        )
+
+    })
 
     //----------------------------------------------------------
     // Render Section
@@ -96,7 +147,6 @@ const Room = (props) =>
                         <group
                             rotation={[-Math.PI / 2, 0, 0]}
                         >
-
                         <mesh
                             castShadow
                             receiveShadow
@@ -157,22 +207,59 @@ const Room = (props) =>
             </group>
 
             {/* Sky Lights */}
+            <group ref={refLight}>
+                <pointLight
+                    position={[
+                        0,
+                        400,
+                        -400
+                    ]}
+                    intensity={0.3}
+                />
+                <pointLight
+                    position={[
+                        0,
+                        400,
+                        100
+                    ]}
+                    intensity={0.3}
+                />
+                <pointLight
+                    position={[
+                        0,
+                        400,
+                        300
+                    ]}
+                    intensity={0.3}
+                />
+            </group>
+
             <pointLight
                 position={[
                     0,
-                    500,
-                    80
+                    300,
+                    -400
                 ]}
+                intensity={0.19}
             />
-            <pointLight color={'white'}
-
+            <pointLight
                 position={[
-                    -72.0,
-                    -481.8,
-                    652.4
+                    0,
+                    300,
+                    100
                 ]}
-                intensity={0.3}
+                intensity={0.19}
             />
+            <pointLight
+                position={[
+                    0,
+                    300,
+                    600
+                ]}
+                intensity={0.19}
+            />
+
+
 
             {/* Physical Constructs */}
             <PhysicalSpace/>
@@ -181,7 +268,11 @@ const Room = (props) =>
             <Frames/>
 
             {/* Ceiling Reflectors */}
-            <Reflectors/>
+            <Reflectors
+                intensityMagenta={props.dat.magentaLight}
+                intensityNavy={props.dat.blueLight}
+                motionSpeed={props.dat.motionSpeed}
+            />
 
             {/* Chair */}
             <Chair
@@ -228,7 +319,7 @@ const Room = (props) =>
                 scale={[10,10,10]}
             />
 
-            <group>
+            <group onClick={() => toggleMusic()}>
                 <Speaker
                     position={[-80,-2.5,-987.5]}
                     rotation={[0,((Math.PI /2) + .2),0]}
@@ -236,7 +327,6 @@ const Room = (props) =>
                 />
 
                 <Speaker
-                    onClick={() => {audioRef.current.play()}}
                     position={[220,-2.5,-942.5]}
                     rotation={[0,((Math.PI /2) -.5),0]}
                     scale={[30,30,30]}
@@ -245,15 +335,20 @@ const Room = (props) =>
                 <PositionalAudio
                     ref={audioRef}
                     url="/audio/soundtrack.mp3"
-                    distance={1000}
+                    distance={280}
                     loop
                     {...props}
                 />
             </group>
 
+            <Bystander
+                position={[0,0,0]}
+                scale={[120,120,120]}
+            />
+
         </>
     )
-}
+})
 
 
 //--------------------------------------------------------------

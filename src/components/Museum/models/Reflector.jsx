@@ -30,11 +30,22 @@ const Reflector = (props) => {
     //useHelper(refLight, SpotLightHelper, 'cyan')
 
 
-
     //----------------------------------------------------------
     // Component Update Section
     //----------------------------------------------------------
-    useFrame(()=>{})
+    useFrame(({clock})=>{
+
+        const eTime  = clock.getElapsedTime()
+        const speed  = (props.speed || 0.1)
+        const radius = .4
+
+        group.current.rotation.set(
+            0,
+            (-Math.PI / props.targetRotationH) + (Math.sin(eTime * speed) * radius),
+            0
+        )
+
+    })
 
 
     //----------------------------------------------------------
@@ -64,17 +75,6 @@ const Reflector = (props) => {
                         material={materials.body}
                         position={[0.04, 0, -5.76]}
                     />
-                    <mesh
-                        ref={lightTargetRef}
-                        position={[0,0,30]}
-                    >
-                        <boxBufferGeometry args={[3.5,3.5,3.5]}/>
-                        <meshStandardMaterial
-                            color='green'
-                            opacity={0}
-                            transparent
-                        />
-                    </mesh>
                     <spotLight
                         ref={refLight}
                         position={[0,0,10]}
@@ -86,6 +86,17 @@ const Reflector = (props) => {
                         decay={1}
                         target={lightTargetRef.current}
                     />
+                    <mesh
+                        ref={lightTargetRef}
+                        position={[0,0,30]}
+                    >
+                        <boxBufferGeometry args={[1.5,1.5,1.5]}/>
+                        <meshStandardMaterial
+                            color='green'
+                            opacity={0.02}
+                            transparent
+                        />
+                    </mesh>
                     <mesh
                         castShadow
                         receiveShadow

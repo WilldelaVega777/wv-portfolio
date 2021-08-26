@@ -24,9 +24,9 @@ const Dat = (props) =>
     // Initialization Section
     //----------------------------------------------------------
     const defaultDat = {
-        posX: 0,
-        posY: 0,
-        posZ: 0
+        magentaLight : 15.0,
+        blueLight    : 15.0,
+        motionSpeed  : 0.1
     }
 
     const [dat, setDat] = useState(defaultDat)
@@ -63,56 +63,49 @@ const Dat = (props) =>
         <figure className="dat">
 
             <DatGui data={dat}
-                    onUpdate={(e) => handleUpdate(e)}
-                    style={{zIndex:9999, left: 0 + 'px'}}
-                    labelWidth={'10%'}
+                onUpdate={(e) => handleUpdate(e)}
+                style={{zIndex:9999, left: 0 + 'px'}}
+                labelWidth={'35%'}
             >
 
                 <DatFolder
-                    title={'Sign Position'}
+                    title={'Lights Control'}
                     closed={true}
                 >
                     <DatNumber
-                        path='posX'
-                        label='X'
-                        min={-700}
-                        max={700}
-                        step={2.5}
+                        path='magentaLight'
+                        label='Magenta'
+                        min={0.0}
+                        max={50.0}
+                        step={0.2}
                     />
                     <DatNumber
-                        path='posY'
-                        label='Y'
-                        min={-60}
-                        max={300}
-                        step={2.5}
+                        path='blueLight'
+                        label='Blue'
+                        min={0.0}
+                        max={50.0}
+                        step={0.2}
                     />
                     <DatNumber
-                        path='posZ'
-                        label='Z'
-                        min={-1200}
-                        max={1200}
-                        step={2.5}
+                        path='motionSpeed'
+                        label='Motion Speed'
+                        min={0.05}
+                        max={5}
+                        step={0.01}
                     />
+
+                    <DatButton
+                        label='Save Preferences'
+                        onClick={() => { SaveDatGui() }}
+                    />
+                    <DatButton
+                        label='Load Preferences'
+                        onClick={async () => { await LoadDatGui() }}
+                    />
+
                 </DatFolder>
 
-                <DatButton
-                    label='Save Position Data'
-                    onClick={() => { SaveDatGui() }}
-                />
-                <DatButton
-                    label='Load Position Data'
-                    onClick={async () => { await LoadDatGui() }}
-                />
-
             </DatGui>
-
-            {/*
-             <div className="debug-container">
-                <div className="debug">
-                    {`${props.debug.dataLabel}: ${props.debug.dataValue}`}
-                </div>
-            </div>
-            */}
 
         </figure>
     )

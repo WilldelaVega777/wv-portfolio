@@ -81,7 +81,7 @@ figure.dat
     padding: 0px;
     margin: 0px;
     max-width: 1400px;
-    min-height: 150px;
+    min-height: 0px;
     min-width: 280px;
     color: #b5a642;
     font-family: 'Poppins Regular';
@@ -97,8 +97,8 @@ figure.dat
         flex-direction: row;
         align-items: center;
         align-content: flex-end;
-        min-height: 150px !important;
-        max-height: 150px !important;
+        min-height: 0px !important;
+        max-height: 1px !important;
 
         .debug
         {

@@ -35,6 +35,12 @@ import Techichi                 from "./models/Techichi"
 const Museum = (props) => {
 
     //----------------------------------------------------------
+    // Feature Flags Section
+    //----------------------------------------------------------
+    const STATS = true
+
+
+    //----------------------------------------------------------
     // Initialization Section
     //----------------------------------------------------------
     // DAT GUI State
@@ -52,8 +58,11 @@ const Museum = (props) => {
 
     const graphicsWorld = useRef()
     const statsRef      = useRef(document.createElement('div'))
+    const room          = useRef()
 
     const cameraRef     = useRef()
+
+    let canStartMusic   = true
 
 
     //----------------------------------------------------------
@@ -138,12 +147,15 @@ const Museum = (props) => {
             />
 
             {/* Stats */}
-            <Stats
-                className="stats"
-                parent={statsRef}
-                showPanel={0}
-                {...props}
-            />
+            {
+                (STATS) &&
+                <Stats
+                    className="stats"
+                    parent={statsRef}
+                    showPanel={0}
+                    {...props}
+                />
+            }
 
             {/* 3D Render */}
             <Canvas
@@ -175,8 +187,9 @@ const Museum = (props) => {
 
                     {/* 3D Expo Room */}
                     <Room
+                        ref={room}
                         position={[0,0,0]}
-                        posDebug={[dat.posX, dat.posY, dat.posZ]}
+                        dat={dat}
                     />
 
                     {/* First Person Camera */}
@@ -193,7 +206,16 @@ const Museum = (props) => {
             {/* Joystick */}
             {
                 (ready===true) &&
-                <div className="bottom-nav">
+                <div
+                    className="bottom-nav"
+                    onPointerDown={() => {
+                        if (canStartMusic)
+                        {
+                            room.current.startMusic()
+                            canStartMusic = false
+                        }
+                    }
+                }>
                     <JoyStick
                         options={{
                                 mode: 'static',
