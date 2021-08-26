@@ -8,6 +8,7 @@
 //--------------------------------------------------------------
 import * as React               from "react"
 import { useState }             from "react"
+import { useEffect }            from "react"
 import DatGui                   from 'react-dat-gui';
 import { DatFolder }            from 'react-dat-gui';
 import { DatNumber }            from 'react-dat-gui';
@@ -26,10 +27,18 @@ const Dat = (props) =>
     const defaultDat = {
         magentaLight : 15.0,
         blueLight    : 15.0,
-        motionSpeed  : 0.1
+        motionSpeed  : 3.25
     }
 
     const [dat, setDat] = useState(defaultDat)
+
+
+    //----------------------------------------------------------
+    // Lifecycle Event Handlers Section
+    //----------------------------------------------------------
+    setTimeout(() => {
+        setDat({...dat, motionSpeed: 2.0})
+    }, 4000)
 
 
     //----------------------------------------------------------
@@ -79,6 +88,7 @@ const Dat = (props) =>
                         max={50.0}
                         step={0.2}
                     />
+
                     <DatNumber
                         path='blueLight'
                         label='Blue'
@@ -86,6 +96,7 @@ const Dat = (props) =>
                         max={50.0}
                         step={0.2}
                     />
+
                     <DatNumber
                         path='motionSpeed'
                         label='Motion Speed'
@@ -98,6 +109,7 @@ const Dat = (props) =>
                         label='Save Preferences'
                         onClick={() => { SaveDatGui() }}
                     />
+
                     <DatButton
                         label='Load Preferences'
                         onClick={async () => { await LoadDatGui() }}

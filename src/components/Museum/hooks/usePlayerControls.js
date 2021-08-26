@@ -34,7 +34,8 @@ export const usePlayerControls = () => {
         left: false,
         right: false,
         jump: false,
-        alt: false
+        alt: false,
+        meta: false
     })
 
 
@@ -43,10 +44,10 @@ export const usePlayerControls = () => {
     //----------------------------------------------------------
     useEffect(() => {
         const handleKeyDown = (e) => setMovement((m) =>
-            ({ ...m, alt:e.altKey, [moveFieldByKey(e.code)]: true }))
+            ({ ...m, alt:e.altKey, meta:e.metaKey, [moveFieldByKey(e.code)]: true }))
 
         const handleKeyUp = (e) => setMovement(
-            (m) => ({ ...m, alt:e.altKey, [moveFieldByKey(e.code)]: false }))
+            (m) => ({ ...m, alt:e.altKey, meta: e.metaKey, [moveFieldByKey(e.code)]: false }))
 
         document.addEventListener("keydown", handleKeyDown)
         document.addEventListener("keyup", handleKeyUp)

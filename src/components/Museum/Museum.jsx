@@ -50,19 +50,17 @@ const Museum = (props) => {
         posZ: 0
     }
 
-    const [dat, setDat]                 = useState(defaultState)
-
-    const [ready, setReady]             = useState(false)
-    const [quickTurn, setQuickTurn]     = useState(0)
-    const [dbug, setDbug]               = useState()
+    const [dat, setDat]                     = useState(defaultState)
+    const [ready, setReady]                 = useState(false)
+    const [quickTurn, setQuickTurn]         = useState(0)
+    const [dbug, setDbug]                   = useState()
+    const [canStartMusic, setCanStartMusic] = useState(true)
 
     const graphicsWorld = useRef()
     const statsRef      = useRef(document.createElement('div'))
     const room          = useRef()
 
     const cameraRef     = useRef()
-
-    let canStartMusic   = true
 
 
     //----------------------------------------------------------
@@ -126,18 +124,7 @@ const Museum = (props) => {
     // Render Section
     //----------------------------------------------------------
     return (
-        <Suspense fallback={
-            <Canvas>
-                {/* Fallback GUI */}
-                <Stage>
-                    <Center>
-                        <Techichi/>
-                    </Center>
-                </Stage>
-                <Preload all/>
-            </Canvas>
-        }>
-
+        <>
             {/* DAT GUI (HTML) Render */}
             <Dat
                 datUpdate={(data) => {
@@ -185,6 +172,16 @@ const Museum = (props) => {
                     damping={1}
                 >
 
+                <Suspense fallback={
+                    <Stage>
+                        <Center>
+                            <Techichi
+                                rotate={true}
+                            />
+                        </Center>
+                    <Preload all/>
+                    </Stage>
+                }>
                     {/* 3D Expo Room */}
                     <Room
                         ref={room}
@@ -200,6 +197,13 @@ const Museum = (props) => {
                         onDebug={(data) => setDbug(data)}
                     />
 
+
+                </Suspense>
+
+
+
+
+
                 </Physics>
             </Canvas>
 
@@ -212,7 +216,7 @@ const Museum = (props) => {
                         if (canStartMusic)
                         {
                             room.current.startMusic()
-                            canStartMusic = false
+                            setCanStartMusic(false)
                         }
                     }
                 }>
@@ -245,10 +249,8 @@ const Museum = (props) => {
                         onClick={() => cameraRef.current.quickTurn(-1)}/>
                 </div>
             }
-
-        </Suspense>
+        </>
     )
-
 }
 
 

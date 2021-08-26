@@ -1,3 +1,4 @@
+
 //--------------------------------------------------------------
 // Supress React Warnings Section
 //--------------------------------------------------------------
@@ -34,6 +35,7 @@ const Camera = forwardRef((props, ref) =>
     // Vars
     let turnDirection    = false
     let currentRotation  = 0
+    let emergency        = false
 
 
     // Consts
@@ -47,7 +49,8 @@ const Camera = forwardRef((props, ref) =>
         backward,
         left,
         right,
-        alt
+        alt,
+        meta
     } = usePlayerControls()
 
     let XY = {}
@@ -94,7 +97,6 @@ const Camera = forwardRef((props, ref) =>
 
         quickTurn(direction)
         {
-            console.log((direction===1) ? 'left': 'right')
             turnDirection = direction
         }
 
@@ -120,10 +122,20 @@ const Camera = forwardRef((props, ref) =>
     //----------------------------------------------------------
     const movePlayer = (delta, move) =>
     {
-
-        wrapperRef.current.getWorldPosition(
-            thisCamera.current.position
-        )
+        if (emergency)
+        {
+            move = {
+                forward: 0,
+                backward: 0,
+                turn: 0
+            }
+        }
+        else
+        {
+            wrapperRef.current.getWorldPosition(
+                thisCamera.current.position
+            )
+        }
 
 
         if (alt && left)
@@ -190,6 +202,23 @@ const Camera = forwardRef((props, ref) =>
             }
             else
             {
+                // Joystick
+                if (
+                    (meta && left) ||
+                    (meta && right) ||
+                    (meta && forward) ||
+                    (meta && backward)
+                )
+                {
+                    emergency = true
+                    move = {
+                        forward: 0,
+                        backward: 0,
+                        turn: 0
+                    }
+                    return
+                }
+
                 frontVector.set(0, 0, -move.forward || (Number(backward) - Number(forward)))
                 sideVector.set(move.turn || (Number(left) - Number(right)), 0, 0)
 
@@ -233,7 +262,6 @@ const Camera = forwardRef((props, ref) =>
     //----------------------------------------------------------
     return (
         <PerspectiveCamera
-
             makeDefault
             ref={thisCamera}
             far={2500}

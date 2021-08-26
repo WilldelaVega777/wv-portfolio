@@ -3,7 +3,9 @@
 //--------------------------------------------------------------
 import React                            from 'react'
 import { useRef }                       from 'react'
+import { useFrame }                     from '@react-three/fiber'
 import { useGLTF }                      from '@react-three/drei'
+import { Html }                         from '@react-three/drei'
 
 
 //--------------------------------------------------------------
@@ -18,6 +20,18 @@ const Techichi = (props) => {
 
     const { nodes } =
         useGLTF('/models/Museum/techichi/scene.gltf')
+
+    //----------------------------------------------------------
+    // Animation Section
+    //----------------------------------------------------------
+    useFrame(({clock}) => {
+        if (props.rotate)
+        {
+            const eT = clock.getElapsedTime()
+
+            group.current.rotation.set(0,eT,0)
+        }
+    })
 
 
     //----------------------------------------------------------
@@ -60,6 +74,25 @@ const Techichi = (props) => {
                     </group>
                 </group>
             </group>
+            { props.rotate &&
+                <Html>
+                    <div style={{
+                        fontSize:16 + 'px',
+                        color: 'white',
+                        fontFamily: 'Helvetica',
+                        fontWeight: 'bold',
+                        minWidth: 300 + 'px',
+                        marginLeft: -100 + 'px',
+                        marginTop: 150 + 'px',
+                        textAlign: 'center',
+                        lineHeight: 1.4
+                    }}>
+                        Please wait while it loads<br/>
+                        Don't Leave or I'll bite you!<br/>
+                        This is the Beta 1 of the site...
+                    </div>
+                </Html>
+            }
         </group>
     )
 }

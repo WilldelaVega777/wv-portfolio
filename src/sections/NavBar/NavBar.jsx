@@ -19,6 +19,7 @@ import { gsap }             from "gsap"
 import { ScrollToPlugin }   from "gsap/ScrollToPlugin"
 
 import PageContext          from "../../context/page-context"
+import { useStore }         from "../../store/store"
 
 
 //--------------------------------------------------------------

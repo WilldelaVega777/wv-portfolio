@@ -2,6 +2,7 @@
 // Imports Section
 //--------------------------------------------------------------
 import React                            from 'react'
+import { useEffect }                    from 'react'
 import { useRef }                       from 'react'
 import { useGLTF }                      from '@react-three/drei'
 import { useAnimations }                from '@react-three/drei'
@@ -22,11 +23,27 @@ const Bystander = (props) => {
 
     const { actions } = useAnimations(animations, group)
 
+
+    //----------------------------------------------------------
+    // Event Handler Methods Section
+    //----------------------------------------------------------
+    useEffect(() => {
+
+        actions.Idle.play()
+
+    }, [])
+
     //----------------------------------------------------------
     // Render Section
     //----------------------------------------------------------
     return (
-        <group ref={group} {...props} dispose={null}>
+        <group
+            ref={group}
+            {...props}
+            dispose={null}
+            position={[-590,0,-80]}
+            rotation={[0,(-Math.PI /2),0]}
+        >
             <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
                 <primitive object={nodes.mixamorig7Hips} />
                 <skinnedMesh

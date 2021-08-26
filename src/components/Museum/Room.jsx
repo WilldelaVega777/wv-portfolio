@@ -30,6 +30,9 @@ import Techichi                 from "./models/Techichi"
 import Speaker                  from "./models/Speaker"
 import WV                       from "./models/WV"
 import Bystander                from "./models/Bystander"
+import Column                   from "./models/Column"
+import MarcusAurelius           from "./models/MarcusAurelius"
+import Coin                     from "./models/Coin"
 
 
 //--------------------------------------------------------------
@@ -276,8 +279,8 @@ const Room = forwardRef((props, ref) =>
 
             {/* Chair */}
             <Chair
-                position={[-652.5,0,355]}
-                rotation={[0,-5.0,0]}
+                position={[-652.5,0,80]}
+                rotation={[0,6.7,0]}
             />
 
 
@@ -299,16 +302,18 @@ const Room = forwardRef((props, ref) =>
 
 
             {/* Balusters */}
+            {/*
             <Baluster
                 position={[-647.5,-40,567.5]}
             />
             <Baluster
                 position={[-664,-40,120]}
             />
+            */}
 
             {/* Techichi */}
             <Techichi
-                position={[-657.5,15,270]}
+                position={[-630,15,-20]}
                 rotation={[0,(-Math.PI / 1.5),0]}
             />
 
@@ -341,11 +346,34 @@ const Room = forwardRef((props, ref) =>
                 />
             </group>
 
+            {/* Bystander */}
             <Bystander
                 position={[0,0,0]}
-                scale={[120,120,120]}
+                scale={[125,125,125]}
             />
 
+            {/* Columns */}
+            <Column
+                position={[180,0,960]}
+                scale={[10,10,10]}
+            />
+            <MarcusAurelius
+                position={[180,166,960]}
+                rotation={[0,Math.PI,0]}
+                scale={[0.1,0.1,0.1]}
+            />
+            <Column
+                position={[-120,0,960]}
+                scale={[10,10,10]}
+            />
+            <Coin
+                position={[-40,150,1045]}
+                scale={[5,5,5]}
+            />
+            <Column
+                position={[-630,0,370]}
+                scale={[10,10,10]}
+            />
         </>
     )
 })
