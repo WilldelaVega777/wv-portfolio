@@ -2,7 +2,6 @@
 // Imports Section
 //--------------------------------------------------------------
 import * as React           from "react"
-import { Suspense }         from "react"
 import "./Portfolio.scss"
 
 import Carousel3d           from "../../components/Carousel3d/Carousel3d.jsx"

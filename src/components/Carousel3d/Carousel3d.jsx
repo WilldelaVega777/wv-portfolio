@@ -2,12 +2,10 @@
 // Imports Section
 //--------------------------------------------------------------
 import * as React           from "react"
-import { Suspense }         from "react"
 import { useState }         from "react"
 import { useTexture }       from '@react-three/drei'
 
 import { Canvas }           from "@react-three/fiber"
-import { Text }             from "@react-three/drei"
 import { Reflector }        from "@react-three/drei"
 import { OrbitControls }    from "@react-three/drei"
 

@@ -2,7 +2,6 @@
 // Imports Section
 //--------------------------------------------------------------
 import * as React       from "react"
-import { Suspense }     from "react"
 import Gallery           from "../../components/Gallery/Gallery.jsx"
 import "./Certifications.scss"
 
