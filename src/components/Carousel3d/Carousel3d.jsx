@@ -51,68 +51,59 @@ const Carousel3d = (props) => {
     // Render Section
     //----------------------------------------------------------
     return (
-        <Suspense fallback={
-            <Canvas>
-                <Text color="white"
-                    anchorX="center"
-                    anchorY="middle"
-                >
-                    Loading
-                </Text>
-            </Canvas>
-        }>
-            <Canvas>
-                <ambientLight />
-                <pointLight position={[10, 10, 10]}
-                            intensity={0.1}
-                />
+
+        <Canvas>
+            <ambientLight />
+            <pointLight position={[10, 10, 10]}
+                        intensity={0.1}
+            />
+            {
+                props.items.map((item, index) => {
+                    const angle = (((index + 1) / props.items.length) * (Math.PI * 2))
+                    const newItem = (
+                        <Item
+                            key={index}
+                            total={props.items.length}
+                            angle={angle}
+                            floor={yBase}
+                            activateItem={(id) => activateItem(id)}
+                            item_IsActive={() => item_IsActive()}
+                            item={item}
+                        />
+                    )
+                    components.push(newItem)
+                    return newItem
+                })
+            }
+            <Reflector
+                args={[10,10]}
+                resolution={2048}
+                mirror={1.0}
+                mixBlur={0.4}
+                mixStrength={0.4}
+                minDepthThreshold={0.5}
+                maxDepthThreshold={0.9}
+                depthScale={0.5}
+                depthToBlurRatioBias={0.1}
+                position={[0,yBase,0]}
+                rotation={[(Math.PI * -0.50), 0, 0]}
+                depthMap={depthMap}
+            >
                 {
-                    props.items.map((item, index) => {
-                        const angle = (((index + 1) / props.items.length) * (Math.PI * 2))
-                        const newItem = (
-                            <Item
-                                key={index}
-                                total={props.items.length}
-                                angle={angle}
-                                floor={yBase}
-                                activateItem={(id) => activateItem(id)}
-                                item_IsActive={() => item_IsActive()}
-                                item={item}
-                            />
-                        )
-                        components.push(newItem)
-                        return newItem
-                    })
+                    (Material, props) => (
+                        <Material {...props}/>
+                    )
                 }
-                <Reflector
-                    args={[10,10]}
-                    resolution={2048}
-                    mirror={1.0}
-                    mixBlur={0.4}
-                    mixStrength={0.4}
-                    minDepthThreshold={0.5}
-                    maxDepthThreshold={0.9}
-                    depthScale={0.5}
-                    depthToBlurRatioBias={0.1}
-                    position={[0,yBase,0]}
-                    rotation={[(Math.PI * -0.50), 0, 0]}
-                    depthMap={depthMap}
-                >
-                    {
-                        (Material, props) => (
-                            <Material {...props}/>
-                        )
-                    }
-                </Reflector>
-                <OrbitControls enablePan={false}
-                               enableZoom={false}
-                               enableRotate={true}
-                               autoRotate={true}
-                               maxPolarAngle={((Math.PI / 2) * 0.85)}
-                               minPolarAngle={((Math.PI / 2) * 0.50)}
-                />
-            </Canvas>
-        </Suspense>
+            </Reflector>
+            <OrbitControls enablePan={false}
+                            enableZoom={false}
+                            enableRotate={true}
+                            autoRotate={true}
+                            maxPolarAngle={((Math.PI / 2) * 0.85)}
+                            minPolarAngle={((Math.PI / 2) * 0.50)}
+            />
+        </Canvas>
+
     )
 }
 

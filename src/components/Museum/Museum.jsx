@@ -172,6 +172,7 @@ const Museum = (props) => {
                     damping={1}
                 >
 
+                {/*
                 <Suspense fallback={
                     <Stage>
                         <Center>
@@ -182,6 +183,7 @@ const Museum = (props) => {
                     <Preload all/>
                     </Stage>
                 }>
+                */}
                     {/* 3D Expo Room */}
                     <Room
                         ref={room}
@@ -197,8 +199,9 @@ const Museum = (props) => {
                         onDebug={(data) => setDbug(data)}
                     />
 
-
+                {/*
                 </Suspense>
+                */}
 
 
 
