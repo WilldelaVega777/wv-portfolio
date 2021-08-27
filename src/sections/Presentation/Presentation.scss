@@ -7,7 +7,7 @@ section.presentation
     font-family: 'Poppins Regular';
     color: #F8EFBA;
     width: 100vw;
-    height: 820px;
+    height: calc(100vh - 100px);
     overflow: hidden;
 
     h1
@@ -20,7 +20,7 @@ section.presentation
     div.presentation-container
     {
         width: 90%;
-        height: 700px;
+        height: calc(100vh - 200px);
         background-color: rgba(255,255,255,0.30);
         border-radius: 6px;
         margin: 0 auto;

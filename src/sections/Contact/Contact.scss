@@ -7,7 +7,7 @@ section.contact
     font-family: 'Poppins Regular';
     color: #F8EFBA;
     width: 100vw;
-    height: 600px;
+    height: calc(100vh - 100px);
     overflow: hidden;
     z-index: 9999;
 
@@ -21,7 +21,7 @@ section.contact
     div.contact-container
     {
         width: 90%;
-        height: 500px;
+        height: calc(100vh - 200px);
         background-color: rgba(255,255,255,0.30);
         border-radius: 6px;
         margin: 0 auto;

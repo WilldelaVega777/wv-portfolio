@@ -9,7 +9,6 @@
 import * as React               from "react"
 import { useRef }               from "react"
 import { Suspense }             from "react"
-import { useStore }             from "../../store/store"
 import "./Diplomas.scss"
 
 import Museum                   from "../../components/Museum/Museum.jsx"
@@ -23,7 +22,6 @@ const Diplomas = (props) => {
     // Initialization Section
     //----------------------------------------------------------
     const diplomasRef = useRef()
-    //void useStore(state => state.setDiplomasContainer(diplomasRef))
 
 
     //----------------------------------------------------------

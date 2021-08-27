@@ -3,7 +3,7 @@ section.portfolio
     position: relative;
     background-color: black;
     width: 100vw;
-    height: 900px;
+    height: calc(100vh - 100px);
     overflow: hidden;
     z-index: 9990;
     color: #F8EFBA;

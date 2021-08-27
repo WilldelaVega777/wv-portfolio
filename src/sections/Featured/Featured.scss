@@ -7,7 +7,7 @@ section.featured
     font-family: 'Poppins Regular';
     color: #F8EFBA;
     width: 100vw;
-    height: 1200px;
+    height: calc(100vh - 100px);
     overflow: hidden;
     z-index: 9999;
 
@@ -21,7 +21,7 @@ section.featured
     div.featured-container
     {
         width: 90%;
-        height: 1100px;
+        height: calc(100vh - 200px);
         background-color: rgba(255,255,255,0.30);
         border-radius: 6px;
         margin: 0 auto;

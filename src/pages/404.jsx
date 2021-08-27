@@ -3,6 +3,7 @@ import { Link } from "gatsby"
 
 
 
+
 // styles
 const pageStyles = {
   color: "#232129",
@@ -25,6 +26,8 @@ const codeStyles = {
   fontSize: "1.25rem",
   borderRadius: 4,
 }
+
+import '../styles/site.scss'
 
 // markup
 const NotFoundPage = () => {

@@ -185,7 +185,7 @@ const Hero = (props) => {
         // Animations by Frame
         //------------------------------------------------------
         // Main Title
-        if (current <= 10)
+        if (current <= 5)
         {
             heroText.current.style.marginTop = `${((current * 15) * -1)}px`
             heroText.current.style.opacity = (1.0 - (current / 5))
