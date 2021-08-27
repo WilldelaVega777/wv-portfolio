@@ -15,13 +15,9 @@ const Certifications = () => {
 
     return (
         <section id="certifications" className="certifications">
-            <Suspense fallback={
-                <div>
-                    Loading...
-                </div>
-            }>
-                <Gallery/>
-            </Suspense>
+
+            <Gallery/>
+
         </section>
     )
 

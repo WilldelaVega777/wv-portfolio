@@ -30,13 +30,7 @@ const Diplomas = (props) => {
     return (
         <section ref={diplomasRef} id="diplomas" className="diplomas">
 
-            <Suspense fallback={
-                <div>
-                    Loading...
-                </div>
-            }>
-                <Museum/>
-            </Suspense>
+            <Museum/>
 
         </section>
     )

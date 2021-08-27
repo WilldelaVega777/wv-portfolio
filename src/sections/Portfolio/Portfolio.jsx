@@ -123,13 +123,9 @@ const Portfolio = (props) => {
                 malus estadus confederatus et chompiras.
             </article>
 
-            <Suspense fallback={
-                <div>
-                    Loading...
-                </div>
-            }>
-                <Carousel3d items={items}/>
-            </Suspense>
+
+            <Carousel3d items={items}/>
+
 
         </section>
     )
