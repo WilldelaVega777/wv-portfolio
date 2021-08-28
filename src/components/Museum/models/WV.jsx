@@ -41,7 +41,7 @@ const WV = (props) => {
                 position={[-10.34, 0.54, 0]}
                 scale={100}
             >
-                <meshBasicMaterial
+                <meshStandardMaterial
                     color='#333366'
                 />
             </mesh>
@@ -52,7 +52,7 @@ const WV = (props) => {
                 position={[-10.34, 0.54, 0]}
                 scale={100}
             >
-                <meshBasicMaterial
+                <meshStandardMaterial
                     color='#333366'
                 />
             </mesh>
@@ -63,7 +63,7 @@ const WV = (props) => {
                 position={[-10.34, 0.54, 0]}
                 scale={100}
             >
-                <meshBasicMaterial
+                <meshStandardMaterial
                     color='#be1e2d'
                 />
             </mesh>
@@ -74,7 +74,7 @@ const WV = (props) => {
                 position={[-10.34, 0.54, 0]}
                 scale={100}
             >
-                <meshBasicMaterial
+                <meshStandardMaterial
                     color='#333366'
                 />
             </mesh>

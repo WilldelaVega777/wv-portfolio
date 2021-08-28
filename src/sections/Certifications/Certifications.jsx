@@ -2,7 +2,8 @@
 // Imports Section
 //--------------------------------------------------------------
 import * as React       from "react"
-import Gallery           from "../../components/Gallery/Gallery.jsx"
+import { Suspense }     from "react"
+import Gallery          from "../../components/Gallery/Gallery.jsx"
 import "./Certifications.scss"
 
 
@@ -11,12 +12,19 @@ import "./Certifications.scss"
 //--------------------------------------------------------------
 const Certifications = () => {
 
+    const isBrowser = typeof window !== "undefined"
 
     return (
         <section id="certifications" className="certifications">
-
-            <Gallery/>
-
+            { isBrowser && (
+            <Suspense fallback={
+                <div>
+                    Loading...
+                </div>
+            }>
+                <Gallery/>
+            </Suspense>
+            )}
         </section>
     )
 

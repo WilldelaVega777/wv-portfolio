@@ -2,6 +2,7 @@
 // Imports Section
 //--------------------------------------------------------------
 import * as React           from "react"
+import { Suspense }         from "react"
 import "./Portfolio.scss"
 
 import Carousel3d           from "../../components/Carousel3d/Carousel3d.jsx"
@@ -11,6 +12,12 @@ import Carousel3d           from "../../components/Carousel3d/Carousel3d.jsx"
 // Component Section
 //--------------------------------------------------------------
 const Portfolio = (props) => {
+
+    //----------------------------------------------------------
+    // Initialization Section
+    //----------------------------------------------------------
+    const isBrowser = (typeof window !== "undefined")
+
 
     //----------------------------------------------------------
     // Internal Functions Section
@@ -121,10 +128,15 @@ const Portfolio = (props) => {
                 Kamala Harris, President, AMLO in locus mentecatus datus gobernatus adipiscing
                 malus estadus confederatus et chompiras.
             </article>
-
-
-            <Carousel3d items={items}/>
-
+            { isBrowser && (
+                <Suspense fallback={
+                    <div>
+                        Loading...
+                    </div>
+                }>
+                    <Carousel3d items={items}/>
+                </Suspense>
+            )}
 
         </section>
     )

@@ -56,6 +56,8 @@ const Museum = (props) => {
     const [dbug, setDbug]                   = useState()
     const [canStartMusic, setCanStartMusic] = useState(true)
 
+    const isBrowser = (typeof window !== "undefined")
+
     const graphicsWorld = useRef()
     const statsRef      = useRef(document.createElement('div'))
     const room          = useRef()
@@ -171,41 +173,33 @@ const Museum = (props) => {
                     allowSleep={false}
                     damping={1}
                 >
+                { isBrowser && (
+                    <Suspense fallback={
+                        <Stage>
+                            <Center>
+                                <Techichi
+                                    rotate={true}
+                                />
+                            </Center>
+                        <Preload all/>
+                        </Stage>
+                    }>
+                        {/* 3D Expo Room */}
+                        <Room
+                            ref={room}
+                            position={[0,0,0]}
+                            dat={dat}
+                        />
 
-                {/*
-                <Suspense fallback={
-                    <Stage>
-                        <Center>
-                            <Techichi
-                                rotate={true}
-                            />
-                        </Center>
-                    <Preload all/>
-                    </Stage>
-                }>
-                */}
-                    {/* 3D Expo Room */}
-                    <Room
-                        ref={room}
-                        position={[0,0,0]}
-                        dat={dat}
-                    />
-
-                    {/* First Person Camera */}
-                    <Camera
-                        ref={cameraRef}
-                        target={graphicsWorld}
-                        quickTurn={quickTurn}
-                        onDebug={(data) => setDbug(data)}
-                    />
-
-                {/*
-                </Suspense>
-                */}
-
-
-
-
+                        {/* First Person Camera */}
+                        <Camera
+                            ref={cameraRef}
+                            target={graphicsWorld}
+                            quickTurn={quickTurn}
+                            onDebug={(data) => setDbug(data)}
+                        />
+                    </Suspense>
+                )}
 
                 </Physics>
             </Canvas>

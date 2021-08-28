@@ -8,6 +8,7 @@
 //--------------------------------------------------------------
 import * as React               from "react"
 import { useRef }               from "react"
+import { Suspense }             from "react"
 import "./Diplomas.scss"
 
 import Museum                   from "../../components/Museum/Museum.jsx"
@@ -21,16 +22,22 @@ const Diplomas = (props) => {
     // Initialization Section
     //----------------------------------------------------------
     const diplomasRef = useRef()
-
+    const isBrowser = (typeof window !== "undefined")
 
     //----------------------------------------------------------
     // Render Section
     //----------------------------------------------------------
     return (
         <section ref={diplomasRef} id="diplomas" className="diplomas">
-
-            <Museum/>
-
+            { isBrowser && (
+                <Suspense fallback={
+                    <div>
+                        Loading...
+                    </div>
+                }>
+                    <Museum/>
+                </Suspense>
+            )}
         </section>
     )
 

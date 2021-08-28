@@ -263,7 +263,6 @@ const Room = forwardRef((props, ref) =>
             />
 
 
-
             {/* Physical Constructs */}
             <PhysicalSpace/>
 
@@ -340,7 +339,8 @@ const Room = forwardRef((props, ref) =>
                 <PositionalAudio
                     ref={audioRef}
                     url="/audio/soundtrack.mp3"
-                    distance={280}
+                    distance={1000}
+                    volume={.5}
                     loop
                     {...props}
                 />
