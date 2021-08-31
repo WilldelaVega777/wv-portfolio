@@ -1,3 +1,14 @@
 node_modules/
 .cache/
-public
+**/.DS_Store
+public/*.*
+public/404
+public/certifications
+public/contact
+public/diplomas
+public/featured
+public/page-data
+public/portfolio
+public/presentation
+public/resume
+.gitignore
