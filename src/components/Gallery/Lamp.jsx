@@ -27,7 +27,7 @@ const Reflector = (props) => {
     //----------------------------------------------------------
     useFrame(({clock, delta}) => {
 
-        const radius = 5
+        const radius = props.radius? props.radius : 2
         const eT = clock.getElapsedTime()
         const speed = radius
 

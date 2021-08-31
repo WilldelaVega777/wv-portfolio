@@ -15,9 +15,6 @@ import "./styles/Museum.scss"
 
 import { Canvas }               from "@react-three/fiber"
 import { Stats }                from "@react-three/drei"
-import { Center }               from "@react-three/drei"
-import { Preload }              from "@react-three/drei"
-import { Stage }                from "@react-three/drei"
 import { Physics }              from "@react-three/cannon"
 
 import JoyStick                 from "react-joystick"
@@ -26,7 +23,10 @@ import Dat                      from "./Dat/Dat"
 import Room                     from "./Room"
 import Camera                   from "./Camera"
 
-import Techichi                 from "./models/Techichi"
+import Preloader                from "../Loader/Preloader"
+
+import "./Museum.scss"
+
 
 
 //--------------------------------------------------------------
@@ -37,7 +37,9 @@ const Museum = (props) => {
     //----------------------------------------------------------
     // Feature Flags Section
     //----------------------------------------------------------
-    const STATS = false
+    let STATS = false
+    const isBrowser = (typeof window !== "undefined")
+    console.log(isBrowser)
 
 
     //----------------------------------------------------------
@@ -52,17 +54,18 @@ const Museum = (props) => {
 
     const [dat, setDat]                     = useState(defaultState)
     const [ready, setReady]                 = useState(false)
-    const [quickTurn, setQuickTurn]         = useState(0)
     const [dbug, setDbug]                   = useState()
     const [canStartMusic, setCanStartMusic] = useState(true)
 
-    const isBrowser = (typeof window !== "undefined")
+
+    const statsRef = isBrowser? useRef(document.createElement('div')) : ''
 
     const graphicsWorld = useRef()
-    const statsRef      = useRef(document.createElement('div'))
     const room          = useRef()
-
     const cameraRef     = useRef()
+    const bottomNav     = useRef()
+    const test = useRef()
+
 
 
     //----------------------------------------------------------
@@ -101,13 +104,15 @@ const Museum = (props) => {
     }
 
     //----------------------------------------------------------
-    const handleQuickTurn = (direction) => {
-        setQuickTurn(direction)
+    const datUpdate = (data) => {
+        setDat(data)
     }
 
     //----------------------------------------------------------
-    const datUpdate = (data) => {
-        setDat(data)
+    const contentLoaded = () => {
+        console.log('loaded')
+        bottomNav.current.classList.remove('hidden')
+        bottomNav.current.classList.add('visible')
     }
 
 
@@ -132,12 +137,11 @@ const Museum = (props) => {
                 datUpdate={(data) => {
                     datUpdate(data)
                 }}
-                debug={dbug}
             />
 
             {/* Stats */}
             {
-                (STATS) &&
+                (dat.showStats) &&
                 <Stats
                     className="stats"
                     parent={statsRef}
@@ -147,68 +151,65 @@ const Museum = (props) => {
             }
 
             {/* 3D Render */}
-            <Canvas
-                concurrent
-                onCreated={() => setReady(true)}
-                gl={{
-                    antialias: true,
-                    premultipliedAlpha: false,
-                    stencil: false,
-                    powerPreference: "high-performance"
-                }}
-            >
-                {/* Physics World */}
-                <Physics
-                    gravity={[0, -980, 0]}
-                    iterations={20}
-                    tolerance={0.0001}
-                    defaultContactMaterial={{
-                        friction: 0.1,
-                        restitution: 0.1,
-                        contactEquationStiffness: 1e9,
-                        contactEquationRelaxation: 4,
-                        frictionEquationStiffness: 1e7,
-                        frictionEquationRelaxation: 2,
+            { isBrowser && (
+                <Canvas
+                    concurrent
+                    onCreated={() => setReady(true)}
+                    gl={{
+                        antialias: true,
+                        premultipliedAlpha: false,
+                        stencil: false,
+                        powerPreference: "high-performance"
                     }}
-                    allowSleep={false}
-                    damping={1}
                 >
-                { isBrowser && (
-                    <Suspense fallback={
-                        <Stage>
-                            <Center>
-                                <Techichi
-                                    rotate={true}
-                                />
-                            </Center>
-                        <Preload all/>
-                        </Stage>
-                    }>
-                        {/* 3D Expo Room */}
-                        <Room
-                            ref={room}
-                            position={[0,0,0]}
-                            dat={dat}
-                        />
+                    {/* Physics World */}
+                    <Physics
+                        gravity={[0, -980, 0]}
+                        iterations={20}
+                        tolerance={0.0001}
+                        defaultContactMaterial={{
+                            friction: 0.1,
+                            restitution: 0.1,
+                            contactEquationStiffness: 1e9,
+                            contactEquationRelaxation: 4,
+                            frictionEquationStiffness: 1e7,
+                            frictionEquationRelaxation: 2,
+                        }}
+                        allowSleep={false}
+                        damping={1}
+                    >
 
-                        {/* First Person Camera */}
-                        <Camera
-                            ref={cameraRef}
-                            target={graphicsWorld}
-                            quickTurn={quickTurn}
-                            onDebug={(data) => setDbug(data)}
-                        />
-                    </Suspense>
-                )}
+                        <Suspense fallback={
+                            <Preloader
+                                onFinishLoading={contentLoaded}
+                            />
+                        }>
+                            {/* 3D Expo Room */}
+                            <Room
+                                ref={room}
+                                position={[0,0,0]}
+                                dat={dat}
+                            />
 
-                </Physics>
-            </Canvas>
+                            {/* First Person Camera */}
+                            <Camera
+                                ref={cameraRef}
+                                target={graphicsWorld}
+                                quickTurn={0}
+                                onDebug={(data) => setDbug(data)}
+                            />
+                        </Suspense>
+
+                    </Physics>
+                </Canvas>
+            )}
 
             {/* Joystick */}
             {
                 (ready===true) &&
                 <div
-                    className="bottom-nav"
+                    ref={bottomNav}
+                    className="bottom-nav hidden"
                     onPointerDown={() => {
                         if (canStartMusic)
                         {

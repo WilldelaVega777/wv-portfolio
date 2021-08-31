@@ -3,49 +3,41 @@
 //--------------------------------------------------------------
 import React                            from 'react'
 import { useRef }                       from 'react'
-import { useGLTF }                      from '@react-three/drei'
+import * as THREE                       from 'three'
+import { useTexture }                   from '@react-three/drei'
 
 
 //--------------------------------------------------------------
 // Component Section
 //--------------------------------------------------------------
-const Chair = (props) => {
+const Certification = (props) => {
 
     //----------------------------------------------------------
     // Initialization Section
     //----------------------------------------------------------
     const group = useRef()
 
-    const { nodes, materials } =
-        useGLTF('/models/Museum/chair/Black_leather_chair.gltf')
+    const [map] =
+        useTexture(['/models/Gallery/textures/Brochure.png'])
 
 
     //----------------------------------------------------------
     // Render Section
     //----------------------------------------------------------
     return (
-        <group
-            ref={group}
+        <mesh
             {...props}
-            dispose={null}
-            scale={[135,135,135]}
         >
-            <mesh
-                castShadow
-                receiveShadow
-                geometry={nodes.koltuk.geometry}
-                material={materials.chair}
-                rotation={[0, -0.5, 0]}
+            <planeBufferGeometry
+                args={[29, 39.5]}
+                attach="geometry"
+                />
+            <meshStandardMaterial
+                color="white"
+                map={map}
+                attach="material"
             />
-        </group>
-    )
-
-
-    //----------------------------------------------------------
-    // Preload GLTF
-    //----------------------------------------------------------
-    useGLTF.preload(
-        '/models/Museum/chair/Black_leather_chair.gltf'
+        </mesh>
     )
 }
 
@@ -53,21 +45,6 @@ const Chair = (props) => {
 //--------------------------------------------------------------
 // Exports Section
 //--------------------------------------------------------------
-export default Chair
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default Certification
 
 

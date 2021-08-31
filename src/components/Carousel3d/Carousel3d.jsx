@@ -4,12 +4,13 @@
 import * as React           from "react"
 import { Suspense }         from "react"
 import { useState }         from "react"
-import { useTexture }       from '@react-three/drei'
+import { useFrame }         from "@react-three/fiber"
 
 import { Canvas }           from "@react-three/fiber"
 import { Text }             from "@react-three/drei"
 import { Reflector }        from "@react-three/drei"
 import { OrbitControls }    from "@react-three/drei"
+import { useTexture }       from '@react-three/drei'
 
 import Item                 from "./Item/Item"
 
@@ -30,11 +31,12 @@ const Carousel3d = (props) => {
 
     const isBrowser = (typeof window !== "undefined")
 
+    let items;
+
     // Textures
     const [
         depthMap
     ] = useTexture([`/images/Portfolio/depth.png`])
-
 
     //----------------------------------------------------------
     // Event Handler Methods Section
@@ -46,6 +48,30 @@ const Carousel3d = (props) => {
     //----------------------------------------------------------
     const item_IsActive = () => {
         return activeComponent
+    }
+
+    //----------------------------------------------------------
+    // Internal Functions Section
+    //----------------------------------------------------------
+    const createItems = () => {
+
+        return props.items.map((item, index) => {
+            const angle = (((index + 1) / props.items.length) * (Math.PI * 2))
+            const newItem = (
+                <Item
+                    key={index}
+                    total={props.items.length}
+                    angle={angle}
+                    floor={yBase}
+                    activateItem={(id) => activateItem(id)}
+                    item_IsActive={() => item_IsActive()}
+                    item={item}
+                />
+            )
+            components.push(newItem)
+            return newItem
+        })
+
     }
 
     //----------------------------------------------------------
@@ -69,24 +95,10 @@ const Carousel3d = (props) => {
                         <pointLight position={[10, 10, 10]}
                                     intensity={0.1}
                         />
-                        {
-                            props.items.map((item, index) => {
-                                const angle = (((index + 1) / props.items.length) * (Math.PI * 2))
-                                const newItem = (
-                                    <Item
-                                        key={index}
-                                        total={props.items.length}
-                                        angle={angle}
-                                        floor={yBase}
-                                        activateItem={(id) => activateItem(id)}
-                                        item_IsActive={() => item_IsActive()}
-                                        item={item}
-                                    />
-                                )
-                                components.push(newItem)
-                                return newItem
-                            })
-                        }
+
+                        { createItems() }
+
+
                         <Reflector
                             args={[10,10]}
                             resolution={2048}

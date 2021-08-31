@@ -19,7 +19,7 @@ const PhysicalSpace = (props) => {
         {
             args: [470, 230],
             rotation: [-Math.PI / 2, 0, 0],
-            position: [-50, 80, 10]
+            position: [-50, 70, 10]
         }
     ))
 /*
@@ -36,9 +36,7 @@ const PhysicalSpace = (props) => {
     // Render Section
     //----------------------------------------------------------
     return (
-
         <group>
-
             {/* Floor */}
             <mesh ref={ref1}>
                 <planeBufferGeometry
@@ -102,11 +100,8 @@ const PhysicalSpace = (props) => {
                 depthPosition={10}
                 side
             />
-
         </group>
-
     )
-
 }
 
 

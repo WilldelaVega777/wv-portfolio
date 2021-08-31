@@ -29,6 +29,7 @@ const Hero = (props) => {
     //----------------------------------------------------------
     // Initialize Variables Section
     //----------------------------------------------------------
+    const isBrowser = (typeof window !== "undefined")
     const NUMBER_OF_IMAGES  = 53
     const heroCanvas        = useRef(null)
     const frontendText      = useRef(null)
@@ -40,7 +41,7 @@ const Hero = (props) => {
     const config            = useContext(PageContext)
     let current             = 1
     let context             = null
-    let image               = new Image()
+    let image               = (isBrowser ? new Image() : null)
 
 
     //----------------------------------------------------------

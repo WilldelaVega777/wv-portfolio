@@ -12,6 +12,7 @@ import { useEffect }            from "react"
 import DatGui                   from 'react-dat-gui';
 import { DatFolder }            from 'react-dat-gui';
 import { DatNumber }            from 'react-dat-gui';
+import { DatBoolean }           from 'react-dat-gui';
 import { DatButton }            from 'react-dat-gui';
 import "./Dat.scss"
 
@@ -27,7 +28,8 @@ const Dat = (props) =>
     const defaultDat = {
         magentaLight : 15.0,
         blueLight    : 15.0,
-        motionSpeed  : 3.25
+        motionSpeed  : 3.25,
+        showStats    : false
     }
 
     const [dat, setDat] = useState(defaultDat)
@@ -37,7 +39,7 @@ const Dat = (props) =>
     // Lifecycle Event Handlers Section
     //----------------------------------------------------------
     useEffect(() => {
-        //setDat({...dat, motionSpeed: 2.0})
+        setDat({...dat, motionSpeed: 1.2})
     }, [])
 
 
@@ -105,6 +107,8 @@ const Dat = (props) =>
                         step={0.01}
                     />
 
+                    <DatBoolean path='showStats' label='Show Stats' />
+
                     <DatButton
                         label='Save Preferences'
                         onClick={() => { SaveDatGui() }}
@@ -123,4 +127,8 @@ const Dat = (props) =>
     )
 }
 
+
+//--------------------------------------------------------------
+// Exports Section
+//--------------------------------------------------------------
 export default Dat

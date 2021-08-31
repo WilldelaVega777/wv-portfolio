@@ -11,11 +11,17 @@ import { useRef }               from 'react'
 import { forwardRef }           from 'react'
 import { useImperativeHandle }  from "react"
 import { useGLTF }              from '@react-three/drei'
-import { Sky }                  from "@react-three/drei"
+import { Environment }          from "@react-three/drei"
 import { PositionalAudio }      from "@react-three/drei"
 
 import PhysicalSpace            from "../PhysicalSpace"
 import Lamp                     from "../Lamp"
+import Reflector                from "../../Museum/models/Reflector"
+import Speaker                  from "../../Museum/models/Speaker"
+import MeshSign                 from "../../Museum/MeshSign"
+import Baluster                 from "../../Museum/models/Baluster"
+import Brochure                 from "../Brochure"
+import Certification            from "../Certification"
 import WV                       from "../../Museum/models/WV"
 
 
@@ -27,7 +33,8 @@ const GalleryRoom = forwardRef((props, ref) =>
     //----------------------------------------------------------
     // Initialization Section
     //----------------------------------------------------------
-    const group   = useRef()
+    const group     = useRef()
+    const audioRef  = useRef()
 
     const { nodes, materials } =
         useGLTF('/models/Gallery/Gallery.gltf')
@@ -37,8 +44,29 @@ const GalleryRoom = forwardRef((props, ref) =>
     // Ref Component Extension Section
     //----------------------------------------------------------
     useImperativeHandle(ref, () => ({
-
+        startMusic()
+        {
+            if (!audioRef.current.isPlaying)
+            {
+                audioRef.current.play()
+            }
+        }
     }))
+
+
+    //----------------------------------------------------------
+    // Event Handler Methods Section
+    //----------------------------------------------------------
+    const toggleMusic = () => {
+        if (!audioRef.current.isPlaying)
+        {
+            audioRef.current.play()
+        }
+        else
+        {
+            audioRef.current.pause()
+        }
+    }
 
 
     //----------------------------------------------------------
@@ -46,19 +74,14 @@ const GalleryRoom = forwardRef((props, ref) =>
     //----------------------------------------------------------
     return (
         <>
-
             {/* Lights */}
-            <ambientLight/>
-            <pointLight position={[10, 10, 10]}
-                        intensity={0.1}
-            />
-
+            <ambientLight intensity={0.1}/>
 
             {/* Lamps */}
             <Lamp
                 position={[-10,140,12]}
                 color="brown"
-                intensity={50}
+                intensity={18}
                 distance={180}
                 angle={Math.PI * 0.2}
             />
@@ -66,141 +89,217 @@ const GalleryRoom = forwardRef((props, ref) =>
             <Lamp
                 position={[-58.5,140,-75]}
                 color="navy"
-                intensity={50}
-                distance={148}
+                intensity={18}
+                distance={160}
             />
 
             <Lamp
                 position={[-124,140,-75]}
                 color="darkmagenta"
-                intensity={50}
+                intensity={18}
                 distance={148}
             />
 
             <Lamp
                 position={[-189,140,-75]}
                 color="navy"
-                intensity={50}
-                distance={148}
-            />
-
-            <Lamp
-                position={[-254.5,140,-75]}
-                color="navy"
-                intensity={50}
-                distance={148}
+                intensity={18}
+                distance={160}
             />
 
            <Lamp
                 position={[-58.5,140,-17]}
                 color="navy"
-                intensity={50}
-                distance={148}
+                intensity={18}
+                distance={160}
             />
 
            <Lamp
                 position={[-59,140,42]}
                 color="navy"
-                intensity={50}
+                intensity={18}
                 distance={148}
             />
 
            <Lamp
                 position={[-59,140,100]}
                 color="navy"
-                intensity={50}
-                distance={148}
+                intensity={18}
+                distance={160}
             />
 
            <Lamp
                 position={[-124,140,-17]}
                 color="navy"
-                intensity={50}
-                distance={148}
+                intensity={18}
+                distance={160}
             />
 
            <Lamp
                 position={[-124,140,42]}
                 color="navy"
-                intensity={50}
+                intensity={18}
                 distance={148}
             />
 
            <Lamp
                 position={[-124,140,100]}
                 color="navy"
-                intensity={50}
-                distance={148}
+                intensity={18}
+                distance={160}
             />
 
             <Lamp
                 position={[-189,140,-17]}
                 color="navy"
-                intensity={50}
+                intensity={18}
                 distance={148}
             />
 
             <Lamp
                 position={[-189,140,42]}
                 color="navy"
-                intensity={50}
-                distance={148}
+                intensity={18}
+                distance={160}
             />
 
             <Lamp
                 position={[-189,140,100]}
                 color="navy"
-                intensity={50}
-                distance={148}
+                intensity={18}
+                distance={160}
             />
+            <group>
+                <Lamp
+                    position={[-254.5,140,-75]}
+                    color="navy"
+                    intensity={18}
+                    distance={160}
+                    radius={.2}
+                />
 
-            <Lamp
-                position={[-254.5,140,-17]}
-                color="darkmagenta"
-                intensity={50}
-                distance={148}
-            />
+                <Lamp
+                    position={[-254.5,140,-17]}
+                    color="darkmagenta"
+                    intensity={18}
+                    distance={160}
+                    radius={.2}
+                />
 
-            <Lamp
-                position={[-254.5,140,42]}
-                color="navy"
-                intensity={50}
-                distance={148}
-            />
+                <Lamp
+                    position={[-254.5,140,42]}
+                    color="navy"
+                    intensity={18}
+                    distance={160}
+                    radius={.2}
+                />
 
-            <Lamp
-                position={[-254.5,140,100]}
-                color="darkmagenta"
-                intensity={50}
-                distance={148}
-            />
-
-
-            <group position={[-289, 70, 10]} scale={[3.5,3.5,3.5]}>
-                <group rotation={[0,(Math.PI /2),0]}>
-                    <WV
-                        standard={true}
-                        rotation={[(Math.PI /2),0,0]}
-                    />
-                    <PositionalAudio
-                        url="/audio/soundtrack.mp3"
-                        distance={1000}
-                        volume={.5}
-                        loop
-                        {...props}
-                    />
-                </group>
+                <Lamp
+                    position={[-254.5,140,100]}
+                    color="darkmagenta"
+                    intensity={18}
+                    distance={160}
+                    radius={.2}
+                />
             </group>
+
+            <group>
+                <Reflector
+                    position={[-150,120,20]}
+                    scale={[40,40,40]}
+                    targetRotationH={0.125}
+                    targetRotationV={2.4}
+                    distance={600}
+                    intensity={.5}
+                    color='white'
+                    speed={1.8}
+                />
+                <Reflector
+                    position={[-150,120,-20]}
+                    scale={[40,40,40]}
+                    targetRotationH={0.125}
+                    targetRotationV={2.5}
+                    distance={600}
+                    intensity={.5}
+                    color='white'
+                    speed={1.5}
+                />
+                <pointLight
+                    position={[-150,120,-0]}
+                    intensity={0.5}
+                />
+            </group>
+
+            <MeshSign
+                position={[-280, 90, 57]}
+                rotation={[0,(Math.PI /2),0]}
+                scale={[25,25,25]}
+                file='thanks'
+                noTextures
+            />
+
+            <Baluster
+                position={[-270, -20, 150]}
+                scale={[100,100,100]}
+            />
+
+            <Baluster
+                position={[-270, -20, -60]}
+                scale={[100,100,100]}
+            />
+
+            <WV position={[-289, 60, 10]}
+                rotation={[0,(Math.PI /2),0]}
+                scale={[20,20,20]}
+                standard={true}
+            />
+
+            <group onClick={() => toggleMusic()}>
+                <Speaker
+                    position={[40,0,-60]}
+                    scale={[10,10,10]}
+
+                />
+
+                <PositionalAudio
+                    ref={audioRef}
+                    url="/audio/soundtrack.mp3"
+                    distance={20}
+                    volume={.5}
+                    loop
+                    {...props}
+                />
+
+                <Speaker
+                    position={[40,0,0]}
+                    scale={[10,10,10]}
+                    rotation={[0,(-Math.PI /6),0]}
+
+                />
+            </group>
+
+            <Brochure
+                position={[-156.5,64.2,129]}
+                rotation={[0,Math.PI,0]}
+                scale={[1.5,1.5,1.5]}
+            />
+
+            <Certification
+                position={[-214.7,64.1,-104]}
+                scale={[1.5,1.5,1.5]}
+            />
+
+            <Certification
+                position={[-108.7,64.1,-104]}
+                scale={[1.5,1.5,1.5]}
+            />
 
 
             {/* Interior */}
             <group ref={group} {...props} dispose={null}>
-                <Sky
-                    distance={450} // Camera distance (default=450000)
-                    sunPosition={[0, 1, 0]} // Sun position normal (defaults to inclination and azimuth if not set)
-                    inclination={0.4} // Sun elevation angle from 0 to 1 (default=0)
-                    azimuth={0.45} // Sun rotation around the Y axis from 0 to 1 (default=0.25)
-                    {...props} // All three-stdlib/objects/Sky props are valid
+                <Environment
+                    preset="night"
+                    background
                 />
                 <group rotation={[-Math.PI / 2, 0, 0]}>
                     <group rotation={[Math.PI / 2, 0, 0]}>
@@ -274,16 +373,15 @@ const GalleryRoom = forwardRef((props, ref) =>
 
             {/* Physical Constructs */}
             <PhysicalSpace position={[0,2,0]}/>
-
         </>
     )
+
+
+    //----------------------------------------------------------
+    // Preload GLTF
+    //----------------------------------------------------------
+    useGLTF.preload('/models/Gallery/gallery.gltf')
 })
-
-
-//--------------------------------------------------------------
-// Preload GLTF
-//--------------------------------------------------------------
-useGLTF.preload('/models/Gallery/gallery.gltf')
 
 
 //--------------------------------------------------------------

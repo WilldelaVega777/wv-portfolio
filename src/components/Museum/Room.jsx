@@ -25,7 +25,6 @@ import Chair                    from "./models/Chair"
 import Signs                    from "./Signs"
 import Doryphoros               from "./models/Doryphoros"
 import Slave                    from "./models/Slave"
-import Baluster                 from "./models/Baluster"
 import Techichi                 from "./models/Techichi"
 import Speaker                  from "./models/Speaker"
 import WV                       from "./models/WV"
@@ -318,9 +317,8 @@ const Room = forwardRef((props, ref) =>
 
             {/* WV */}
             <WV
-                position={[37.5,90,-1032.5]}
-                rotation={[(Math.PI /2), 0, 0]}
-                scale={[10,10,10]}
+                position={[37.5,150,-1032.5]}
+                scale={[35,35,35]}
             />
 
             <group onClick={() => toggleMusic()}>
@@ -376,13 +374,13 @@ const Room = forwardRef((props, ref) =>
             />
         </>
     )
+
+
+    //----------------------------------------------------------
+    // Preload GLTF
+    //----------------------------------------------------------
+    useGLTF.preload('/models/Museum/room/scene.gltf')
 })
-
-
-//--------------------------------------------------------------
-// Preload GLTF
-//--------------------------------------------------------------
-useGLTF.preload('/models/Museum/room/scene.gltf')
 
 
 //--------------------------------------------------------------

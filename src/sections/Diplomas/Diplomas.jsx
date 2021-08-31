@@ -28,16 +28,12 @@ const Diplomas = (props) => {
     // Render Section
     //----------------------------------------------------------
     return (
-        <section ref={diplomasRef} id="diplomas" className="diplomas">
-            { isBrowser && (
-                <Suspense fallback={
-                    <div>
-                        Loading...
-                    </div>
-                }>
-                    <Museum/>
-                </Suspense>
-            )}
+        <section
+            ref={diplomasRef}
+            id="diplomas"
+            className="diplomas"
+        >
+            <Museum/>
         </section>
     )
 

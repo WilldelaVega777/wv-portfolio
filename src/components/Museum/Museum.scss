@@ -1,0 +1,50 @@
+div.diplomas-container
+{
+    display: flex;
+    z-index: 0;
+    flex-direction: column;
+    justify-content: center;
+
+    width: calc(100vw - 200px);
+    height: calc(100vh - 200px);
+    background-color: rgba(255,255,255,0.30);
+    border-radius: 6px;
+    margin: 0 auto;
+    margin-top: 50px;
+    box-shadow: 10px 10px 19px 0px rgba(0,0,0,0.73);
+    text-align: center;
+}
+
+.museum
+{
+    z-index: 9999;
+    top: 0px;
+    left: 0px;
+    min-height: calc(100vh - 100px);
+}
+
+.preloader
+{
+    text-align: center;
+    font-family:'Gill Sans',
+                'Gill Sans MT',
+                Calibri,
+                'Trebuchet MS',
+                sans-serif
+                !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+    color: #444 !important;
+    line-height: 1.4em !important;
+    margin-top: 80px;
+}
+
+.hidden
+{
+    visibility: hidden;
+}
+
+.visible
+{
+    visibility: visible;
+}

@@ -74,6 +74,7 @@ const MeshSign = (props) =>
                     position={[-1.37, 0.16, 0]}
                     rotation={[1.56, 0, 0]}
                 >
+                    { !props.noTextures &&
                     <meshStandardMaterial
                         attach='material'
                         map={base}
@@ -87,9 +88,21 @@ const MeshSign = (props) =>
                         specular={0x888888}
                         depthText={false}
                         depthWrite={false}
-                        side={THREE.DoubleSide}
                         color={props.color || 'goldenrod'}
-                    />
+                        />
+                    }
+                    { props.noTextures &&
+                        <meshStandardMaterial
+                            attach='material'
+                            metalness={0.3}
+                            roughness={0.95}
+                            reflectivity={0.2}
+                            specular={0x888888}
+                            depthText={false}
+                            depthWrite={false}
+                            color={props.color || 'goldenrod'}
+                        />
+                    }
                 </mesh>
             </group>
         </group>

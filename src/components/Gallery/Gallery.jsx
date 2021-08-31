@@ -6,39 +6,33 @@ import { useState }         from "react"
 import { useEffect }        from "react"
 import { useRef }           from "react"
 import { Suspense }         from "react"
-import "./Gallery.scss"
 
 import { Canvas }           from "@react-three/fiber"
 import { Physics }          from "@react-three/cannon"
 
-
 import GalleryRoom          from "./models/GalleryRoom"
+import Preloader            from "../Loader/Preloader"
 import Camera               from "./Camera"
 import JoyStick             from "react-joystick"
 
+import "./Gallery.scss"
 
 //--------------------------------------------------------------
 // Component Section
 //--------------------------------------------------------------
 const Gallery = () => {
+
     //----------------------------------------------------------
     // Initialization Section
     //----------------------------------------------------------
-    const [quickTurn, setQuickTurn] = useState(0)
-    const [ready, setReady]         = useState(false)
+    const isBrowser = (typeof window !== "undefined")
+
+    const [ready, setReady]                 = useState(false)
+    const [canStartMusic, setCanStartMusic] = useState(true)
 
     const room          = useRef()
     const cameraRef     = useRef()
-
-    const isBrowser = (typeof window !== "undefined")
-
-
-    //----------------------------------------------------------
-    // Life Cycle Event Handler Methods Section
-    //----------------------------------------------------------
-    useEffect(() => {
-
-    }, [])
+    const bottomNav     = useRef()
 
 
     //----------------------------------------------------------
@@ -64,6 +58,16 @@ const Gallery = () => {
         })
     }
 
+    //----------------------------------------------------------
+    const contentLoaded = () => {
+        console.log('loaded')
+        setTimeout(() => {
+            bottomNav.current.classList.remove('hidden')
+            bottomNav.current.classList.add('visible')
+        }, 1000)
+
+    }
+
 
     //----------------------------------------------------------
     // Internal Functions Section
@@ -80,12 +84,8 @@ const Gallery = () => {
     // Render Section
     //----------------------------------------------------------
     return (
-        <div>
-            <Suspense fallback={
-                <div className="certificate-container">
-                    Loading...
-                </div>
-            }>
+        <>
+            { isBrowser && (
                 <Canvas
                     className="gallery"
                     concurrent
@@ -113,7 +113,11 @@ const Gallery = () => {
                         allowSleep={false}
                         damping={1}
                     >
-                        <group>
+                        <Suspense fallback={
+                            <Preloader
+                                onFinishLoading={contentLoaded}
+                            />
+                        }>
 
                             {/* Room Model */}
                             <GalleryRoom
@@ -121,21 +125,31 @@ const Gallery = () => {
                                 position={[0,0,0]}
                             />
 
-
-
                             {/* First Person Camera */}
                             <Camera
                                 lookAt={room}
                                 ref={cameraRef}
                                 target={room}
-                                quickTurn={quickTurn}
+                                quickTurn={0}
                             />
-                        </group>
+                        </Suspense>
                     </Physics>
                 </Canvas>
-            </Suspense>
+            )}
 
-            <div className="bottom-nav">
+
+            { ready &&
+            <div
+                ref={bottomNav}
+                className="bottom-nav"
+                onPointerDown={() => {
+                    if (canStartMusic)
+                    {
+                        room.current.startMusic()
+                        setCanStartMusic(false)
+                    }
+                }
+            }>
                 <JoyStick
                     options={{
                             mode: 'static',
@@ -165,7 +179,8 @@ const Gallery = () => {
                     onClick={() => cameraRef.current.quickTurn(-1)}
                 />
             </div>
-        </div>
+            }
+        </>
     )
 
 }

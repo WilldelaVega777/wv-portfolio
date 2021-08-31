@@ -28,7 +28,7 @@ const Baluster = (props) => {
             ref={group}
             {...props}
             dispose={null}
-            scale={[250,250,250]}
+            scale={props.scale || [250,250,250]}
         >
             <group
                 rotation={[-Math.PI / 2, 0, 0]}
@@ -60,15 +60,15 @@ const Baluster = (props) => {
             </group>
       </group>
     )
+
+
+    //----------------------------------------------------------
+    // Preload GLTF
+    //----------------------------------------------------------
+    useGLTF.preload(
+        '/models/Museum/baluster/scene.gltf'
+    )
 }
-
-
-//--------------------------------------------------------------
-// Preload GLTF
-//--------------------------------------------------------------
-useGLTF.preload(
-    '/models/Museum/baluster/scene.gltf'
-)
 
 
 //--------------------------------------------------------------

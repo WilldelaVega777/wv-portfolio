@@ -74,36 +74,17 @@ const Techichi = (props) => {
                     </group>
                 </group>
             </group>
-            { props.rotate &&
-                <Html>
-                    <div style={{
-                        fontSize:16 + 'px',
-                        color: 'white',
-                        fontFamily: 'Helvetica',
-                        fontWeight: 'bold',
-                        minWidth: 300 + 'px',
-                        marginLeft: -100 + 'px',
-                        marginTop: 150 + 'px',
-                        textAlign: 'center',
-                        lineHeight: 1.4
-                    }}>
-                        Please wait while it loads<br/>
-                        Don't Leave or I'll bite you!<br/>
-                        This is the Beta 1 of the site...
-                    </div>
-                </Html>
-            }
         </group>
     )
+
+
+    //----------------------------------------------------------
+    // Preload GLTF
+    //----------------------------------------------------------
+    useGLTF.preload(
+        '/models/Museum/techichi/scene.gltf'
+    )
 }
-
-
-//--------------------------------------------------------------
-// Preload GLTF
-//--------------------------------------------------------------
-useGLTF.preload(
-    '/models/Museum/techichi/scene.gltf'
-)
 
 
 //--------------------------------------------------------------
