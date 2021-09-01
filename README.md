@@ -9,6 +9,8 @@
 
 ## 🚀 Quick start
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/94f2cb1b-c0fc-4bb4-a311-d67e443992c9/deploy-status)](https://app.netlify.com/sites/portfolio-willdelavega/deplo
+
 1.  **Create a Gatsby site.**
 
     Use the Gatsby CLI to create a new site, specifying the minimal starter.
