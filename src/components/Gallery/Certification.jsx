@@ -6,6 +6,8 @@ import { useRef }                       from 'react'
 import * as THREE                       from 'three'
 import { useTexture }                   from '@react-three/drei'
 
+import brochure from './textures/Brochure.png'
+
 
 //--------------------------------------------------------------
 // Component Section
@@ -18,7 +20,7 @@ const Certification = (props) => {
     const group = useRef()
 
     const [map] =
-        useTexture(['/models/Gallery/textures/Brochure.png'])
+        useTexture([brochure])
 
 
     //----------------------------------------------------------

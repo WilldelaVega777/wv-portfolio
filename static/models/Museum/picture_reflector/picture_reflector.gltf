@@ -1,0 +1,188 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v1.6.16",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0,
+                1,
+                2,
+                3
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "name" : "Point 01",
+            "rotation" : [
+                0.16907575726509094,
+                0.7558803558349609,
+                -0.27217137813568115,
+                0.570947527885437
+            ],
+            "translation" : [
+                15.356304168701172,
+                2.8558506965637207,
+                0.846308708190918
+            ]
+        },
+        {
+            "name" : "Camera",
+            "rotation" : [
+                0.483536034822464,
+                0.33687159419059753,
+                -0.20870360732078552,
+                0.7804827094078064
+            ],
+            "translation" : [
+                7.358891487121582,
+                4.958309173583984,
+                6.925790786743164
+            ]
+        },
+        {
+            "name" : "Point 02",
+            "translation" : [
+                -8.521590232849121,
+                2.7111704349517822,
+                0
+            ]
+        },
+        {
+            "mesh" : 0,
+            "name" : "PL01",
+            "scale" : [
+                0.0010000000474974513,
+                0.0010000000474974513,
+                0.0010000000474974513
+            ],
+            "translation" : [
+                0.00026925659039989114,
+                0.11032525449991226,
+                -0.09290508925914764
+            ]
+        }
+    ],
+    "materials" : [
+        {
+            "doubleSided" : true,
+            "name" : "PL01",
+            "normalTexture" : {
+                "index" : 0,
+                "scale" : 0.019999999552965164
+            },
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    0.5647059082984924,
+                    0.5529412031173706,
+                    0.5333333611488342,
+                    1
+                ],
+                "roughnessFactor" : 0.8964735269546509
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Mesh",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TEXCOORD_0" : 2
+                    },
+                    "indices" : 3,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "textures" : [
+        {
+            "sampler" : 0,
+            "source" : 0
+        }
+    ],
+    "images" : [
+        {
+            "mimeType" : "image/jpeg",
+            "name" : "Steel 0012",
+            "uri" : "Steel.jpg"
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 9670,
+            "max" : [
+                192.45277404785156,
+                25.745845794677734,
+                185.81016540527344
+            ],
+            "min" : [
+                -192.9912872314453,
+                -141.92236328125,
+                -1.0405658485979075e-06
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 9670,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 9670,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5123,
+            "count" : 17736,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 116040,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 116040,
+            "byteOffset" : 116040
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 77360,
+            "byteOffset" : 232080
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 35472,
+            "byteOffset" : 309440
+        }
+    ],
+    "samplers" : [
+        {
+            "magFilter" : 9729,
+            "minFilter" : 9987
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 344912,
+            "uri" : "picture_reflector.bin"
+        }
+    ]
+}
