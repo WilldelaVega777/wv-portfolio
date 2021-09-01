@@ -4,7 +4,6 @@
 import * as React           from "react"
 import { Suspense }         from "react"
 import { useState }         from "react"
-import { useFrame }         from "@react-three/fiber"
 
 import { Canvas }           from "@react-three/fiber"
 import { Text }             from "@react-three/drei"
@@ -33,7 +32,7 @@ const Carousel3d = (props) => {
 
     let items;
 
-    // Textures
+    // Texture
     const [
         depthMap
     ] = useTexture([`/images/Portfolio/depth.png`])
