@@ -2,19 +2,52 @@
 // Imports Section
 //--------------------------------------------------------------
 import * as React       from "react"
-import "./Featured.scss"
+import { useEffect }    from 'react'
+import { useRef }       from 'react'
+import { gsap }         from 'gsap'
+
+import Title            from "../../components/Resume/components/Title"
+import Ripple           from "../../components/Backgrounds/Ripple"
+
+import "./FeaturedSection.scss"
 
 
 //--------------------------------------------------------------
 // Component Section
 //--------------------------------------------------------------
-const Featured = () => {
+const FeaturedSection = () => {
+    //----------------------------------------------------------
+    // Initialization Section
+    //----------------------------------------------------------
+    const barra = useRef(null)
 
 
+    //----------------------------------------------------------
+    // Lifecycle Eventhandler Section
+    //----------------------------------------------------------
+    useEffect(() => {
+        gsap.to(barra.current, {
+            width: 1530,
+            delay: 1,
+            duration: 1.5, // duration of the animation
+        });
+    }, []);
+
+
+    //----------------------------------------------------------
+    // Render Section
+    //----------------------------------------------------------
     return (
         <section id="featured" className="featured">
-            <h1>FEATURED COMPONENT</h1>
-            <div className="featured-container">
+            <Ripple
+                color={0x2a2a2a}
+                orbit={true}
+            />
+            <div className="featured-container scroll">
+            <Title
+                    title={'The best'}
+                    span={''}
+            />
 
             </div>
         </section>
@@ -25,4 +58,4 @@ const Featured = () => {
 //--------------------------------------------------------------
 // Exports Section
 //--------------------------------------------------------------
-export default Featured
+export default FeaturedSection

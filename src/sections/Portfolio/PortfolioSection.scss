@@ -1,0 +1,48 @@
+section.portfolio
+{
+    position: relative;
+    background-color: black;
+    width: 100vw;
+    height: calc(100vh - 100px);
+    overflow: hidden;
+    z-index: 1200;
+    color: #F8EFBA;
+
+    div.portfolio-container
+    {
+        transform: translate(calc((100vw - 1200px) / 2));
+        position: absolute;
+        z-index: 9999;
+        width: calc(100vw - 820px);
+        height: 200px;
+        background-color: rgba(22, 22, 22, 0.98);
+        margin: 0 auto;
+        overflow-y: auto !important;
+        padding: 50px;
+    }
+
+    article
+    {
+        max-width: 1400px;
+        min-height: 0px;
+        margin: 0 auto;
+        margin-top: 40px;
+        color: #b5a642;
+        font-family: 'Poppins Regular';
+        font-size: 14px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 6;
+        padding: 20px;
+    }
+
+    .carousel
+    {
+        position: absolute;
+        top: -80px;
+    }
+}
+
+.MuiDialog-paperFullWidth
+{
+    width: 640px !important;
+}

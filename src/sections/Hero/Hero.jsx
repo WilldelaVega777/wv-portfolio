@@ -7,7 +7,7 @@
 // Imports Section
 //--------------------------------------------------------------
 import * as React           from "react"
-import "./Hero.scss"
+import "./HeroSection.scss"
 
 import { Timeline }         from 'react-gsap';
 import { PlayState }        from 'react-gsap';
@@ -16,7 +16,7 @@ import { Tween }            from 'react-gsap';
 import { useRef }           from "react"
 import { useEffect }        from "react"
 import { useContext }       from "react"
-import PageContext          from "../../context/page-context"
+import SiteContext          from "../../context/site-context"
 
 import { navigate }         from "@reach/router"
 
@@ -24,7 +24,7 @@ import { navigate }         from "@reach/router"
 //--------------------------------------------------------------
 // Component Section
 //--------------------------------------------------------------
-const Hero = (props) => {
+const HeroSection = (props) => {
 
     //----------------------------------------------------------
     // Initialize Variables Section
@@ -38,7 +38,7 @@ const Hero = (props) => {
     const heroMask          = useRef(null)
     const frontEndAnimation = useRef(null)
     const backEndAnimation  = useRef(null)
-    const config            = useContext(PageContext)
+    const config            = useContext(SiteContext)
     let current             = 1
     let context             = null
     let image               = (isBrowser ? new Image() : null)
@@ -147,12 +147,14 @@ const Hero = (props) => {
     //----------------------------------------------------------
     const update = (index) => {
 
-        const context = heroCanvas.current.getContext('2d')
-        image.onload = () => {
-            context.drawImage(image, 0, 0)
+        if (heroCanvas.current)
+        {
+            const context = heroCanvas.current.getContext('2d')
+            image.onload = () => {
+                context.drawImage(image, 0, 0)
+            }
+            image.src = currentFrame(index)
         }
-        image.src = currentFrame(index)
-
     }
 
     //----------------------------------------------------------
@@ -179,7 +181,6 @@ const Hero = (props) => {
     }
 
 
-
     //----------------------------------------------------------
     const animate = async (current, direction) => {
         //------------------------------------------------------
@@ -190,20 +191,19 @@ const Hero = (props) => {
         {
             heroText.current.style.marginTop = `${((current * 15) * -1)}px`
             heroText.current.style.opacity = (1.0 - (current / 5))
-
-            // Show FrontEnd Article
-            if (current === 10)
+        }
+        // Show FrontEnd Article
+        else if (current === 10)
+        {
+            if (direction === 'down')
             {
-                if (direction === 'down')
-                {
-                    frontEndAnimation.current.getGSAP().play(0)
-                }
-                else
-                {
-                    frontEndAnimation.current.getGSAP().timeScale(
-                        frontEndAnimation.current.getGSAP().duration()
-                    ).reverse()
-                }
+                frontEndAnimation.current.getGSAP().play(0)
+            }
+            else
+            {
+                frontEndAnimation.current.getGSAP().timeScale(
+                    frontEndAnimation.current.getGSAP().duration()
+                ).reverse()
             }
         }
 
@@ -218,7 +218,7 @@ const Hero = (props) => {
                 ).reverse()
             }
 
-            if ((current === 42) && (direction === 'down'))
+            if ((current === 48) && (direction === 'down'))
             {
                 // Brings up BackEnd Article
                 backEndAnimation.current.getGSAP().play(0)
@@ -240,10 +240,7 @@ const Hero = (props) => {
 
         if (current === 65)
         {
-            await Promise.all([
-                rewindAsync(),
-                navigate('#nav')
-            ])
+            await navigate('/presentation/?automatic=true')
         }
 
         // Update Clock Animation
@@ -276,7 +273,9 @@ const Hero = (props) => {
                 onFocus={()  => heroCanvas_onMouseEnter()}
         >
             <div ref={heroText} className="hero-text">
-                THE WATCHMEN
+                SOFTWARE IS LIKE
+                <br/>
+                A CLASSIC CLOCK
             </div>
 
             <img ref={heroMask}
@@ -349,4 +348,4 @@ const Hero = (props) => {
 //--------------------------------------------------------------
 // Exports Section
 //--------------------------------------------------------------
-export default Hero
+export default HeroSection

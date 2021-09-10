@@ -11,7 +11,6 @@ import { Suspense }             from "react"
 import { useState }             from "react"
 import { useRef }               from "react"
 import { useEffect }            from "react"
-import "./styles/Museum.scss"
 
 import { Canvas }               from "@react-three/fiber"
 import { Stats }                from "@react-three/drei"
@@ -25,22 +24,12 @@ import Camera                   from "./Camera"
 
 import Preloader                from "../Loader/Preloader"
 
-import "./Museum.scss"
-
-
+import "./styles/Museum.scss"
 
 //--------------------------------------------------------------
 // Component Section
 //--------------------------------------------------------------
 const Museum = (props) => {
-
-    //----------------------------------------------------------
-    // Feature Flags Section
-    //----------------------------------------------------------
-    let STATS = false
-    const isBrowser = (typeof window !== "undefined")
-    console.log(isBrowser)
-
 
     //----------------------------------------------------------
     // Initialization Section
@@ -52,20 +41,21 @@ const Museum = (props) => {
         posZ: 0
     }
 
+    const isBrowser = (typeof window !== "undefined")
+
     const [dat, setDat]                     = useState(defaultState)
     const [ready, setReady]                 = useState(false)
     const [dbug, setDbug]                   = useState()
     const [canStartMusic, setCanStartMusic] = useState(true)
 
 
+    // Check if running in Server Rendering
     const statsRef = isBrowser? useRef(document.createElement('div')) : ''
 
     const graphicsWorld = useRef()
     const room          = useRef()
     const cameraRef     = useRef()
     const bottomNav     = useRef()
-    const test = useRef()
-
 
 
     //----------------------------------------------------------
@@ -110,9 +100,10 @@ const Museum = (props) => {
 
     //----------------------------------------------------------
     const contentLoaded = () => {
-        console.log('loaded')
-        bottomNav.current.classList.remove('hidden')
-        bottomNav.current.classList.add('visible')
+        setTimeout(() => {
+            bottomNav.current.classList.remove('hidden')
+            bottomNav.current.classList.add('visible')
+        }, 1000)
     }
 
 
@@ -194,9 +185,9 @@ const Museum = (props) => {
                             {/* First Person Camera */}
                             <Camera
                                 ref={cameraRef}
-                                target={graphicsWorld}
+                                lookAt={room}
+                                target={room}
                                 quickTurn={0}
-                                onDebug={(data) => setDbug(data)}
                             />
                         </Suspense>
 

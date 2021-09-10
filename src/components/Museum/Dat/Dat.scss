@@ -299,37 +299,37 @@
 /* Import Fonts */
 @font-face {
     font-family: 'Oxygen Regular';
-    src: local('Oxygen'), url(../../../assets/fonts/Oxygen/Oxygen-Regular.ttf) format('truetype');
+    src: local('Oxygen'), url('/fonts/Oxygen/Oxygen-Regular.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Oxygen Light';
-    src: local('Oxygen'), url(../../../assets/fonts/Oxygen/Oxygen-Light.ttf) format('truetype');
+    src: local('Oxygen'), url('/fonts/Oxygen/Oxygen-Light.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Oxygen Bold';
-    src: local('Oxygen'), url(../../../assets/fonts/Oxygen/Oxygen-Bold.ttf) format('truetype');
+    src: local('Oxygen'), url('/assets/fonts/Oxygen/Oxygen-Bold.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Poppins Extra Bold';
-    src: local('Poppins'), url(../../../assets/fonts/Poppins/Poppins-ExtraBold.ttf) format('truetype');
+    src: local('Poppins'), url('/fonts/Poppins/Poppins-ExtraBold.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Poppins Bold';
-    src: local('Poppins'), url(../../../assets/fonts/Poppins/Poppins-Bold.ttf) format('truetype');
+    src: local('Poppins'), url('/fonts/Poppins/Poppins-Bold.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Poppins Regular';
-    src: local('Poppins'), url(../../../assets/fonts/Poppins/Poppins-Regular.ttf) format('truetype');
+    src: local('Poppins'), url('/fonts/Poppins/Poppins-Regular.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Roboto Regular';
-    src: local('Roboto'), url(../../../assets/fonts/Roboto/Roboto-Regular.ttf) format('truetype');
+    src: local('Roboto'), url('/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
 }
 
 /* Website Content */

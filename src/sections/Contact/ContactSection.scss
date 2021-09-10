@@ -1,0 +1,74 @@
+section.contact
+{
+    background-color: black;
+    font-family: 'Poppins Regular';
+    color: #F8EFBA;
+    width: 100vw;
+    height: calc(100vh - 100px);
+    overflow: hidden;
+    z-index: 1200;
+
+    .wrong-data
+    {
+        position: absolute;
+        top: 55px;
+        left: calc(100vw - 385px);
+        width: 380px;
+        height: 70px;
+    }
+
+    .data-sent
+    {
+        position: absolute;
+        top: 55px;
+        left: calc(100vw - 430px);
+        width: 430px;
+        height: 70px;
+    }
+
+    h1
+    {
+        text-align: center;
+        font-family: 'Oxygen Bold', Tahoma, Geneva, Verdana, sans-serif;
+        color: #cc8e35;
+        text-shadow: 2px 2px 2px #222;
+        padding: 30px;
+    }
+
+    div.contact-container
+    {
+        display: flex;
+        flex-direction: row;
+        align-content: flex-start;
+        width: 1000px;
+        height: calc(100vh - 250px);
+        background-color: rgba(255,255,255,0.1);
+        border-radius: 6px;
+        margin: 0 auto;
+        box-shadow: 10px 10px 19px 0px rgba(0,0,0,0.73);
+        padding: 0px;
+
+        div.form
+        {
+            background-color: #85754e;
+            border-top-left-radius: 6px;
+            border-bottom-left-radius: 6px;
+            padding: 20px;
+            padding-top: 0px;
+            color: #222;
+            max-width: 45%;
+            flex: 0 1 45%;
+        }
+
+        div.visuals
+        {
+            background-color: rgba(255,255,255,0.01);
+            background-image: url('/images/Contact/OldPhone.jpg');
+            background-size: cover;
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
+            max-width: 55%;
+            flex: 1 1 55%;
+        }
+    }
+}

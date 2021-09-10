@@ -1,0 +1,32 @@
+section.diplomas
+{
+    position: relative;
+    background-color: black;
+    width: 100vw;
+    min-height: calc(100vh - 100px);
+    height: calc(100vh - 100px);
+    max-height: calc(100vh - 100px);
+    overflow: hidden;
+    z-index: 9990;
+    color: #F8EFBA;
+    cursor: pointer;
+    /* box-shadow: 10px 10px 27px 0px rgba(0,0,0,0.66); */
+
+    h1
+    {
+        text-align: center;
+        font-family: 'Oxygen Bold', Tahoma, Geneva, Verdana, sans-serif;
+        text-shadow: 2px 2px 2px #222;
+        z-index: 9990;
+    }
+
+    div.diplomas-title
+    {
+        position: absolute;
+        max-width: 1400px;
+        min-height: 100%;
+        top: 0px;
+        transform: translate(calc((100vw - 300px) / 2));
+    }
+
+}

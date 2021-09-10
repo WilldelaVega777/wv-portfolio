@@ -2,27 +2,34 @@
 // Imports Section
 //--------------------------------------------------------------
 import * as React       from "react"
-import "./Resume.scss"
+import Particles        from 'react-particles-js'
+import Resume           from '../../components/Resume/Resume'
+import particles        from './particles-config.json'
+
+import './ResumeSection.scss'
 
 
 //--------------------------------------------------------------
 // Component Section
 //--------------------------------------------------------------
-const Resume = () => {
+const ResumeSection = () => {
 
-
+    //----------------------------------------------------------
+    // Render Section
+    //----------------------------------------------------------
     return (
-        <section id="resume" className="resume">
-            <h1>RESUME COMPONENT</h1>
-            <div className="resume-container">
-
+        <section className="resume">
+            <Particles params={particles}/>
+            <div id='main' className="resume-container scroll">
+                <Resume/>
             </div>
         </section>
     )
 
 }
 
+
 //--------------------------------------------------------------
 // Exports Section
 //--------------------------------------------------------------
-export default Resume
+export default ResumeSection

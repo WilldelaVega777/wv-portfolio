@@ -1,0 +1,22 @@
+section.presentation
+{
+    background-color: black;
+    font-family: 'Poppins Regular';
+    color: #F8EFBA;
+    width: 100vw;
+    height: calc(100vh - 100px);
+    overflow: hidden;
+
+    div.presentation-container
+    {
+        transform: translate(calc((100vw - 1200px) / 2));
+        position: absolute;
+        top: 50px;
+        width: calc(100vw - 820px);
+        height: calc(100vh - 200px);
+        background-color: rgba(22, 22, 22, 0.98);
+        margin: 0 auto;
+        overflow-y: auto !important;
+        padding: 50px;
+    }
+}

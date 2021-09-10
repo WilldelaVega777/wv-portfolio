@@ -5,7 +5,7 @@ import * as React           from "react"
 import { useEffect }        from "react"
 
 import Layout               from "../components/Layout/Layout"
-import Hero                 from '../sections/Hero/Hero'
+import HeroSection          from '../sections/Hero/Hero'
 
 import "../styles/site.scss"
 
@@ -28,7 +28,7 @@ const IndexPage = () => {
     //----------------------------------------------------------
     return (
         <Layout>
-            <Hero/>
+            <HeroSection/>
         </Layout>
     )
 }

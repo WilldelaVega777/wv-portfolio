@@ -50,6 +50,13 @@ const Carousel3d = (props) => {
     }
 
     //----------------------------------------------------------
+    const selectedItem = (item) =>
+    {
+        props.itemSelected(item)
+    }
+
+
+    //----------------------------------------------------------
     // Internal Functions Section
     //----------------------------------------------------------
     const createItems = () => {
@@ -64,6 +71,7 @@ const Carousel3d = (props) => {
                     floor={yBase}
                     activateItem={(id) => activateItem(id)}
                     item_IsActive={() => item_IsActive()}
+                    selectItem = {(item) => selectedItem(item)}
                     item={item}
                 />
             )

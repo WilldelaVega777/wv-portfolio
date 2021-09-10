@@ -1,11 +1,11 @@
 //--------------------------------------------------------------
 // Imports Section
 //--------------------------------------------------------------
-import * as React           from "react"
-import { useEffect }        from "react"
+import * as React               from "react"
+import { useEffect }            from "react"
 
-import Layout               from "../components/Layout/Layout"
-import Certifications       from '../sections/Certifications/Certifications'
+import Layout                   from "../components/Layout/Layout"
+import CertificationsSection    from '../sections/Certifications/Certifications'
 
 import "../styles/site.scss"
 
@@ -28,7 +28,7 @@ const CertificationsPage = () => {
     //----------------------------------------------------------
     return (
         <Layout>
-            <Certifications/>
+            <CertificationsSection/>
         </Layout>
     )
 }

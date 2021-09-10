@@ -3,7 +3,6 @@
 //--------------------------------------------------------------
 import * as React           from "react"
 import { useState }         from "react"
-import { useEffect }        from "react"
 import { useRef }           from "react"
 import { Suspense }         from "react"
 
@@ -15,7 +14,7 @@ import Preloader            from "../Loader/Preloader"
 import Camera               from "./Camera"
 import JoyStick             from "react-joystick"
 
-import "./Gallery.scss"
+import "./styles/Gallery.scss"
 
 //--------------------------------------------------------------
 // Component Section
@@ -60,12 +59,10 @@ const Gallery = () => {
 
     //----------------------------------------------------------
     const contentLoaded = () => {
-        console.log('loaded')
         setTimeout(() => {
             bottomNav.current.classList.remove('hidden')
             bottomNav.current.classList.add('visible')
         }, 1000)
-
     }
 
 
@@ -127,8 +124,8 @@ const Gallery = () => {
 
                             {/* First Person Camera */}
                             <Camera
-                                lookAt={room}
                                 ref={cameraRef}
+                                lookAt={room}
                                 target={room}
                                 quickTurn={0}
                             />
@@ -137,7 +134,7 @@ const Gallery = () => {
                 </Canvas>
             )}
 
-
+            {/* Joystick */}
             { ready &&
             <div
                 ref={bottomNav}

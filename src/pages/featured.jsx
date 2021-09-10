@@ -5,7 +5,7 @@ import * as React           from "react"
 import { useEffect }        from "react"
 
 import Layout               from "../components/Layout/Layout"
-import Featured             from '../sections/Featured/Featured'
+import FeaturedSection      from '../sections/Featured/Featured'
 
 import "../styles/site.scss"
 
@@ -28,7 +28,7 @@ const FeaturedPage = () => {
     //----------------------------------------------------------
     return (
         <Layout>
-            <Featured/>
+            <FeaturedSection/>
         </Layout>
     )
 }

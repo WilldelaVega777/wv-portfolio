@@ -134,6 +134,7 @@ const Item = (props) => {
                 position={o2i0Pos}
                 rotation={rt}
                 onPointerOver={(event) => itemOnPointerOver(event)}
+                className="clicker"
             >
                 <boxGeometry args={[1.8, 1.0, .01]} />
                 <meshStandardMaterial color={'#b3b3b3'}
@@ -144,6 +145,7 @@ const Item = (props) => {
                 ref={o2i1bMesh}
                 position={o2i1Pos}
                 rotation={rt}
+                onClick={() => props.selectItem(props.item)}
             >
                 <boxGeometry args={[1.8, .63, .01]}/>
                 <meshStandardMaterial color={'#bbb'}

@@ -5,7 +5,7 @@ import * as React           from "react"
 import { useEffect }        from "react"
 
 import Layout               from "../components/Layout/Layout"
-import Diplomas             from '../sections/Diplomas/Diplomas'
+import DiplomasSection      from '../sections/Diplomas/Diplomas'
 
 import "../styles/site.scss"
 
@@ -28,7 +28,7 @@ const DiplomasPage = () => {
     //----------------------------------------------------------
     return (
         <Layout>
-            <Diplomas/>
+            <DiplomasSection/>
         </Layout>
     )
 }

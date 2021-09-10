@@ -1,0 +1,37 @@
+a
+{
+    float: left;
+    display: block;
+    color: #4b3621;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+    font-family: 'Poppins Regular';
+}
+
+a:hover
+{
+    color: #e4d96f;
+    text-shadow: 2px 2px 2px #222;
+}
+
+
+a.lets-talk
+{
+    color: #e4d96f;
+    margin-top: -3px;
+}
+
+span.lets-talk-phone
+{
+    display: inline-block;
+    color: #e4d96f;
+    margin-top: -3px;
+    text-shadow: 2px 2px 2px #222;
+}
+
+a.lets-talk:hover
+{
+    color: white;
+    text-shadow: 2px 2px 2px #222;
+}

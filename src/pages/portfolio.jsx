@@ -5,9 +5,7 @@ import * as React           from "react"
 import { useEffect }        from "react"
 
 import Layout               from "../components/Layout/Layout"
-import Portfolio            from '../sections/Portfolio/Portfolio'
-
-import "../styles/site.scss"
+import PortfolioSection     from '../sections/Portfolio/Portfolio'
 
 
 //--------------------------------------------------------------
@@ -28,7 +26,7 @@ const PortfolioPage = () => {
     //----------------------------------------------------------
     return (
         <Layout>
-            <Portfolio/>
+            <PortfolioSection/>
         </Layout>
     )
 }

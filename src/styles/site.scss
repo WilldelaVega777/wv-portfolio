@@ -1,37 +1,37 @@
 /* Import Fonts */
 @font-face {
     font-family: 'Oxygen Regular';
-    src: local('Oxygen'), url(../assets/fonts/Oxygen/Oxygen-Regular.ttf) format('truetype');
+    src: local('Oxygen'), url('/fonts/Oxygen/Oxygen-Regular.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Oxygen Light';
-    src: local('Oxygen'), url(../assets/fonts/Oxygen/Oxygen-Light.ttf) format('truetype');
+    src: local('Oxygen'), url('/fonts/Oxygen/Oxygen-Light.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Oxygen Bold';
-    src: local('Oxygen'), url(../assets/fonts/Oxygen/Oxygen-Bold.ttf) format('truetype');
+    src: local('Oxygen'), url('/fonts/Oxygen/Oxygen-Bold.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Poppins Extra Bold';
-    src: local('Poppins'), url(../assets/fonts/Poppins/Poppins-ExtraBold.ttf) format('truetype');
+    src: local('Poppins'), url('/fonts/Poppins/Poppins-ExtraBold.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Poppins Bold';
-    src: local('Poppins'), url(../assets/fonts/Poppins/Poppins-Bold.ttf) format('truetype');
+    src: local('Poppins'), url('/fonts/Poppins/Poppins-Bold.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Poppins Regular';
-    src: local('Poppins'), url(../assets/fonts/Poppins/Poppins-Regular.ttf) format('truetype');
+    src: local('Poppins'), url('/fonts/Poppins/Poppins-Regular.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Roboto Regular';
-    src: local('Roboto'), url(../assets/fonts/Roboto/Roboto-Regular.ttf) format('truetype');
+    src: local('Roboto'), url('/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
 }
 
 /* Website Content */
@@ -77,3 +77,24 @@ canvas, img
 	border: 0px solid #555555;
 }
 
+.scroll::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #1a1a1a;
+}
+
+.scroll::-webkit-scrollbar
+{
+    width: 6px;
+    background-color: #222 !important;
+}
+
+.scroll::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}

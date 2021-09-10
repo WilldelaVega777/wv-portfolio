@@ -4,13 +4,14 @@
 import * as React           from "react"
 import { Suspense }         from "react"
 import Gallery              from "../../components/Gallery/Gallery.jsx"
-import "./Certifications.scss"
+
+import "./CertificationsSection.scss"
 
 
 //--------------------------------------------------------------
 // Component Section
 //--------------------------------------------------------------
-const Certifications = () => {
+const CertificationsSection = () => {
 
     const isBrowser = typeof window !== "undefined"
 
@@ -28,4 +29,4 @@ const Certifications = () => {
 //--------------------------------------------------------------
 // Exports Section
 //--------------------------------------------------------------
-export default Certifications
+export default CertificationsSection

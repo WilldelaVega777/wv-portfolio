@@ -5,7 +5,7 @@ import * as React           from "react"
 import { useEffect }        from "react"
 
 import Layout               from "../components/Layout/Layout"
-import Contact             from '../sections/Contact/Contact'
+import ContactSection       from '../sections/Contact/Contact'
 
 import "../styles/site.scss"
 
@@ -28,7 +28,7 @@ const ContactPage = () => {
     //----------------------------------------------------------
     return (
         <Layout>
-            <Contact/>
+            <ContactSection/>
         </Layout>
     )
 }

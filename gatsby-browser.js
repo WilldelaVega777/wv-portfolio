@@ -2,11 +2,12 @@
 // Imports Section
 //--------------------------------------------------------------
 import React from "react"
-import { PageProvider } from "./src/context/page-context"
+import { SiteProvider } from "./src/context/site-context"
+
 
 //--------------------------------------------------------------
 // Root Component Section
 //--------------------------------------------------------------
 export const wrapRootElement = ({ element }) => (
-  <PageProvider>{element}</PageProvider>
+  <SiteProvider>{ element }</SiteProvider>
 )

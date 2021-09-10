@@ -1,0 +1,126 @@
+section.resume
+{
+    background-color: black;
+    width: 100vw;
+    height: calc(100vh - 100px);
+    overflow: hidden;
+    z-index: 9999;
+    color: #F8EFBA;
+
+    div.resume-container
+    {
+        transform: translate(calc((100vw - 1200px) / 2));
+        position: absolute;
+        top: 50px;
+        width: calc(100vw - 820px);
+        height: calc(100vh - 200px);
+        background-color: rgba(22, 22, 22, 0.98);
+        margin: 0 auto;
+        overflow-y: auto !important;
+        padding: 50px;
+    }
+}
+
+.resumeSection{
+    --primary-color: #ff9800;
+    --background-color: #111;
+    --sidebar-color: #000;
+    --font-color: #F1F1F1;
+    --paragraph-color: #bbb;
+    --border-color: #191919;
+    --border-color-2: #4c4c4c;
+    color: var(--font-color);
+    padding: 0px;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: Poppins, sans-serif;
+    margin: 3rem 0px;
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: repeat(1, 1fr);
+
+}
+
+.skills{
+    --primary-color: #ff9800;
+    --background-color: #111;
+    --sidebar-color: #000;
+    --font-color: #F1F1F1;
+    --paragraph-color: #bbb;
+    --border-color: #191919;
+    --border-color-2: #4c4c4c;
+    color: var(--font-color);
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: Poppins, sans-serif;
+}
+
+
+.content {
+    --primary-color: #ff9800;
+    --background-color: #111;
+    --sidebar-color: #000;
+    --font-color: #F1F1F1;
+    --paragraph-color: #bbb;
+    --border-color: #191919;
+    --border-color-2: #4c4c4c;
+    color: var(--font-color);
+    margin: 0px;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: Poppins, sans-serif;
+    width: 100%;
+    position: relative;
+    border-left: 8px solid var(--border-color-2);
+    padding: 1.5rem;
+}
+
+h1 {
+    --primary-color: #ff9800;
+    --background-color: #111;
+    --sidebar-color: #000;
+    --font-color: #F1F1F1;
+    --paragraph-color: #bbb;
+    --border-color: #191919;
+    --border-color-2: #4c4c4c;
+    color: var(--font-color);
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: Poppins, sans-serif;
+    text-transform: capitalize;
+    letter-spacing: 0.1rem;
+    font-size: 2.17em !important;
+}
+
+h1::before {
+        content: "";
+        position: absolute;
+        width: 8.8rem;
+        height: 0.3rem;
+        border: 2px solid var(--border-color-2);
+        left: 0px;
+        bottom: -10px;
+        border-radius: 10px;
+}
+
+:root {
+    background-color: #000;
+}
+
+.App-header {
+    background-color: #030811;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+}

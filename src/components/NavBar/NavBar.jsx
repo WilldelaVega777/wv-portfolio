@@ -6,13 +6,15 @@
 //--------------------------------------------------------------
 // Imports Section
 //--------------------------------------------------------------
-import * as React               from "react"
+import * as React        from "react"
 import './NavBar.scss'
 
-import { Link }                 from "gatsby"
-import { useContext }           from "react"
+import { Link }          from "gatsby"
+import { useContext }    from "react"
+import { useRef }        from "react"
 
-import PageContext              from "../../context/page-context"
+import SiteContext       from "../../context/site-context"
+import LetsTalk          from "../../components/NavBar/LetsTalk/LetsTalk"
 
 
 //--------------------------------------------------------------
@@ -23,7 +25,8 @@ const NavBar = (props) => {
     //----------------------------------------------------------
     // Initial Settings Section
     //----------------------------------------------------------
-    const config = useContext(PageContext)
+    const ctx           = useContext(SiteContext)
+    const presentation  = useRef()
 
 
     //----------------------------------------------------------
@@ -31,38 +34,69 @@ const NavBar = (props) => {
     //----------------------------------------------------------
     return (
         <nav id="nav">
-            <Link to="/">
+            <Link
+                to="/"
+                activeClassName="active"
+            >
                 <img className="logo-link"
-                     src="../images/Logo.png"
-                     alt="WV Logo"
+                    src="/images/Logo.png"
+                    alt="WV Logo"
                 />
             </Link>
-            <Link to="/presentation">
+            <Link
+                ref={presentation}
+                to="/presentation"
+                activeClassName="active"
+                getProps={({isCurrent}) => {
+                    return (
+                        ((ctx.activatePresentationLink === 'presentation') ||
+                        (isCurrent)) ?
+                        { className: "active" } :
+                        {}
+                    )
+                }}
+            >
                 Hi, I'm Will
             </Link>
-            <Link to="/portfolio">
+            <Link
+                to="/portfolio"
+                activeClassName="active"
+            >
                 My Portfolio
             </Link>
-            <Link to="/featured">
+            <Link
+                to="/featured"
+                activeClassName="active"
+            >
                 Favorite Projects
             </Link>
-            <Link to="/certifications">
+            <Link
+                to="/certifications"
+                activeClassName="active"
+            >
                 Some Certifications
             </Link>
-            <Link to="/resume">
+            <Link
+                to="/resume"
+                activeClassName="active"
+            >
                 My Resume
             </Link>
-            <Link to="/diplomas">
+            <Link
+                to="/diplomas"
+                activeClassName="active"
+            >
                 A Few Diplomas
             </Link>
             <a href="#" className="under-construction">
                 🚧 Under Construction 🚧
             </a>
-            <div className={"lets-talk "  + (config.scroll ? "move-right" : "move-left")}>
+            <div className={"lets-talk "  + (ctx.scroll ? "move-right" : "move-left")}>
                 <Link to="/contact"
                     className="lets-talk"
+                    activeClassName="active"
                 >
-                    ☎️ &nbsp; Let's Talk!
+                    <LetsTalk/>
                 </Link>
             </div>
         </nav>
