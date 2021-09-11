@@ -4,7 +4,7 @@
 import * as React                       from 'react'
 import { useEffect }                    from 'react'
 import { useRef }                       from 'react'
-import SchoolIcon                       from '@material-ui/icons/School'
+import PersonIcon                       from '@material-ui/icons/Person'
 import BusinessCenterIcon               from '@material-ui/icons/BusinessCenter'
 import { gsap }                         from 'gsap'
 import styled                           from 'styled-components'
@@ -109,24 +109,30 @@ const Resume = () =>
 
                 <InnerLayout className="resumeSection">
                     <div className="education">
-                        <h4><SchoolIcon /><span>Education</span></h4>
+                        <h4><PersonIcon /><span>Soft Skills</span></h4>
                         <ResumeItem
-                            year={'2004-2007'}
-                            title={'Computer Science'}
-                            subTitle={'Cambridge Uiversity'}
-                            text={'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit, quisquam!'}
+                            year={''}
+                            title={'A team leader/player capable to provide consistently great results with minimum or no supervision at all.'}
+                            subTitle={''}
+                            text={''}
                         />
                         <ResumeItem
-                            year={'2008-2010'}
-                            title={'Bachleor Degree'}
-                            subTitle={'Kingdom University'}
-                            text={'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit, quisquam!'}
+                            year={''}
+                            title={'Fast learner, keeps updated with the latest technologies.'}
+                            subTitle={''}
+                            text={''}
                         />
                         <ResumeItem
-                            year={'2012-2015'}
-                            title={'Master Degree'}
-                            subTitle={'Hardvard Uiversity'}
-                            text={'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit, quisquam!'}
+                            year={''}
+                            title={'Empathic, Easygoing and always ready to help'}
+                            subTitle={''}
+                            text={''}
+                        />
+                        <ResumeItem
+                            year={''}
+                            title={'Strong Organizational Skills with Great attention to details.'}
+                            subTitle={''}
+                            text={''}
                         />
                     </div>
                     <div className="experience">
@@ -137,22 +143,22 @@ const Resume = () =>
                             </span>
                         </h4>
                         <ResumeItem
-                            year={'2015-2017'}
-                            title={'App Developer'}
-                            subTitle={'Microsoft'}
-                            text={'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit, quisquam!'}
+                            year={'2020-2021'}
+                            title={'Software Consultant'}
+                            subTitle={'WilldelaVega.com'}
+                            text={'Full stack developer, specialized in .NET Core, Node, Angular and React'}
                         />
                         <ResumeItem
-                            year={'2017-2018'}
-                            title={'Software Engineer'}
-                            subTitle={'Google'}
-                            text={'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit, quisquam!'}
+                            year={'2010-2019'}
+                            title={'Founder'}
+                            subTitle={'Geosys Online'}
+                            text={'Development of customer solutions with Angular 2-10 and ASP.NET Core WebApi / Node Express with GraphQL'}
                         />
                         <ResumeItem
-                            year={'2019-Present'}
-                            title={'Backend Developer'}
-                            subTitle={'Adobe'}
-                            text={'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit, quisquam!'}
+                            year={'2007-2010'}
+                            title={'Sr. Microsoft .NET Web Developer'}
+                            subTitle={'Symetri Internet Marketing'}
+                            text={'Interacted with Business side for maintenance of existing ASP.NET Web Applications'}
                         />
                     </div>
                 </InnerLayout>
@@ -163,51 +169,56 @@ const Resume = () =>
                     <Title title={'My Skills'} span={'Skills'} />
                     <InnerLayout>
                         <div className="skills">
-                        <SkillsItem
-                            title={'HTML5'}
-                            width={'90%'}
-                            text={'90%'}
-                        />
-                        <SkillsItem
-                            title={'CSS3'}
-                            width={'80%'}
-                            text={'80%'}
-                        />
-                        <SkillsItem
-                            title={'JAVASCRIPT'}
-                            width={'75%'}
-                            text={'75%'}
-                        />
-                        <SkillsItem
-                            title={'BOOTSTRAP'}
-                            width={'65%'}
-                            text={'65%'}
-                        />
-                        <SkillsItem
-                            title={'REACT JS'}
-                            width={'85%'}
-                            text={'85%'}
-                        />
-                        <SkillsItem
-                            title={'NODE JS'}
-                            width={'75%'}
-                            text={'75%'}
-                        />
-                        <SkillsItem
-                            title={'MONGO DB'}
-                            width={'70%'}
-                            text={'70%'}
-                        />
-                        <SkillsItem
-                            title={'EXPRESS JS'}
-                            width={'65%'}
-                            text={'65%'}
-                        />
-                        <SkillsItem
-                            title={'REACT NATIVE'}
-                            width={'85%'}
-                            text={'85%'}
-                        />
+                            <SkillsItem
+                                title={'ANGULAR'}
+                                width={'90%'}
+                                text={'90%'}
+                            />
+                            <SkillsItem
+                                title={'REACT'}
+                                width={'75%'}
+                                text={'75%'}
+                            />
+                            <SkillsItem
+                                title={'JAVASCRIPT'}
+                                width={'90%'}
+                                text={'90%'}
+                            />
+                            <SkillsItem
+                                title={'C#'}
+                                width={'85%'}
+                                text={'85%'}
+                            />
+                            <SkillsItem
+                                title={'ASP.NET CORE'}
+                                width={'85%'}
+                                text={'85%'}
+                            />
+                            <SkillsItem
+                                title={'NODE JS'}
+                                width={'75%'}
+                                text={'75%'}
+                            />
+                            <SkillsItem
+                                title={'MONGO DB'}
+                                width={'70%'}
+                                text={'70%'}
+                            />
+                            <SkillsItem
+                                title={'SQL SERVER'}
+                                width={'65%'}
+                                text={'65%'}
+                            />
+                            <SkillsItem
+                                title={'REACT NATIVE'}
+                                width={'65%'}
+                                text={'65%'}
+                            />
+                            <SkillsItem
+                                title={'IONIC'}
+                                width={'85%'}
+                                text={'85%'}
+                            />
                         </div>
                     </InnerLayout>
                 </div>

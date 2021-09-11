@@ -6,6 +6,7 @@ import MailIcon         from '@material-ui/icons/Mail'
 import LinkedInIcon     from '@material-ui/icons/LinkedIn'
 import PhoneIcon        from '@material-ui/icons/Phone'
 import SkypeIcon        from './Skype'
+import ScheduleIcon     from '@material-ui/icons/Schedule'
 
 import './Footer.scss'
 
@@ -60,6 +61,16 @@ const Footer = () => {
                     </div>
                     <div className="text-link">
                         &nbsp; WilldelaVega777
+                    </div>
+                </a>
+            </div>
+            <div className="last-published">
+                <a href="#">
+                    <div className="image-link">
+                        <ScheduleIcon/>
+                    </div>
+                    <div className="text-link">
+                        &nbsp; Updated: Sept 2021
                     </div>
                 </a>
             </div>

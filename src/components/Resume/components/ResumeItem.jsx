@@ -53,7 +53,7 @@ const ResumeItem = ({year, title, subTitle, text}) => {
         <ResumeItemStyled>
              <div className="content">
                 <h5>{title}</h5>
-                <h6>{subTitle} / {year}</h6>
+                <h6>{subTitle} {subTitle && '/'} {year}</h6>
                 <p>{text}</p>
             </div>
         </ResumeItemStyled>

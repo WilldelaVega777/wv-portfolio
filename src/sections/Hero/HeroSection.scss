@@ -9,7 +9,7 @@ section.hero
     {
         position: absolute;
         margin-top: -25px;
-        transform: scale(.92,.92) translate(calc((100vw - 1400px) / 2));
+        transform: scale(.92,.92) translate(calc((100vw - 1350px) / 2));
         z-index: 9999;
         opacity: 0;
     }
@@ -57,6 +57,16 @@ article.heroFront
         text-shadow: 2px 2px 2px #222;
     }
 
+    h1::before
+    {
+        position: relative !important;
+        width: 0rem !important;
+        height: 0rem !important;
+        border: none !important;
+        bottom: 0px !important;
+        border-radius: 0px !important;
+    }
+
     p
     {
         max-width: 800px;
@@ -85,6 +95,16 @@ article.heroBack
         font-size: 24pt;
         text-shadow: 2px 2px 2px #222;
         text-align: right;
+    }
+
+    h1::before
+    {
+        position: relative !important;
+        width: 0rem !important;
+        height: 0rem !important;
+        border: none !important;
+        bottom: 0px !important;
+        border-radius: 0px !important;
     }
 
     p

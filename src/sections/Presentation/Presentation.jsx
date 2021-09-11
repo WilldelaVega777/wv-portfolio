@@ -38,7 +38,10 @@ const PresentationSection = () => {
     // Render Section
     //----------------------------------------------------------
     return (
-        <section id="presentation" className="presentation">
+        <section
+            id="presentation"
+            className="presentation"
+        >
             <Ripple
                 color={0x2a2a2a}
                 speed={15}
@@ -51,6 +54,9 @@ const PresentationSection = () => {
                     title={'Hi there...'}
                     span={''}
                 />
+                <div style={{paddingTop: '15px'}}>
+                    <h2>Video Presentation Coming Soon...</h2>
+                </div>
             </div>
         </section>
     )

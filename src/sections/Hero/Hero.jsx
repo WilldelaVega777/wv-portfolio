@@ -30,7 +30,7 @@ const HeroSection = (props) => {
     // Initialize Variables Section
     //----------------------------------------------------------
     const isBrowser = (typeof window !== "undefined")
-    const NUMBER_OF_IMAGES  = 53
+    const NUMBER_OF_IMAGES  = 38
     const heroCanvas        = useRef(null)
     const frontendText      = useRef(null)
     const backendText       = useRef(null)
@@ -253,9 +253,9 @@ const HeroSection = (props) => {
             {
                 update(1)
             }
-            else if (current > 53)
+            else if (current > 38)
             {
-                update(53)
+                update(38)
             }
         })
     }
@@ -299,15 +299,16 @@ const HeroSection = (props) => {
                     <div ref={frontendText}>
                         <h1>Front End</h1>
                         <p>
-                            Lorem Ipsum Dolor sit amet consectetur
-                            boris malos noff justus novicius mentecatus et justo
-                            et metropolis austerus mexicus Kabala Harris president
-                            Lorem Ipsum Dolor sit amet consectetur
-                            boris malos noff justus novicius mentecatus et justo
-                            et metropolis austerus mexicus Kabala Harris president
-                            Lorem Ipsum Dolor sit amet consectetur
-                            boris malos noff justus novicius mentecatus et justo
-                            et metropolis austerus mexicus Kabala Harris president
+                            It needs to be built with proper care, its design
+                            requires a good understanding of user interactions
+                            in order to create experiences that are sticky, that
+                            means keeping the user coming back for more.
+                            <br/>
+                            A good understanding of design principles combined with
+                            the right amount of innovation, is rare in most developers.
+                            That ability to give life to comps with Adobe XD and Photoshop,
+                            create and manipulate 3D models, Animations and extreme
+                            attention to detail is what makes the difference.
                         </p>
                     </div>
                 </article>
@@ -323,15 +324,19 @@ const HeroSection = (props) => {
                     <div ref={backendText}>
                         <h1>Back End</h1>
                         <p>
-                            Lorem Ipsum Dolor sit amet consectetur
-                            boris malos noff justus novicius mentecatus et justo
-                            et metropolis austerus mexicus Kabala Harris president
-                            Lorem Ipsum Dolor sit amet consectetur
-                            boris malos noff justus novicius mentecatus et justo
-                            et metropolis austerus mexicus Kabala Harris president
-                            Lorem Ipsum Dolor sit amet consectetur
-                            boris malos noff justus novicius mentecatus et justo
-                            et metropolis austerus mexicus Kabala Harris president
+                            A Web application not only needs to be beautiful,
+                            responsive and interactive, but it often needs to adress
+                            thousands of requests per minute, be secure and fault
+                            tolerant, it should scale as the user base grows and
+                            provide infrastructure for logging and diagnostics, as
+                            well for managing async tasks with queues for more
+                            complex workflows and improved read/write database access.
+                            <br/>
+                            The ability to deploy in the cloud to AWS, Azure and
+                            Google Cloud are key these days key for the success of
+                            any full stack developer. Back end is not what you see,
+                            but if it fails you surely know that the business won't
+                            be right.
                         </p>
                     </div>
                 </article>

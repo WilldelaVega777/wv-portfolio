@@ -3,17 +3,18 @@
 //--------------------------------------------------------------
 import * as React           from "react"
 import { useState }         from "react"
-import { useEffect }    from 'react'
-import { useRef }       from 'react'
-import { gsap }         from 'gsap'
+import { useEffect }        from 'react'
+import { useRef }           from 'react'
+import { gsap }             from 'gsap'
 
-import Title            from "../../components/Resume/components/Title"
+import Title                from "../../components/Resume/components/Title"
 import { Suspense }         from "react"
 
 import DialogTitle          from '@material-ui/core/DialogTitle';
 import Dialog               from '@material-ui/core/Dialog';
 
-import { createTheme, ThemeProvider } from '@material-ui/core/styles'
+import { createTheme }      from '@material-ui/core/styles'
+import { ThemeProvider }    from '@material-ui/core/styles'
 
 import YouTube              from 'react-youtube';
 

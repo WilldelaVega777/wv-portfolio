@@ -44,10 +44,14 @@ const FeaturedSection = () => {
                 orbit={true}
             />
             <div className="featured-container scroll">
-            <Title
-                    title={'The best'}
-                    span={''}
-            />
+                <Title
+                        title={'The best'}
+                        span={''}
+                />
+
+                <div style={{paddingTop: '15px'}}>
+                    <h2>Content Coming Soon...</h2>
+                </div>
 
             </div>
         </section>

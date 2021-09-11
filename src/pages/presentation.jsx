@@ -20,6 +20,9 @@ import "../styles/site.scss"
 //--------------------------------------------------------------
 const PresentationPage = () => {
 
+    //----------------------------------------------------------
+    // Initialization Section
+    //----------------------------------------------------------
     const ctx = useContext(SiteContext)
     const location = useLocation()
     const defaultAutomatic = ((
@@ -27,17 +30,21 @@ const PresentationPage = () => {
         getAutomatic(location.search)
     ) || false)
 
-    if (defaultAutomatic)
-    {
-        ctx.updateActivatePresentationLink('presentation')
-    }
+    setTimeout(() => {
+        if (defaultAutomatic)
+        {
+            ctx.updateActivatePresentationLink('presentation')
+        }
+    }, 1000)
 
 
     //----------------------------------------------------------
     // Lifecycle Event Handler Method Section
     //----------------------------------------------------------
     useEffect(() => {
+
         window.document.body.id = "app"
+
     }, [])
 
 

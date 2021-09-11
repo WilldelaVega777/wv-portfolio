@@ -4,9 +4,10 @@
 import React                from 'react'
 import { useState }         from 'react'
 import { makeStyles }       from '@material-ui/core/styles';
+import { createTheme }      from '@material-ui/core/styles'
+import { ThemeProvider }    from '@material-ui/core/styles'
 import Popover              from '@material-ui/core/Popover';
 import Typography           from '@material-ui/core/Typography';
-
 
 
 //--------------------------------------------------------------
@@ -33,12 +34,18 @@ const SiteStatus = (props) => {
     const open = props.show
     const id   = open ? 'simple-popover' : undefined
 
+    const darkTheme = createTheme({
+        palette: {
+          type: 'dark',
+        },
+    })
+
 
     //----------------------------------------------------------
     // Eventhandler Methods Section
     //----------------------------------------------------------
     const handleClose = () => {
-        open = null
+        props.reset()
     }
 
 
@@ -46,11 +53,11 @@ const SiteStatus = (props) => {
     // Render Section
     //----------------------------------------------------------
     return (
-        <>
+        <ThemeProvider theme={darkTheme}>
             <Popover
                 id={id}
                 open={open}
-                anchorEl={anchorEl}
+                anchorEl={props.element}
                 onClose={handleClose}
                 anchorOrigin={{
                     vertical: 'bottom',
@@ -64,10 +71,10 @@ const SiteStatus = (props) => {
                 <Typography
                     className={classes.typography}
                 >
-                    The content of the Popover.
+                    { props.children }
                 </Typography>
             </Popover>
-        </>
+        </ThemeProvider>
     )
 
 }
