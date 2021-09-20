@@ -1,3 +1,5 @@
+@import '../../styles/site.scss';
+
 section.contact
 {
     background-color: black;
@@ -48,9 +50,22 @@ section.contact
         box-shadow: 10px 10px 19px 0px rgba(0,0,0,0.73);
         padding: 0px;
 
+        @include md-screen{
+            min-width: 80%;
+            width: 80%;
+            max-width: 80%;
+            transform: translate(-3%);
+        }
+
+        @include sm-screen{
+            min-width: 97%;
+            width: 97%;
+            max-width: 97%;
+        }
+
         div.form
         {
-            background-color: #85754e;
+            background-color: #74643d;
             border-top-left-radius: 6px;
             border-bottom-left-radius: 6px;
             padding: 20px;
@@ -58,6 +73,17 @@ section.contact
             color: #222;
             max-width: 45%;
             flex: 0 1 45%;
+
+            @include md-screen{
+                min-width: 100%;
+                width: 100%;
+                max-width: 100%;
+                border-radius: 6px;
+            }
+
+            @include sm-screen{
+                border-radius: 0px;
+            }
         }
 
         div.visuals
@@ -69,6 +95,10 @@ section.contact
             border-bottom-right-radius: 6px;
             max-width: 55%;
             flex: 1 1 55%;
+
+            @include md-screen{
+                display: none;
+            }
         }
     }
 }

@@ -4320,6 +4320,11 @@ cannon-es@^0.18.0:
   resolved "https://registry.yarnpkg.com/cannon-es/-/cannon-es-0.18.0.tgz#ae831ff9df2352d5faabb269c11ea0f10bc35c7e"
   integrity sha512-GiQ1bd0etZsMVSnUhNc+p+FEh0R/cULpp8uRSAhEK4Kax+y/31Au03m6h1h1xdDivAMnFg8YDwevHgzLynOHlw==
 
+canvas-txt@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/canvas-txt/-/canvas-txt-3.0.0.tgz#47d84e8870201d21604cc2d2964be22c46360ec4"
+  integrity sha512-SrNIp4aaGsgddjQX7S0D8jDaYNaOkPjC/k6VjaaT3h1GZ5RonSvmoCv2FyQfNk9mPZto84C8sNURgEC8dsC/vA==
+
 capture-stack-trace@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/capture-stack-trace/-/capture-stack-trace-1.0.1.tgz#a6c0bbe1f38f3aa0b92238ecb6ff42c344d4135d"

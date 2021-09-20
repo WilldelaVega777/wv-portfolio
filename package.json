@@ -23,6 +23,7 @@
     "@react-three/fiber": "^7.0.6",
     "animate.css": "^4.1.1",
     "babel-plugin-styled-components": "^1.13.2",
+    "canvas-txt": "^3.0.0",
     "gatsby": "^3.10.2",
     "gatsby-plugin-sass": "^4.10.0",
     "gatsby-plugin-styled-components": "^4.13.0",

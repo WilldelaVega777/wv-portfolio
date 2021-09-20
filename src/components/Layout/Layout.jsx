@@ -4,7 +4,7 @@
 import React                    from "react"
 import { SiteProvider }         from "../../context/site-context"
 
-import NavBar                   from "../../components/NavBar/NavBar"
+import NavBar                   from "../../components/NavBar/Mui/NavBar"
 import Footer                   from "../../components/Footer/Footer"
 
 

@@ -14,7 +14,11 @@ const SiteContext = React.createContext({
         console.log('There is not a matching provider!')
     },
     fixTop: 0,
-    updateFixTop: () => {}
+    updateFixTop: () => {},
+    activatePresentationLink: false,
+    setActivatePresentationLink: () => {},
+    requestActivate: false,
+    toggleRequestActivate: () => {}
 })
 
 
@@ -31,6 +35,10 @@ export const SiteProvider = (props) => {
     const [
         activatePresentationLink,
         setActivatePresentationLink
+    ] = useState()
+    const [
+        requestActivate,
+        setRequestActivate
     ] = useState()
 
 
@@ -61,6 +69,11 @@ export const SiteProvider = (props) => {
     }
 
     //----------------------------------------------------------
+    const toggleRequestActivate = () => {
+        setRequestActivate(!requestActivate)
+    }
+
+    //----------------------------------------------------------
     // Render Section
     //----------------------------------------------------------
     return (
@@ -71,7 +84,9 @@ export const SiteProvider = (props) => {
                 fixTop,
                 updateFixTop,
                 activatePresentationLink:activatePresentationLink,
-                updateActivatePresentationLink:updateActivatePresentationLink
+                updateActivatePresentationLink:updateActivatePresentationLink,
+                requestActivate,
+                toggleRequestActivate:toggleRequestActivate
             }}
         >
             { props.children }

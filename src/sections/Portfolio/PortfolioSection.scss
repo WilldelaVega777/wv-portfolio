@@ -1,3 +1,5 @@
+@import '../../styles/site.scss';
+
 section.portfolio
 {
     position: relative;
@@ -13,12 +15,20 @@ section.portfolio
         transform: translate(calc((100vw - 1200px) / 2));
         position: absolute;
         z-index: 9999;
-        width: calc(100vw - 820px);
+        width: 50%;
         height: 200px;
         background-color: rgba(22, 22, 22, 0.98);
         margin: 0 auto;
         overflow-y: auto !important;
         padding: 50px;
+        left: calc(50% + 100px);
+        transform: translate(calc(-50% - 100px));
+
+        @include xl-screen{
+            width: calc(100% - 100px);
+            left: 0px;
+            transform: translate(-0%);
+        }
     }
 
     article
@@ -33,16 +43,29 @@ section.portfolio
         background: rgba(255,255,255,0.2);
         border-radius: 6;
         padding: 20px;
+
     }
 
     .carousel
     {
         position: absolute;
         top: -80px;
+
+        @include lg-screen {
+            min-width: 100%;
+            width: 100%;
+            max-width: 100%;
+        }
     }
 }
 
 .MuiDialog-paperFullWidth
 {
     width: 640px !important;
+
+    @include sm-screen {
+        min-width: 100%;
+        width: 100%;
+        max-width: 100%;
+    }
 }

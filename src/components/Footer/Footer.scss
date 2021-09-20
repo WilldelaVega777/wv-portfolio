@@ -1,103 +1,187 @@
+@import '../../styles/site.scss';
+
 footer
 {
-    display: flex;
-    flex-direction: row;
-    align-content: center;
+    display: relative;
+    min-height: 50px;
     max-height: 50px;
-    font-family: 'Poppins Regular';
     overflow: hidden;
-    background-color: #85754e;
     max-width: 100%;
-    padding: 10px;
-    padding-left: 0px;
-    text-align: center;
-    color: #4b3621;
+    min-width: 100%;
 
-    div.contact-email
+    div.footer-container
     {
-        display: flex;
-        flex-direction: row;
-        align-content: center;
-        align-items: center;
-        justify-content: center;
-        width: 20%;
-        line-height: 1.2em;
-        flex: 0 5 20%;
-    }
-
-    div.contact-linkedin
-    {
-        display: flex;
-        flex-direction: row;
-        align-content: center;
-        align-items: center;
-        justify-content: center;
-        width: 20%;
-        line-height: 1.2em;
-        flex: 1 5 20%;
-    }
-
-    div.contact-phone
-    {
-        display: flex;
-        flex-direction: row;
-        align-content: center;
-        align-items: center;
-        justify-content: center;
-        width: 20%;
-        line-height: 1.2em;
-        flex: 2 5 20%;
-    }
-
-    div.contact-skype
-    {
-        display: flex;
-        flex-direction: row;
-        align-content: center;
-        align-items: center;
-        justify-content: center;
-        width: 20%;
-        line-height: 1.2em;
-        flex: 3 5 20%;
-    }
-
-    div.last-published
-    {
-        display: flex;
-        flex-direction: row;
-        align-content: flex-start;
-        align-items: flex-start;
-        justify-content: center;
-        min-width: 20%;
-        line-height: 1.2em;
-        padding-right: 20px;
-        flex: 4 5 20%;
-    }
-
-
-    a
-    {
-        display: flex;
-        vertical-align: middle !important;
+        position: absolute;
+        left: 0px;
+        top: calc(100vh - 50px);
+        left: 0px;
+        width: 100vw;
+        min-height: 50px;
+        height: 50px;
         padding: 0px !important;
-        flex-direction: row;
-        align-content: center;
-        align-items: center;
-        justify-content: center;
+        margin: 0px !important;
+        z-index: 110;
+
+
+        div.footer-flex
+        {
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            min-height: 50px;
+            max-height: 50px;
+            font-family: 'Poppins Regular';
+            overflow: hidden;
+            background-color: #85754e;
+            max-width: 100%;
+            padding-left: 0px;
+            text-align: center;
+            color: #4b3621;
+
+
+            div.contact-email
+            {
+                display: flex;
+                flex-direction: row;
+                align-content: center;
+                align-items: center;
+                justify-content: center;
+                width: 27%;
+                line-height: 1.2em;
+                padding-left: 30px;
+                flex: 0 5 27%;
+
+                @include md-screen{
+                    width: 35%;
+                    flex: 0 5 35%;
+                }
+
+                @include sm-screen{
+                    width: 50%;
+                    flex: 0 5 50%;
+                }
+
+                @include xs-screen{
+                    display: none;
+                }
+            }
+
+            div.contact-linkedin
+            {
+                display: flex;
+                flex-direction: row;
+                align-content: center;
+                align-items: center;
+                justify-content: center;
+                width: 20%;
+                line-height: 1.2em;
+                flex: 1 5 20%;
+
+                @include sm-screen{
+                    width: 50%;
+                    flex: 0 5 50%;
+                }
+
+                @include xs-screen{
+                    width: 100%;
+                    flex: 0 5 100%;
+                }
+            }
+
+            div.contact-phone
+            {
+                display: flex;
+                flex-direction: row;
+                align-content: center;
+                align-items: center;
+                justify-content: center;
+                width: 20%;
+                line-height: 1.2em;
+                flex: 2 5 20%;
+
+                @include sm-screen{
+                    display: none;
+                }
+
+                @include xs-screen{
+                    display: none;
+                }
+            }
+
+            div.contact-skype
+            {
+                display: flex;
+                flex-direction: row;
+                align-content: center;
+                align-items: center;
+                justify-content: center;
+                width: 20%;
+                line-height: 1.2em;
+                flex: 3 5 20%;
+
+                @include md-screen{
+                    display: none;
+                }
+
+                @include sm-screen{
+                    display: none;
+                }
+
+                @include xs-screen{
+                    display: none;
+                }
+
+            }
+
+            div.last-published
+            {
+                display: flex;
+                flex-direction: row;
+                align-content: flex-start;
+                align-items: flex-start;
+                justify-content: center;
+                min-width: 20%;
+                line-height: 1.2em;
+                padding-right: 20px;
+                flex: 4 5 20%;
+
+                @include md-screen{
+                    display: none;
+                }
+
+                @include sm-screen{
+                    display: none;
+                }
+
+                @include xs-screen{
+                    display: none;
+                }
+            }
+
+
+            a
+            {
+                display: flex;
+                vertical-align: middle !important;
+                padding: 0px !important;
+                flex-direction: row;
+                align-content: center;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .image-link
+            {
+                padding: 0px !important;
+                margin-top: 3px;
+                vertical-align: middle;
+            }
+
+            .text-link
+            {
+                display: block;
+            }
+
+        }
     }
-
-    .image-link
-    {
-        padding: 0px !important;
-        margin-top: 3px;
-        vertical-align: middle;
-    }
-
-    .text-link
-    {
-        display: block;
-
-
-    }
-
 }

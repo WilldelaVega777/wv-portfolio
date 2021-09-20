@@ -1,3 +1,44 @@
+//Large Screen - 993 to 1170 screen size
+$xl-screen-size: 1350px;
+$lg-screen-size: 1170px;
+$md-screen-size: 992px;
+$sm-screen-size: 767px;
+$xs-screen-size: 575px;
+
+@mixin xl-screen {
+    @media only screen and (max-width: $xl-screen-size) {
+        @content;
+    }
+}
+
+@mixin lg-screen {
+    @media only screen and (max-width: $lg-screen-size) {
+        @content;
+    }
+}
+
+//Medium Screen - 768 to 992 screen size
+@mixin md-screen {
+    @media only screen and (max-width: $md-screen-size) {
+        @content;
+    }
+}
+
+//Medium Screen - 575 to 767 screen size
+@mixin sm-screen {
+    @media only screen and (max-width: $sm-screen-size) {
+        @content;
+    }
+}
+
+//Medium Screen - below 575 screen size
+@mixin xs-screen {
+    @media only screen and (max-width: $xs-screen-size) {
+        @content;
+    }
+}
+
+
 /* Import Fonts */
 @font-face {
     font-family: 'Oxygen Regular';
@@ -33,6 +74,7 @@
     font-family: 'Roboto Regular';
     src: local('Roboto'), url('/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
 }
+
 
 /* Website Content */
 html, body
@@ -97,4 +139,53 @@ canvas, img
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
     box-shadow: inset 0 0 6px rgba(0,0,0,.3);
     background-color: #555;
+}
+
+a {
+    float: left;
+    display: block;
+    color: #4b3621;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+    font-family: 'Poppins Regular';
+  }
+
+  a:hover
+  {
+      color: #e4d96f;
+      text-shadow: 2px 2px 2px #222;
+  }
+
+a>img.logo-link
+{
+    margin-left: -15px;
+    margin-top: 5px;
+    max-height: 34px;
+    cursor: pointer;
+    filter: drop-shadow(4px 4px 4px #444);
+}
+
+a>img.logo-link:hover
+{
+    filter: hue-rotate(90deg)
+            drop-shadow(4px 4px 4px #444);
+}
+
+.MuiToolbar-gutters
+{
+    min-height: 50px !important;
+    height: 50px !important;
+    max-height: 50px !important;
+}
+
+.MuiToolbar
+{
+    box-shadow: 10px 10px 27px 0px
+                rgba(0,0,0,0.66) !important;
+}
+
+.shadow-container
+{
+    box-shadow: rgb(0 0 0 / 99%) 10px 10px 27px 3px !important
 }

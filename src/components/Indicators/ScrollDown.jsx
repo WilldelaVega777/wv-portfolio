@@ -1,47 +1,34 @@
 //--------------------------------------------------------------
 // Imports Section
 //--------------------------------------------------------------
-import * as React           from "react"
-import { useEffect }        from "react"
-import { useContext }       from "react"
+import React                            from 'react'
 
-import SiteContext          from "../context/site-context"
-import Layout               from "../components/Layout/Layout"
-import PortfolioSection     from '../sections/Portfolio/Portfolio'
-
+import './ScrollDown.scss'
 
 //--------------------------------------------------------------
 // Component Section
 //--------------------------------------------------------------
-const PortfolioPage = () => {
+const ScrollDown = (props) => {
 
     //----------------------------------------------------------
     // Initialization Section
     //----------------------------------------------------------
-    const config = useContext(SiteContext)
 
-
-    //----------------------------------------------------------
-    // Lifecycle Event Handler Method Section
-    //----------------------------------------------------------
-    useEffect(() => {
-        window.document.body.id = "app"
-        config.updateActivatePresentationLink(undefined)
-    }, [])
 
 
     //----------------------------------------------------------
     // Render Section
     //----------------------------------------------------------
     return (
-        <Layout>
-            <PortfolioSection/>
-        </Layout>
+        <div className="indicator">
+
+        </div>
     )
+
 }
 
 
 //--------------------------------------------------------------
 // Exports Section
 //--------------------------------------------------------------
-export default PortfolioPage
+export default ScrollDown

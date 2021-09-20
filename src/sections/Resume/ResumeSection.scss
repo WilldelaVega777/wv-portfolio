@@ -1,3 +1,5 @@
+@import '../../styles/site.scss';
+
 section.resume
 {
     background-color: black;
@@ -14,10 +16,30 @@ section.resume
         top: 50px;
         width: calc(100vw - 820px);
         height: calc(100vh - 200px);
-        background-color: rgba(22, 22, 22, 0.98);
+        background-color: rgba(22, 22, 22, 0.85);
         margin: 0 auto;
         overflow-y: auto !important;
         padding: 50px;
+        min-width: 60%;
+        width: 60%;
+        max-width: 60%;
+        left: calc(50% + 100px);
+        transform: translate(calc(-50% - 100px));
+
+        @include xl-screen{
+            left: 0px;
+            transform: translate(0px);
+            min-width: 70%;
+            width: 70%;
+            max-width: 70%;
+        }
+
+        @include md-screen{
+            min-width: 80vw;
+            width: 80vw;
+            max-width: 80vw;
+        }
+
     }
 }
 

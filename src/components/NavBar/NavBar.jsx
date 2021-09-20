@@ -13,16 +13,7 @@ import { useState }      from "react"
 import { Link }          from "gatsby"
 import { useContext }    from "react"
 import { useRef }        from "react"
-
 import { Badge }         from "@material-ui/core"
-import List              from '@material-ui/core/List';
-import ListItem          from '@material-ui/core/ListItem';
-import ListItemIcon      from '@material-ui/core/ListItemIcon';
-import ListItemText      from '@material-ui/core/ListItemText';
-import Divider           from '@material-ui/core/Divider';
-
-import ArrowRightIcon    from '@material-ui/icons/ArrowRight';
-
 import NotificationsIcon from "@material-ui/icons/Notifications"
 
 import SiteContext       from "../../context/site-context"
@@ -38,8 +29,9 @@ const NavBar = (props) => {
     //----------------------------------------------------------
     // Initial Settings Section
     //----------------------------------------------------------
-    const ctx           = useContext(SiteContext)
     const [showStatus, setShowStatus] = useState(false)
+
+    const ctx           = useContext(SiteContext)
     const presentation  = useRef(null)
     const notifications = useRef(null)
 
@@ -60,7 +52,7 @@ const NavBar = (props) => {
             </Link>
             <Link
                 ref={presentation}
-                to="/presentation"
+                to="/presentation/"
                 activeClassName="active"
                 getProps={({isCurrent}) => {
                     return (

@@ -19,18 +19,11 @@ const PresentationSection = () => {
     //----------------------------------------------------------
     // Initialization Section
     //----------------------------------------------------------
-    const barra = useRef(null)
-
 
     //----------------------------------------------------------
     // Lifecycle Eventhandler Section
     //----------------------------------------------------------
     useEffect(() => {
-        gsap.to(barra.current, {
-            width: 1530,
-            delay: 1,
-            duration: 1.5, // duration of the animation
-        });
     }, []);
 
 

@@ -18,61 +18,65 @@ const Footer = () => {
 
     return (
         <footer>
-            <div className="contact-email">
-                <a
-                    href="mailto:info@willdelavega.com"
-                    target="_blank"
-                >
-                    <div className="image-link">
-                        <MailIcon/>
+            <div className="footer-container">
+                <div className="footer-flex">
+                    <div className="contact-email">
+                        <a
+                            href="mailto:info@willdelavega.com"
+                            target="_blank"
+                        >
+                            <div className="image-link">
+                                <MailIcon/>
+                            </div>
+                            <div className="text-link">
+                                &nbsp; info@willdelavega.com
+                            </div>
+                        </a>
                     </div>
-                    <div className="text-link">
-                        &nbsp; info@willdelavega.com
+                    <div className="contact-linkedin">
+                        <a
+                            href="https://www.linkedin.com/in/willdelavega/?locale=en_US"
+                            target="_blank"
+                        >
+                            <div className="image-link">
+                                <LinkedInIcon/>
+                            </div>
+                            <div className="text-link">
+                                &nbsp; /in/willdelavega
+                            </div>
+                        </a>
                     </div>
-                </a>
-            </div>
-            <div className="contact-linkedin">
-                <a
-                    href="https://www.linkedin.com/in/willdelavega/?locale=en_US"
-                    target="_blank"
-                >
-                    <div className="image-link">
-                        <LinkedInIcon/>
+                    <div className="contact-phone">
+                        <a href="skype:+6197385996?call">
+                            <div className="image-link">
+                                <PhoneIcon/>
+                            </div>
+                            <div className="text-link">
+                                &nbsp; (619) 738-5996
+                            </div>
+                        </a>
                     </div>
-                    <div className="text-link">
-                        &nbsp; /in/willdelavega
+                    <div className="contact-skype">
+                        <a href="skype:WilldelaVega777?chat">
+                            <div className="image-link">
+                                <SkypeIcon/>
+                            </div>
+                            <div className="text-link">
+                                &nbsp; WilldelaVega777
+                            </div>
+                        </a>
                     </div>
-                </a>
-            </div>
-            <div className="contact-phone">
-                <a href="skype:+6197385996?call">
-                    <div className="image-link">
-                        <PhoneIcon/>
+                    <div className="last-published">
+                        <a href="#" style={{ marginTop: '9px' }}>
+                            <div className="image-link">
+                                <ScheduleIcon/>
+                            </div>
+                            <div className="text-link">
+                                &nbsp; Updated: Sept 2021
+                            </div>
+                        </a>
                     </div>
-                    <div className="text-link">
-                        &nbsp; (619) 738-5996
-                    </div>
-                </a>
-            </div>
-            <div className="contact-skype">
-                <a href="skype:WilldelaVega777?chat">
-                    <div className="image-link">
-                        <SkypeIcon/>
-                    </div>
-                    <div className="text-link">
-                        &nbsp; WilldelaVega777
-                    </div>
-                </a>
-            </div>
-            <div className="last-published">
-                <a href="#">
-                    <div className="image-link">
-                        <ScheduleIcon/>
-                    </div>
-                    <div className="text-link">
-                        &nbsp; Updated: Sept 2021
-                    </div>
-                </a>
+                </div>
             </div>
         </footer>
     )

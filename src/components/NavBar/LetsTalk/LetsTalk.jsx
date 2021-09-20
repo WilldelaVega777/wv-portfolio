@@ -92,11 +92,11 @@ const LetsTalk = () => {
     //----------------------------------------------------------
     return (
 
-        <span>
+        <span className="lets-talk">
             <span ref={phone} className="lets-talk-phone">
                 ☎️
             </span>
-            &nbsp;&nbsp; Let's Talk!
+            &nbsp;&nbsp; Let's&nbsp;Talk!
         </span>
 
     )
