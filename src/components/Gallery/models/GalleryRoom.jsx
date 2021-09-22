@@ -21,9 +21,11 @@ import Speaker                  from "../../Museum/models/Speaker"
 import MeshSign                 from "../../Museum/MeshSign"
 import Baluster                 from "../../Museum/models/Baluster"
 import Brochure                 from "../Brochure"
-import Certification            from "../Certification"
+import Frame                    from "../Frame"
 import WV                       from "../../Museum/models/WV"
 
+import linkedin                 from '../textures/LinkedInJSGrade.png'
+import angular                  from '../textures/AngularGrade.png'
 
 //--------------------------------------------------------------
 // Component Section
@@ -263,9 +265,9 @@ const GalleryRoom = forwardRef((props, ref) =>
 
                 <PositionalAudio
                     ref={audioRef}
+                    position={[40,0,-60]}
                     url="/audio/soundtrack.mp3"
-                    distance={20}
-                    volume={.5}
+                    distance={10}
                     loop
                     {...props}
                 />
@@ -284,12 +286,14 @@ const GalleryRoom = forwardRef((props, ref) =>
                 scale={[1.5,1.5,1.5]}
             />
 
-            <Certification
+            <Frame
+                content={linkedin}
                 position={[-214.7,64.1,-104]}
                 scale={[1.5,1.5,1.5]}
             />
 
-            <Certification
+            <Frame
+                content={angular}
                 position={[-108.7,64.1,-104]}
                 scale={[1.5,1.5,1.5]}
             />

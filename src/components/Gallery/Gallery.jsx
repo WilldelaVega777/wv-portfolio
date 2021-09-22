@@ -62,7 +62,7 @@ const Gallery = () => {
         setTimeout(() => {
             bottomNav.current.classList.remove('hidden')
             bottomNav.current.classList.add('visible')
-        }, 1000)
+        }, 1500)
     }
 
 
@@ -130,6 +130,7 @@ const Gallery = () => {
                                 quickTurn={0}
                             />
                         </Suspense>
+
                     </Physics>
                 </Canvas>
             )}
@@ -138,7 +139,7 @@ const Gallery = () => {
             { ready &&
             <div
                 ref={bottomNav}
-                className="bottom-nav"
+                className="bottom-nav hidden"
                 onPointerDown={() => {
                     if (canStartMusic)
                     {

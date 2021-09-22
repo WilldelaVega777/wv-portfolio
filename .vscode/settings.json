@@ -41,5 +41,7 @@
     "**/angular.json": true,
     "**/main.ts": true,
     "**/index.html": true
-  }
+  },
+  "workbench.colorTheme": "Volatile Contrast (rainglow)",
+  "editor.fontFamily": "Fira Code iScript"
 }

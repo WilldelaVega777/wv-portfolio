@@ -6,21 +6,18 @@ import { useRef }                       from 'react'
 import * as THREE                       from 'three'
 import { useTexture }                   from '@react-three/drei'
 
-import brochure from './textures/Brochure.png'
-
 
 //--------------------------------------------------------------
 // Component Section
 //--------------------------------------------------------------
-const Certification = (props) => {
+const Frame = (props) => {
 
     //----------------------------------------------------------
     // Initialization Section
     //----------------------------------------------------------
     const group = useRef()
 
-    const [map] =
-        useTexture([brochure])
+    const [map] = useTexture([props.content])
 
 
     //----------------------------------------------------------
@@ -31,9 +28,9 @@ const Certification = (props) => {
             {...props}
         >
             <planeBufferGeometry
-                args={[29, 39.5]}
+                args={[29.5, 39]}
                 attach="geometry"
-                />
+            />
             <meshStandardMaterial
                 color="white"
                 map={map}
@@ -47,6 +44,6 @@ const Certification = (props) => {
 //--------------------------------------------------------------
 // Exports Section
 //--------------------------------------------------------------
-export default Certification
+export default Frame
 
 

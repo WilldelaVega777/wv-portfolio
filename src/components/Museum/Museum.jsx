@@ -45,14 +45,13 @@ const Museum = (props) => {
 
     const [dat, setDat]                     = useState(defaultState)
     const [ready, setReady]                 = useState(false)
-    const [dbug, setDbug]                   = useState()
     const [canStartMusic, setCanStartMusic] = useState(true)
 
 
     // Check if running in Server Rendering
     const statsRef = isBrowser? useRef(document.createElement('div')) : ''
 
-    const graphicsWorld = useRef()
+    // Refs
     const room          = useRef()
     const cameraRef     = useRef()
     const bottomNav     = useRef()
@@ -103,7 +102,7 @@ const Museum = (props) => {
         setTimeout(() => {
             bottomNav.current.classList.remove('hidden')
             bottomNav.current.classList.add('visible')
-        }, 1000)
+        }, 5000)
     }
 
 
@@ -196,8 +195,7 @@ const Museum = (props) => {
             )}
 
             {/* Joystick */}
-            {
-                (ready===true) &&
+            { ready &&
                 <div
                     ref={bottomNav}
                     className="bottom-nav hidden"

@@ -247,7 +247,7 @@ const NavBar = () => {
                                     <ListItemIcon>
                                         <InboxIcon fontSize="small" />
                                     </ListItemIcon>
-                                    <ListItemText primary="Some Certifications"/>
+                                    <ListItemText primary="More Info"/>
                                 </StyledMenuItem>
                                 <StyledMenuItem>
                                     <ListItemIcon>
@@ -296,7 +296,7 @@ const NavBar = () => {
                                 to="/certifications"
                                 activeClassName="active"
                             >
-                                Some Certifications
+                                More Info
                             </Link>
                             <Link
                                 to="/resume"

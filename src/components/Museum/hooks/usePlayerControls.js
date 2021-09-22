@@ -14,7 +14,8 @@ const keys = {
     ArrowLeft       : "left",
     ArrowRight      : "right",
     Space           : "jump",
-    Alt             : "alt"
+    Alt             : "alt",
+    Meta            : "meta"
 }
 
 const moveFieldByKey = (key) => keys[key]
@@ -47,7 +48,15 @@ export const usePlayerControls = () => {
             ({ ...m, alt:e.altKey, meta:e.metaKey, [moveFieldByKey(e.code)]: true }))
 
         const handleKeyUp = (e) => setMovement(
-            (m) => ({ ...m, alt:e.altKey, meta: e.metaKey, [moveFieldByKey(e.code)]: false }))
+            (m) => (
+                {
+                    ...m,
+                    alt:e.altKey,
+                    meta: e.metaKey,
+                    [moveFieldByKey(e.code)]: false
+                }
+            )
+        )
 
         document.addEventListener("keydown", handleKeyDown)
         document.addEventListener("keyup", handleKeyUp)

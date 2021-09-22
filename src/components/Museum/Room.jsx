@@ -61,6 +61,7 @@ const Room = forwardRef((props, ref) =>
         {
             if (!audioRef.current.isPlaying)
             {
+                audioRef.current.distance = 80
                 audioRef.current.play()
             }
         }
@@ -73,6 +74,7 @@ const Room = forwardRef((props, ref) =>
     const toggleMusic = () => {
         if (!audioRef.current.isPlaying)
         {
+            audioRef.current.distance = 80
             audioRef.current.play()
         }
         else
@@ -337,8 +339,7 @@ const Room = forwardRef((props, ref) =>
                 <PositionalAudio
                     ref={audioRef}
                     url="/audio/soundtrack.mp3"
-                    distance={1000}
-                    volume={.5}
+                    distance={800}
                     loop
                     {...props}
                 />

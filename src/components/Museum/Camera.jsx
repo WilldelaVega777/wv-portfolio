@@ -122,13 +122,14 @@ const Camera = forwardRef((props, ref) =>
     //----------------------------------------------------------
     const movePlayer = (delta, move) =>
     {
-        if (emergency)
+        if (meta)
         {
             move = {
                 forward: 0,
                 backward: 0,
                 turn: 0
             }
+            return
         }
         else
         {
