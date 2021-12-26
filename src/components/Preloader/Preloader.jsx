@@ -2,8 +2,8 @@ import '../../../static/models/Museum/baluster/scene.bin';
 
 
 
-const PreLoader = () => {
+const Preloader = () => {
     // export elements here?
 }
 
-export default PreLoader;
+export default Preloader;

@@ -7,7 +7,7 @@ import { useEffect }        from "react"
 import Layout               from "../components/Layout/Layout"
 import HeroSection          from '../sections/Hero/Hero'
 
-import Preloader            from "../components/PreLoader/Preloader"
+import Preloader            from "../components/Preloader/Preloader"
 
 
 import "../styles/site.scss"
