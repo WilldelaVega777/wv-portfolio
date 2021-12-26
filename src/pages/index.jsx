@@ -7,6 +7,9 @@ import { useEffect }        from "react"
 import Layout               from "../components/Layout/Layout"
 import HeroSection          from '../sections/Hero/Hero'
 
+import Preloader            from "../Loader/Preloader"
+
+
 import "../styles/site.scss"
 
 

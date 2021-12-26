@@ -43,5 +43,9 @@
     "**/index.html": true
   },
   "workbench.colorTheme": "Volatile Contrast (rainglow)",
-  "editor.fontFamily": "Fira Code iScript"
+  "editor.fontFamily": "Fira Code iScript",
+  "cSpell.words": [
+    "drei",
+    "multitouch"
+  ]
 }
