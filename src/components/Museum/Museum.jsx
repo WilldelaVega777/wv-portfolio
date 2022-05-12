@@ -98,13 +98,10 @@ const Museum = (props) => {
     }
 
     //----------------------------------------------------------
-    const contentLoaded = () => {
-        setTimeout(() => {
-            bottomNav.current.classList.remove('hidden')
-            bottomNav.current.classList.add('visible')
-        }, 5000)
+    const onRendered = () => {
+        bottomNav.current.classList.remove('hidden')
+        bottomNav.current.classList.add('visible')
     }
-
 
     //----------------------------------------------------------
     // Internal Functions Section
@@ -115,7 +112,6 @@ const Museum = (props) => {
 
         return { x: xPos.toFixed(2), y: yPos.toFixed(2) }
     }
-
 
     //----------------------------------------------------------
     // Render Section
@@ -170,9 +166,7 @@ const Museum = (props) => {
                     >
 
                         <Suspense fallback={
-                            <Preloader
-                                onFinishLoading={contentLoaded}
-                            />
+                            <Preloader/>
                         }>
                             {/* 3D Expo Room */}
                             <Room
@@ -187,6 +181,7 @@ const Museum = (props) => {
                                 lookAt={room}
                                 target={room}
                                 quickTurn={0}
+                                rendered={onRendered}
                             />
                         </Suspense>
 

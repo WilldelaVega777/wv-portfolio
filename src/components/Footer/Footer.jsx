@@ -22,14 +22,14 @@ const Footer = () => {
                 <div className="footer-flex">
                     <div className="contact-email">
                         <a
-                            href="mailto:info@willdelavega.com"
+                            href="mailto:WilldelaVega777@gmail.com"
                             target="_blank"
                         >
                             <div className="image-link">
                                 <MailIcon/>
                             </div>
                             <div className="text-link">
-                                &nbsp; info@willdelavega.com
+                                &nbsp; WilldelaVega777@gmail.com
                             </div>
                         </a>
                     </div>
@@ -72,7 +72,7 @@ const Footer = () => {
                                 <ScheduleIcon/>
                             </div>
                             <div className="text-link">
-                                &nbsp; Updated: Sept 2021
+                                &nbsp; Updated: May 2022
                             </div>
                         </a>
                     </div>

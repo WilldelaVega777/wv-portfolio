@@ -31,12 +31,11 @@ const Camera = forwardRef((props, ref) =>
     const thisCamera     = useRef()
     const velocity       = useRef([0, 0, 0])
     const SPEED          = 150
+    const started        = useRef(false)
 
     // Vars
     let turnDirection    = false
     let currentRotation  = 0
-    let emergency        = false
-
 
     // Consts
     const speed          = new THREE.Vector3()
@@ -60,10 +59,12 @@ const Camera = forwardRef((props, ref) =>
     // Physics Initialization Section
     //----------------------------------------------------------
     const [wrapperRef, api] = useSphere(() => ({
+
         type        : 'Dynamic',
         mass        : 1,
         args        : 40,
         position    : [0,174,900]
+
     }))
 
 
@@ -71,7 +72,6 @@ const Camera = forwardRef((props, ref) =>
     // Lifecycle Event Handler Methods Section
     //----------------------------------------------------------
     useEffect(() => {
-
         if (api)
         {
             api.position.set(0, 380, 900)
@@ -81,7 +81,6 @@ const Camera = forwardRef((props, ref) =>
                 (v) => (velocity.current = v)
             )
         }
-
     }, [])
 
 
@@ -107,13 +106,17 @@ const Camera = forwardRef((props, ref) =>
     // Update Frame Section
     //----------------------------------------------------------
     useFrame((state, delta) => {
+        if (!started.current)
+        {
+            started.current = true
+            props.rendered()
+        }
 
         const move = {
             forward: ((XY.y) ? (XY.y) : 0),
             turn: ((XY.x) ? (-XY.x) : 0)
         }
         movePlayer(delta, move)
-
     })
 
 
@@ -211,7 +214,6 @@ const Camera = forwardRef((props, ref) =>
                     (meta && backward)
                 )
                 {
-                    emergency = true
                     move = {
                         forward: 0,
                         backward: 0,

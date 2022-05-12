@@ -31,6 +31,7 @@ const Camera = forwardRef((props, ref) =>
     const thisCamera     = useRef()
     const velocity       = useRef([0, 0, 0])
     const SPEED          = 50
+    const started        = useRef(false)
 
     // Vars
     let turnDirection    = false
@@ -108,6 +109,12 @@ const Camera = forwardRef((props, ref) =>
     // Update Frame Section
     //----------------------------------------------------------
     useFrame((state, delta) => {
+
+        if (!started.current)
+        {
+            started.current = true
+            props.rendered()
+        }
 
         const move = {
             forward: ((XY.y) ? (XY.y) : 0),

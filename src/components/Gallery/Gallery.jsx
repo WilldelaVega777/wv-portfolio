@@ -32,6 +32,7 @@ const Gallery = () => {
     const room          = useRef()
     const cameraRef     = useRef()
     const bottomNav     = useRef()
+    const cameraPhysics = useRef()
 
 
     //----------------------------------------------------------
@@ -58,13 +59,15 @@ const Gallery = () => {
     }
 
     //----------------------------------------------------------
-    const contentLoaded = () => {
-        setTimeout(() => {
-            bottomNav.current.classList.remove('hidden')
-            bottomNav.current.classList.add('visible')
-        }, 1500)
+    const onLoaded = () => {
+        setReady(true)
     }
 
+    //----------------------------------------------------------
+    const onRendered = () => {
+        bottomNav.current.classList.remove('hidden')
+        bottomNav.current.classList.add('visible')
+    }
 
     //----------------------------------------------------------
     // Internal Functions Section
@@ -72,10 +75,8 @@ const Gallery = () => {
     const convertPosition = (distanceFromCenter, angle) => {
         let xPos = (((Math.cos(angle) * distanceFromCenter) * 2) / 100)
         let yPos = (((Math.sin(angle) * distanceFromCenter) * 2) / 100)
-
         return { x: xPos.toFixed(2), y: yPos.toFixed(2) }
     }
-
 
     //----------------------------------------------------------
     // Render Section
@@ -85,8 +86,8 @@ const Gallery = () => {
             { isBrowser && (
                 <Canvas
                     className="gallery"
-                    concurrent
-                    onCreated={() => setReady(true)}
+                    concurrent={true}
+                    onCreated={onLoaded}
                     gl={{
                         antialias: true,
                         premultipliedAlpha: false,
@@ -111,9 +112,7 @@ const Gallery = () => {
                         damping={1}
                     >
                         <Suspense fallback={
-                            <Preloader
-                                onFinishLoading={contentLoaded}
-                            />
+                            <Preloader/>
                         }>
 
                             {/* Room Model */}
@@ -128,6 +127,7 @@ const Gallery = () => {
                                 lookAt={room}
                                 target={room}
                                 quickTurn={0}
+                                rendered={onRendered}
                             />
                         </Suspense>
 
