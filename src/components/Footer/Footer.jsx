@@ -47,12 +47,12 @@ const Footer = () => {
                         </a>
                     </div>
                     <div className="contact-phone">
-                        <a href="skype:+6197385996?call">
+                        <a href="skype:+6196000278?call">
                             <div className="image-link">
                                 <PhoneIcon/>
                             </div>
                             <div className="text-link">
-                                &nbsp; (619) 738-5996
+                                &nbsp; (619) 600-0278
                             </div>
                         </a>
                     </div>
